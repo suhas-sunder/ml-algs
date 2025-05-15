@@ -1,0 +1,197 @@
+{
+  "main": {
+    "id": "04bbfb83e1308c6d",
+    "type": "split",
+    "children": [
+      {
+        "id": "4d7ba1f5acb2cfa1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7d8bbdb9c78f7feb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2-miki-mikano-app-DC-Decay"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e2f769da1503662c",
+    "type": "split",
+    "children": [
+      {
+        "id": "b722a4686bd4c028",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "41bdb79f4402733e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "44f5260fbfa3ac7d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "c42bbf9dc7ab2f0c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e46679ef2439950f",
+    "type": "split",
+    "children": [
+      {
+        "id": "433a002764a41506",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7293d1cdcaad939e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "6a27f91fa2006222",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "89a813bee19893ae",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "01b788db2b478ff9",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Welcome.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Welcome"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "7d8bbdb9c78f7feb",
+  "lastOpenFiles": [
+    "Pasted image 20250514232450.png",
+    "Pasted image 20250514232416.png",
+    "Pasted image 20250514232335.png",
+    "Pasted image 20250514232305.png",
+    "Pasted image 20250514232206.png",
+    "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
+    "Pasted image 20250514230545.png",
+    "Pasted image 20250514230756.png",
+    "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
+    "Pasted image 20250514230304.png",
+    "Pasted image 20250514230424.png",
+    "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
+    "trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
+    "trig-algorithms/imgs/Pasted image 20250514215048.png",
+    "trig-algorithms/imgs/Pasted image 20250514205238.png",
+    "trig-algorithms/1-miki-mikano/Pros and Cons of Miki algorithm.md",
+    "trig-algorithms/4-gilbert-and-shovlin/Pros and Cons of Gilbert algorithm.md",
+    "trig-algorithms/2-mann-and-morrison/Pros and Cons of Mann algorithm.md",
+    "trig-algorithms/3-rockerfeller-and-udren/Pros and Cons of Rockerfeller algorithm.md",
+    "trig-algorithms/4-gilbert-and-shovlin",
+    "trig-algorithms/3-rockerfeller-and-udren",
+    "trig-algorithms/imgs",
+    "trig-algorithms/2-mann-and-morrison",
+    "trig-algorithms/1-miki-mikano",
+    "Welcome.md"
+  ]
+}
