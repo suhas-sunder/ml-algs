@@ -11,12 +11,14 @@
             "id": "7d8bbdb9c78f7feb",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "trig-algorithms/imgs/20250514215245.png"
+                "file": "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "20250514215245"
+              "icon": "lucide-file",
+              "title": "0-miki-mikano-filter"
             }
           }
         ]
@@ -166,6 +168,7 @@
   },
   "active": "7d8bbdb9c78f7feb",
   "lastOpenFiles": [
+    "trig-algorithms/imgs/20250514215245.png",
     "trig-algorithms/imgs/20250514215154.png",
     "trig-algorithms/imgs/20250514215048.png",
     "trig-algorithms/imgs/20250514214907.png",
@@ -176,7 +179,6 @@
     "trig-algorithms/imgs/20250514212613.png",
     "trig-algorithms/imgs/20250514212404.png",
     "trig-algorithms/imgs/20250514212201.png",
-    "trig-algorithms/imgs/20250514211737.png",
     "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
     "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
     "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
