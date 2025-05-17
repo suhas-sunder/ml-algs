@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "trig-algorithms/3-rockerfeller-and-udren/3-rockerfeller-udren-app-2nd-harmonic.md",
+                "file": "trig-algorithms/3-rockerfeller-and-udren/5-rockerfeller-udren-app-transient.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3-rockerfeller-udren-app-2nd-harmonic"
+              "title": "5-rockerfeller-udren-app-transient"
             }
           }
         ]
@@ -168,24 +168,26 @@
   },
   "active": "df5b66859f1085b6",
   "lastOpenFiles": [
+    "Pasted image 20250517160343.png",
+    "Pasted image 20250517160313.png",
+    "Pasted image 20250517160247.png",
+    "Pasted image 20250517160224.png",
+    "trig-algorithms/3-rockerfeller-and-udren/4-rockerfeller-udren-app-3rd-harmonic.md",
+    "trig-algorithms/2-mann-and-morrison/5-mann-morrison-app-transient.md",
+    "trig-algorithms/3-rockerfeller-and-udren/5-rockerfeller-udren-app-transient.md",
+    "Pasted image 20250517155911.png",
+    "Pasted image 20250517155849.png",
+    "Pasted image 20250517155834.png",
+    "Pasted image 20250517155812.png",
+    "trig-algorithms/2-mann-and-morrison/4-mann-morrison-app-3rd-harmonic.md",
+    "trig-algorithms/3-rockerfeller-and-udren/3-rockerfeller-udren-app-2nd-harmonic.md",
     "Pasted image 20250517155528.png",
     "Pasted image 20250517155508.png",
     "Pasted image 20250517155443.png",
-    "trig-algorithms/3-rockerfeller-and-udren/4-rockerfeller-udren-app-3rd-harmonic.md",
     "trig-algorithms/2-mann-and-morrison/3-mann-morrison-app-2nd-harmonic.md",
-    "trig-algorithms/2-mann-and-morrison/4-mann-morrison-app-3rd-harmonic.md",
-    "trig-algorithms/3-rockerfeller-and-udren/3-rockerfeller-udren-app-2nd-harmonic.md",
-    "Pasted image 20250517154910.png",
     "trig-algorithms/3-rockerfeller-and-udren/2-rockerfeller-udren-app-DC-Decay.md",
     "trig-algorithms/2-mann-and-morrison/2-mann-morrison-app-DC-Decay.md",
-    "Pasted image 20250517154548.png",
-    "Pasted image 20250517154532.png",
-    "Pasted image 20250517154513.png",
-    "Pasted image 20250517154454.png",
     "trig-algorithms/2-mann-and-morrison/1-mann-morrison-app-pure-sine.md",
-    "Pasted image 20250517154345.png",
-    "Pasted image 20250517154328.png",
-    "Pasted image 20250517154306.png",
     "trig-algorithms/3-rockerfeller-and-udren/1-rockerfeller-udren-app-pure-sine.md",
     "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
     "trig-algorithms/3-rockerfeller-and-udren/Pros and Cons of Rockerfeller algorithm.md",
@@ -194,9 +196,7 @@
     "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
     "trig-algorithms/2-mann-and-morrison/Pros and Cons of Mann algorithm.md",
     "trig-algorithms/2-mann-and-morrison/0-mann-morrison-filter.md",
-    "trig-algorithms/3-rockerfeller-and-udren/5-rockerfeller-udren-app-transient.md",
     "trig-algorithms/3-rockerfeller-and-udren/0-rockerfeller-udren-filter.md",
-    "trig-algorithms/2-mann-and-morrison/5-mann-morrison-app-transient.md",
     "trig-algorithms/1-miki-mikano/5-miki-mikano-app-transient.md",
     "trig-algorithms/1-miki-mikano/4-miki-mikano-app-3rd-harmonic.md",
     "trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
