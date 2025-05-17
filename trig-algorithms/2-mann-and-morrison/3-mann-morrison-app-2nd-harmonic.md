@@ -275,10 +275,10 @@ xtickformat('%d');
 
 
 
-![[Pasted image 20250517150142.png]]
+![](../images/20250517150142.png)
 
-![[Pasted image 20250517150043.png]]
+![](../images/20250517150043.png)
 
-![[Pasted image 20250517145923.png]]
+![](../images/20250517145923.png)
 
-![[Pasted image 20250517145519.png]]
+![](../images/20250517145519.png)

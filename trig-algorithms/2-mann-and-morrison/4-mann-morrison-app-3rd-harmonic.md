@@ -270,10 +270,10 @@ xtickformat('%d');
 ```
 
 
-![[Pasted image 20250517150425.png]]
+![](../images/20250517150425.png)
 
-![[Pasted image 20250517150400.png]]
+![](../images/20250517150400.png)
 
-![[Pasted image 20250517150317.png]]
+![](../images/20250517150317.png)
 
-![[Pasted image 20250517150257.png]]
+![](../images/20250517150257.png)
