@@ -18,15 +18,15 @@ omega = 2 * pi * f0; % Angular frequency of fundamental
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate 60 Hz sine wave input with 2nd harmonic at 120 Hz
+% Generate 60 Hz sine wave input with 3rd harmonic at 180 Hz
 
-A2 = 7; % Amplitude of 2nd harmonic (example: 3V)
+A3 = 7; % Amplitude of 3rd harmonic (example: 7V)
 
 phi1 = pi/12; % Phase shift for fundamental
 
-phi2 = pi/6; % Phase shift for 2nd harmonic (you can change if needed)
+phi3 = pi/6; % Phase shift for 3rd harmonic
 
-x = Vm * sin(omega * t + phi1) + A2 * sin(2 * omega * t + phi2); % Composite waveform
+x = Vm * sin(omega * t + phi1) + A3 * sin(3 * omega * t + phi3); % Composite waveform
 
 % Allocate arrays to store angles and magnitude values
 
@@ -124,7 +124,7 @@ xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 25]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([0 30]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 grid on;
 
@@ -258,7 +258,7 @@ grid on;
 
 xlim([0 fs/2]); %%%%%%%%%%%%%%% CHANGE X-AXIS
 
-ylim([0, 1000]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([0, 1200]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 % Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
 

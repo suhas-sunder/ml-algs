@@ -220,7 +220,7 @@ phasor_const_phase = mag; % constant phase
 
 N = length(phasor_complex);
 
-half = floor(N/2);
+half = N/2 + 1;
 
 Y_var = fft(phasor_complex);
 

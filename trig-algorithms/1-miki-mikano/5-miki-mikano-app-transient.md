@@ -12,21 +12,27 @@ t = 0:T:0.1; % Time vector (0.1 seconds)
 
 f0 = 60; % Fundamental frequency (Hz)
 
-Vm = 10; % Fundamental amplitude
+Vm = 10; % Initial amplitude (before transient)
 
-omega = 2 * pi * f0; % Angular frequency of fundamental
+Vm_spike = 50; % Amplitude after transient
+
+omega = 2 * pi * f0; % Angular frequency
+
+phi1 = pi/12; % Desired phase shift (radians)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate 60 Hz sine wave input with 2nd harmonic at 120 Hz
+%% Generate Transient Signal (Pure 60 Hz sine)
 
-A2 = 7; % Amplitude of 2nd harmonic (example: 3V)
+x = zeros(size(t)); % Pre-allocate
 
-phi1 = pi/12; % Phase shift for fundamental
+% Before t = 0.03 s → base signal with phase shift
 
-phi2 = pi/6; % Phase shift for 2nd harmonic (you can change if needed)
+x(t < 0.03) = Vm * sin(omega * t(t < 0.03) + phi1);
 
-x = Vm * sin(omega * t + phi1) + A2 * sin(2 * omega * t + phi2); % Composite waveform
+% After t = 0.03 s → high amplitude, same frequency & phase
+
+x(t >= 0.03) = Vm_spike * sin(omega * t(t >= 0.03) + phi1);
 
 % Allocate arrays to store angles and magnitude values
 
@@ -52,7 +58,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm - 10, Vm + 10]); % match amplitude range
+ylim([-Vm - 40, Vm + 40]); % match amplitude range
 
 grid on;
 
@@ -68,7 +74,7 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm - 10, Vm + 10]); % same range for consistency
+ylim([-Vm - 40, Vm + 40]); % same range for consistency
 
 grid on;
 
@@ -124,7 +130,7 @@ xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 25]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([0 60]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 grid on;
 
@@ -258,7 +264,7 @@ grid on;
 
 xlim([0 fs/2]); %%%%%%%%%%%%%%% CHANGE X-AXIS
 
-ylim([0, 1000]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([0, 1200]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 % Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
 
