@@ -1,11 +1,11 @@
 ### Expected Plot From Lecture Slides 
-![](../../imgs/20250514210358.png) ![](../../imgs/20250514210738.png)
-- These plots are modeled after the equation we solved in lecture. Assuming the equation remains the same the above plots are correct for: ![](../../imgs/20250514210639.png)
+![](../../images/20250514210358.png) ![](../../images/20250514210738.png)
+- These plots are modeled after the equation we solved in lecture. Assuming the equation remains the same the above plots are correct for: ![](../../images/20250514210639.png)
 
 
 ### Plot From Code
 
-![](../../imgs/20250513215312.png)
+![](../../images/20250513215312.png)
 ### Reminder to improve this code so that we're finding frequency response for both real and imaginary parts. This filter currently only accounts for the real part.
 
 ```

@@ -270,7 +270,7 @@ xtickformat('%d');
 ```
 ### A PURE 60Hz Sine Wave is passed through the algorithm "filter"
 
-![](../../imgs/20250514211228.png) ![](../../imgs/20250514215154.png)
+![](../../images/20250514211228.png) ![](../../images/20250514215154.png)
 - We are not given the equation for this. It was simply included in the lecture. 
 - Through trial and error, pure_sine_wave = Vm * sin(omega * t + pi/18) was the equation that matched closest to the waveform above. 
 	- It's a pure sine wave, but the phase is shifted by pi/20. 
@@ -278,9 +278,9 @@ xtickformat('%d');
 	- If input eqn is not given, and the prof says pure sine wave, we should probably do pure_sine_wave = Vm * sin(omega * t) without the pi/12 phase shift. Not sure why his example had any shift to begin with.
 
 ### Expected Plots After Algorithm "Filter" is applied to input signal
-![](../../imgs/20250514211706.png) ![](../../imgs/20250514215245.png)
- ![](../../imgs/20250514211737.png)
-![](../../imgs/20250514230756.png)
+![](../../images/20250514211706.png) ![](../../images/20250514215245.png)
+ ![](../../images/20250514211737.png)
+![](../../images/20250514230756.png)
 - In the "Phase" plot, the y-axis goes from -100 to 100. The professor told me this is not correct. It should go for -180 to 180. So that plot will look different, but only because our scaling is different.
 - I also got the phase plot to match 100% when I used the atan function instead of atan2, however, the imaginary values on the real axis are not accounted for when we use atan. So I think, based on that observation, using atan2 is the correct method. This may not make sense from just reading this so remind me to explain this part. It will make sense when I show you visually.
 - If you change the y-axis for the code below back to -100 to 100, it should match the lecture example.
