@@ -202,9 +202,9 @@ xlim([-axis_limit, axis_limit]);
 
 ylim([-axis_limit, axis_limit]);
 
-xticks(-axis_limit:1:axis_limit);
+xticks(-axis_limit:2:axis_limit);
 
-yticks(-axis_limit:1:axis_limit);
+yticks(-axis_limit:2:axis_limit);
 
 grid on;
 
