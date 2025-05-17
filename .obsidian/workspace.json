@@ -11,14 +11,12 @@
             "id": "7d8bbdb9c78f7feb",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "trig-algorithms/1-miki-mikano/5-miki-mikano-app-transient.md",
-                "mode": "source",
-                "source": false
+                "file": "trig-algorithms/imgs/20250514215245.png"
               },
-              "icon": "lucide-file",
-              "title": "5-miki-mikano-app-transient"
+              "icon": "lucide-image",
+              "title": "20250514215245"
             }
           }
         ]
@@ -168,23 +166,24 @@
   },
   "active": "7d8bbdb9c78f7feb",
   "lastOpenFiles": [
-    "trig-algorithms/1-miki-mikano/4-miki-mikano-app-3rd-harmonic.md",
-    "trig-algorithms/1-miki-mikano/5-miki-mikano-app-transient.md",
+    "trig-algorithms/imgs/20250514215154.png",
+    "trig-algorithms/imgs/20250514215048.png",
+    "trig-algorithms/imgs/20250514214907.png",
+    "trig-algorithms/imgs/20250514214714.png",
+    "trig-algorithms/imgs/20250514212956.png",
+    "trig-algorithms/imgs/20250514212914.png",
+    "trig-algorithms/imgs/20250514212858.png",
+    "trig-algorithms/imgs/20250514212613.png",
+    "trig-algorithms/imgs/20250514212404.png",
+    "trig-algorithms/imgs/20250514212201.png",
+    "trig-algorithms/imgs/20250514211737.png",
+    "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
     "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
     "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
+    "trig-algorithms/1-miki-mikano/5-miki-mikano-app-transient.md",
+    "trig-algorithms/1-miki-mikano/4-miki-mikano-app-3rd-harmonic.md",
     "trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
     "trig-algorithms/1-miki-mikano/Pros and Cons of Miki algorithm.md",
-    "Pasted image 20250515010335.png",
-    "Pasted image 20250515010108.png",
-    "Pasted image 20250514234233.png",
-    "Pasted image 20250514232450.png",
-    "Pasted image 20250514232416.png",
-    "Pasted image 20250514232335.png",
-    "Pasted image 20250514232305.png",
-    "20250514232206.png",
-    "Pasted image 20250514230545.png",
-    "20250514230756.png",
-    "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
     "trig-algorithms/4-gilbert-and-shovlin/Pros and Cons of Gilbert algorithm.md",
     "trig-algorithms/2-mann-and-morrison/Pros and Cons of Mann algorithm.md",
     "trig-algorithms/3-rockerfeller-and-udren/Pros and Cons of Rockerfeller algorithm.md",

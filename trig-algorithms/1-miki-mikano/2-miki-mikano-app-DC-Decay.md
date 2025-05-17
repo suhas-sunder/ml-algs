@@ -279,6 +279,6 @@ xtickformat('%d');
 
 ```
 
-### Applying DC Decay to sin input (Best Guess) ![[Pasted image 20250514234233.png]]![[Pasted image 20250514232305.png]]![[20250514232206.png]] ![[Pasted image 20250514232335.png]] ![[Pasted image 20250514232416.png]] ![[Pasted image 20250514232450.png]]
-![[Pasted image 20250515010108.png]]  ![[Pasted image 20250515010335.png]]
+### Applying DC Decay to sin input (Best Guess) ![](../../imgs/20250514234233.png)![](../../imgs/20250514232305.png)![](../../imgs/20250514232206.png) ![](../../imgs/20250514232335.png) ![](../../imgs/20250514232416.png) ![](../../imgs/20250514232450.png)
+![](../../imgs/20250515010108.png)  ![](../../imgs/20250515010335.png)
  
