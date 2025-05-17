@@ -12,25 +12,15 @@ t = 0:T:0.1; % Time vector (0.1 seconds)
 
 f0 = 60; % Signal frequency (Hz)
 
-Vm = 10; % Sine amplitude
-
-A = 10; % Peak DC influence
-
-tau_rise = 0.003; % Rise time
-
-tau_decay = 0.008; % Fall time
+Vm = 10; % Amplitude
 
 omega = 2 * pi * f0; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate shaped DC envelope (starts at 0, bumps up, then decays)
+% Generate 60 Hz sine wave input
 
-dc_shape = A * (exp(-t / tau_decay) - exp(-t / tau_rise));
-
-% Combined signal: sine + shaped DC
-
-x = Vm * sin(omega * t + pi/6) + dc_shape; % Input waveform
+x = Vm * sin(omega * t + pi/18); % Input waveform
 
 % Allocate arrays to store angles and magnitude values
 
@@ -90,11 +80,15 @@ V0 = x(n-1); % x[n-1] → center sample
 
 V_plus_1 = x(n); % x[n]
 
+% Second derivative (acceleration estimate)
+
+num = (V_plus_1 - 2 * V0 + V_minus_1) / (omega^2 * T^2);
+
 den = (V_plus_1 - V_minus_1) / (2 * omega * T);
 
-angle_deg(n-1) = atan2(V0, den) * 180 / pi;
+angle_deg(n - 1) = atan2(num, den) * 180 / pi;
 
-mag(n-1) = sqrt(V0^2 + den^2);
+mag(n - 1) = sqrt(num^2 + den^2);
 
 end
 
@@ -258,9 +252,9 @@ xlabel('Frequency (Hz)');
 
 ylabel('Magnitude');
 
-title('FFT Magnitude: Variable Phase (blue) vs Constant Phase (red)');
+title('FFT Magnitude: Constant Phase (blue) vs Constant Phase (red)');
 
-legend('Variable Phase','Constant Phase');
+legend('Constant Phase','Constant Phase');
 
 grid on;
 
@@ -278,10 +272,11 @@ xtickformat('%d');
 ```
 
 
-![[Pasted image 20250517154454.png]]
+![[Pasted image 20250517153119.png]]
 
-![[Pasted image 20250517154513.png]]
+![[Pasted image 20250517153045.png]]
 
-![[Pasted image 20250517154532.png]]
 
-![[Pasted image 20250517154548.png]]
+![[Pasted image 20250517153002.png]]
+
+![[Pasted image 20250517152945.png]]

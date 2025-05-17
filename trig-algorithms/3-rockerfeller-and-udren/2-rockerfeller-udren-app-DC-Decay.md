@@ -56,7 +56,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm, Vm]); % match amplitude range
+ylim([-Vm, Vm + 5]); % match amplitude range
 
 grid on;
 
@@ -72,7 +72,7 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm, Vm]); % same range for consistency
+ylim([-Vm, Vm + 5]); % same range for consistency
 
 grid on;
 
@@ -90,11 +90,15 @@ V0 = x(n-1); % x[n-1] → center sample
 
 V_plus_1 = x(n); % x[n]
 
-den = (V_plus_1 - V_minus_1) / (2 * omega * T);
+% Second derivative (acceleration estimate)
 
-angle_deg(n-1) = atan2(V0, den) * 180 / pi;
+num = ((V_plus_1 - 2 * V0 + V_minus_1) / (omega * T)^2);
 
-mag(n-1) = sqrt(V0^2 + den^2);
+den = ((V_plus_1 - V_minus_1) / (2 * omega * T));
+
+angle_deg(n - 1) = atan2(num, den) * 180 / pi;
+
+mag(n - 1) = sqrt(num^2 + den^2);
 
 end
 
@@ -258,9 +262,9 @@ xlabel('Frequency (Hz)');
 
 ylabel('Magnitude');
 
-title('FFT Magnitude: Variable Phase (blue) vs Constant Phase (red)');
+title('FFT Magnitude: Constant Phase (blue) vs Constant Phase (red)');
 
-legend('Variable Phase','Constant Phase');
+legend('Constant Phase','Constant Phase');
 
 grid on;
 
@@ -278,10 +282,11 @@ xtickformat('%d');
 ```
 
 
-![[Pasted image 20250517154454.png]]
 
-![[Pasted image 20250517154513.png]]
+![[Pasted image 20250517154345.png]]
 
-![[Pasted image 20250517154532.png]]
+![[Pasted image 20250517154328.png]]
 
-![[Pasted image 20250517154548.png]]
+![[Pasted image 20250517154306.png]]
+
+![[Pasted image 20250517154247.png]]
