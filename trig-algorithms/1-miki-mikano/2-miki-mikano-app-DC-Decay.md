@@ -14,11 +14,9 @@ f0 = 60; % Signal frequency (Hz)
 
 Vm = 10; % Sine amplitude
 
-A = 10; % Peak DC influence
+A = 5; % Peak DC influence
 
-tau_rise = 0.003; % Rise time
-
-tau_decay = 0.008; % Fall time
+tau = 0.01; % Time constant of decay (s)
 
 omega = 2 * pi * f0; % Angular frequency
 
@@ -26,11 +24,11 @@ omega = 2 * pi * f0; % Angular frequency
 
 % Generate shaped DC envelope (starts at 0, bumps up, then decays)
 
-dc_shape = A * (exp(-t / tau_decay) - exp(-t / tau_rise));
+dc_shape = A * exp(-t / tau);
 
 % Combined signal: sine + shaped DC
 
-x = Vm * sin(omega * t + pi/6) + dc_shape; % Input waveform
+x = Vm * sin(omega * t + pi/16) + dc_shape; % Input waveform
 
 % Allocate arrays to store angles and magnitude values
 
@@ -280,7 +278,13 @@ xtickformat('%d');
 
 ```
 
-### Applying DC Decay to sin input (Best Guess) ![](../images/20250514234233.png)![](../images/20250514232305.png)![](../images/20250514232206.png) ![](../images/20250514232335.png) ![](../images/20250514232416.png) ![](../images/20250514232450.png)
-![](../images/20250515010108.png)   
-![](../images/20250517131732.png)
- 
+### Applying DC Decay to sin input (Best Guess) 
+
+![](../images/20250517164406.png)
+
+![](../images/20250517164346.png)
+
+![](../images/20250517164330.png)
+
+![](../images/20250517164312.png)
+

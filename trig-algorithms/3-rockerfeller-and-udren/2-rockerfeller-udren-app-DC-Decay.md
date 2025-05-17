@@ -16,9 +16,7 @@ Vm = 10; % Sine amplitude
 
 A = 10; % Peak DC influence
 
-tau_rise = 0.003; % Rise time
-
-tau_decay = 0.008; % Fall time
+tau = 0.01; % Time constant of decay (s)
 
 omega = 2 * pi * f0; % Angular frequency
 
@@ -26,11 +24,11 @@ omega = 2 * pi * f0; % Angular frequency
 
 % Generate shaped DC envelope (starts at 0, bumps up, then decays)
 
-dc_shape = A * (exp(-t / tau_decay) - exp(-t / tau_rise));
+dc_shape = A_DC * exp(-t / tau);
 
 % Combined signal: sine + shaped DC
 
-x = Vm * sin(omega * t + pi/6) + dc_shape; % Input waveform
+x = Vm * sin(omega * t + pi/16) + dc_shape; % Input waveform
 
 % Allocate arrays to store angles and magnitude values
 
@@ -210,9 +208,9 @@ xlim([-axis_limit, axis_limit]);
 
 ylim([-axis_limit, axis_limit]);
 
-xticks(-axis_limit:1:axis_limit);
+xticks(-axis_limit:2:axis_limit);
 
-yticks(-axis_limit:1:axis_limit);
+yticks(-axis_limit:2:axis_limit);
 
 grid on;
 
@@ -282,11 +280,10 @@ xtickformat('%d');
 ```
 
 
+![](../images/20250517165801.png)
 
-![[Pasted image 20250517154345.png]]
+![](../images/20250517165653.png)
 
-![[Pasted image 20250517154328.png]]
+![](../images/20250517165635.png)
 
-![[Pasted image 20250517154306.png]]
-
-![[Pasted image 20250517154247.png]]
+![](../images/20250517165531.png)
