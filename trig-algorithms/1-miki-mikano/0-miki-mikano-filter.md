@@ -1,33 +1,31 @@
 
 
 ```
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Initializing Variables with Parameters
+
 fs = 720; % Sampling frequency
 
 T = 1 / fs; % Sampling period
 
-f = linspace(0, fs, 1000); % Frequency range for plotting
+f_range = linspace(0, fs, 1000); % Frequency range for plotting
 
-omega = 2 * pi * f * T; % Discrete angular frequency (radians/sample)
+omega = 2 * pi * f_range; % Discrete angular frequency (radians/sample)
 
-% --- H(z) = 1.732*1 - 2*z^(-1) ---
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-z = exp(1j * omega);
+% --- H(z) REAL PART Vp COS(Theta) ---
 
-H = 1.732 * z.^0 - 2 * z.^(-1);
+z = exp(1j * omega * T);
 
-mag = abs(H);
+H1 = 1.732 * z.^0 - 2 * z.^(-1);
 
-phi = atan2(imag(H), real(H)) * 180 / pi;
+mag = abs(H1);
 
-% Phase correction for H
+phi = atan2(imag(H1), real(H1)) * 180 / pi;
 
-phi_start = phi(1);
-
-phi_end = phi(end);
-
-phi_baseline = linspace(phi_start, phi_end, length(phi));
-
-phi_corrected = phi_baseline - phi;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Plot magnitude and phase of H
 
@@ -35,7 +33,7 @@ figure;
 
 subplot(2,1,1);
 
-plot(f, mag, 'b', 'LineWidth', 1);
+plot(f_range, mag, 'b', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
@@ -51,7 +49,7 @@ xlim([0 720]);
 
 subplot(2,1,2);
 
-plot(f, phi_corrected, 'r', 'LineWidth', 1);
+plot(f_range, phi_corrected, 'r', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
@@ -67,7 +65,9 @@ xlim([0 720]);
 
 ylim([-180 180]);
 
-% --- H2(z) = z^0 = 1 ---
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --- H2(z) IMAGINARY PART Vp Sin(Theta) ---
 
 H2 = ones(size(z)); % constant 1 at all frequencies
 
@@ -75,15 +75,7 @@ mag2 = abs(H2); % will be all ones
 
 phi2 = atan2(imag(H2), real(H2)) * 180 / pi; % will be zero everywhere
 
-% Phase correction (unnecessary here but for consistency)
-
-phi2_start = phi2(1);
-
-phi2_end = phi2(end);
-
-phi2_baseline = linspace(phi2_start, phi2_end, length(phi2));
-
-phi2_corrected = phi2_baseline - phi2;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Plot magnitude and phase of H2
 
@@ -91,7 +83,7 @@ figure;
 
 subplot(2,1,1);
 
-plot(f, mag2, 'm', 'LineWidth', 1);
+plot(f_range, mag2, 'm', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
@@ -107,7 +99,7 @@ xlim([0 720]);
 
 subplot(2,1,2);
 
-plot(f, phi2_corrected, 'k', 'LineWidth', 1);
+plot(f_range, phi2_corrected, 'k', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
