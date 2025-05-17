@@ -1,3 +1,4 @@
+
 ```
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -247,9 +248,9 @@ f = (0:half-1) * fs / N;
 
 figure;
 
-plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
+%% plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
 
-hold on;
+%% hold on;
 
 plot(f, Y_const_mag, 'r-', 'LineWidth', 1);
 
@@ -280,5 +281,6 @@ xtickformat('%d');
 ```
 
 ### Applying DC Decay to sin input (Best Guess) ![](../images/20250514234233.png)![](../images/20250514232305.png)![](../images/20250514232206.png) ![](../images/20250514232335.png) ![](../images/20250514232416.png) ![](../images/20250514232450.png)
-![](../images/20250515010108.png)  ![](../images/20250515010335.png)
+![](../images/20250515010108.png)   
+![](../images/20250517131732.png)
  

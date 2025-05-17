@@ -238,13 +238,11 @@ f = (0:half-1) * fs / N;
 
 figure;
 
-plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
+%% plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
 
-hold on;
+%% hold on;
 
 plot(f, Y_const_mag, 'r-', 'LineWidth', 1);
-
-set(gca, 'YScale', 'log');
 
 xlabel('Frequency (Hz)');
 
@@ -284,5 +282,7 @@ xtickformat('%d');
 - In the "Phase" plot, the y-axis goes from -100 to 100. The professor told me this is not correct. It should go for -180 to 180. So that plot will look different, but only because our scaling is different.
 - I also got the phase plot to match 100% when I used the atan function instead of atan2, however, the imaginary values on the real axis are not accounted for when we use atan. So I think, based on that observation, using atan2 is the correct method. This may not make sense from just reading this so remind me to explain this part. It will make sense when I show you visually.
 - If you change the y-axis for the code below back to -100 to 100, it should match the lecture example.
+
+![](../images/20250517132005.png)
 
 

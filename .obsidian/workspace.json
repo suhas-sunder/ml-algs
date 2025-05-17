@@ -11,14 +11,12 @@
             "id": "7d8bbdb9c78f7feb",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
-                "mode": "source",
-                "source": false
+                "file": "trig-algorithms/images/20250517132704.png"
               },
-              "icon": "lucide-file",
-              "title": "0-miki-mikano-filter"
+              "icon": "lucide-image",
+              "title": "20250517132704"
             }
           }
         ]
@@ -166,26 +164,26 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "7d8bbdb9c78f7feb",
+  "active": "41bdb79f4402733e",
   "lastOpenFiles": [
-    "trig-algorithms/images/20250515010335.png",
-    "trig-algorithms/images/20250515010108.png",
-    "trig-algorithms/images/20250514234233.png",
-    "trig-algorithms/images/20250514232450.png",
-    "trig-algorithms/images/20250514232416.png",
-    "trig-algorithms/images/20250514232335.png",
-    "trig-algorithms/images/20250514232305.png",
-    "trig-algorithms/images/20250514232206.png",
-    "trig-algorithms/images/20250514230756.png",
-    "trig-algorithms/images/20250514215245.png",
-    "trig-algorithms/images/20250514215154.png",
-    "trig-algorithms/images",
-    "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
-    "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
-    "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
+    "trig-algorithms/images/20250517132633.png",
+    "trig-algorithms/images/20250517132615.png",
+    "trig-algorithms/images/20250517132445.png",
+    "trig-algorithms/images/20250517132400.png",
+    "trig-algorithms/images/20250517132340.png",
+    "trig-algorithms/images/20250517132317.png",
+    "trig-algorithms/images/20250517132252.png",
+    "trig-algorithms/images/20250517132005.png",
+    "trig-algorithms/images/20250517131504.png",
+    "trig-algorithms/images/20250517131440.png",
     "trig-algorithms/1-miki-mikano/5-miki-mikano-app-transient.md",
+    "trig-algorithms/images/20250517132704.png",
     "trig-algorithms/1-miki-mikano/4-miki-mikano-app-3rd-harmonic.md",
     "trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
+    "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
+    "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
+    "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
+    "trig-algorithms/images",
     "trig-algorithms/1-miki-mikano/Pros and Cons of Miki algorithm.md",
     "trig-algorithms/4-gilbert-and-shovlin/Pros and Cons of Gilbert algorithm.md",
     "trig-algorithms/2-mann-and-morrison/Pros and Cons of Mann algorithm.md",

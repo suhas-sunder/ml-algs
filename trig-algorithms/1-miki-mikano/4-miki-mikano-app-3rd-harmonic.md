@@ -270,3 +270,11 @@ xticks(xticks_vals);
 
 xtickformat('%d');
 ```
+
+![](../images/20250517132400.png)
+
+![](../images/20250517132340.png)
+
+![](../images/20250517132317.png)
+
+![](../images/20250517132252.png)
