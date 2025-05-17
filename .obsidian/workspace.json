@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
+                "file": "trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2-miki-mikano-app-DC-Decay"
+              "title": "3-miki-mikano-app-2nd-harmonic"
             }
           }
         ]
@@ -166,24 +166,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "7d8bbdb9c78f7feb",
+  "active": "41bdb79f4402733e",
   "lastOpenFiles": [
+    "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
+    "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
+    "trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
+    "trig-algorithms/1-miki-mikano/Pros and Cons of Miki algorithm.md",
+    "Pasted image 20250515010335.png",
+    "Pasted image 20250515010108.png",
+    "Pasted image 20250514234233.png",
     "Pasted image 20250514232450.png",
     "Pasted image 20250514232416.png",
     "Pasted image 20250514232335.png",
     "Pasted image 20250514232305.png",
-    "Pasted image 20250514232206.png",
-    "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
+    "20250514232206.png",
     "Pasted image 20250514230545.png",
-    "Pasted image 20250514230756.png",
-    "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
-    "Pasted image 20250514230304.png",
-    "Pasted image 20250514230424.png",
+    "20250514230756.png",
     "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
-    "trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
-    "trig-algorithms/imgs/Pasted image 20250514215048.png",
-    "trig-algorithms/imgs/Pasted image 20250514205238.png",
-    "trig-algorithms/1-miki-mikano/Pros and Cons of Miki algorithm.md",
     "trig-algorithms/4-gilbert-and-shovlin/Pros and Cons of Gilbert algorithm.md",
     "trig-algorithms/2-mann-and-morrison/Pros and Cons of Mann algorithm.md",
     "trig-algorithms/3-rockerfeller-and-udren/Pros and Cons of Rockerfeller algorithm.md",

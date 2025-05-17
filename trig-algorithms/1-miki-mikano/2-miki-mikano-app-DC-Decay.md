@@ -15,7 +15,7 @@ Vm = 10; % Sine amplitude
 
 A = 10; % Peak DC influence
 
-tau_rise = 0.0032; % Rise time
+tau_rise = 0.003; % Rise time
 
 tau_decay = 0.008; % Fall time
 
@@ -29,7 +29,7 @@ dc_shape = A * (exp(-t / tau_decay) - exp(-t / tau_rise));
 
 % Combined signal: sine + shaped DC
 
-x = Vm * sin(omega * t + pi/4) + dc_shape; % Input waveform
+x = Vm * sin(omega * t + pi/6) + dc_shape; % Input waveform
 
 % Allocate arrays to store angles and magnitude values
 
@@ -218,7 +218,67 @@ ylabel('Imaginary Axis');
 title('Estimated Phasors on Complex Plane (All samples)');
 
 hold off;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plot Frequency Analysis of Estimated Phasor using FFT
+
+phasor_complex = mag .* exp(1j * deg2rad(angle_deg)); % Variable phase
+
+phasor_const_phase = mag; % constant phase
+
+N = length(phasor_complex);
+
+half = floor(N/2);
+
+Y_var = fft(phasor_complex);
+
+Y_var_mag = abs(Y_var);
+
+Y_var_mag = Y_var_mag(1:half);
+
+Y_const = fft(phasor_const_phase);
+
+Y_const_mag = abs(Y_const);
+
+Y_const_mag = Y_const_mag(1:half);
+
+f = (0:half-1) * fs / N;
+
+figure;
+
+plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
+
+hold on;
+
+plot(f, Y_const_mag, 'r-', 'LineWidth', 1);
+
+set(gca, 'YScale', 'log');
+
+xlabel('Frequency (Hz)');
+
+ylabel('Magnitude');
+
+title('FFT Magnitude: Variable Phase (blue) vs Constant Phase (red)');
+
+legend('Variable Phase','Constant Phase');
+
+grid on;
+
+xlim([0 fs/2]);
+
+% Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
+
+xticks_vals = 0:f0:(fs/2);
+
+xticks(xticks_vals);
+
+% Optional: format tick labels as integers without decimals
+
+xtickformat('%d');
+
 ```
 
-### Applying DC Decay to sin input (Best Guess) ![[Pasted image 20250514232305.png]]![[Pasted image 20250514232206.png]] ![[Pasted image 20250514232335.png]] ![[Pasted image 20250514232416.png]] ![[Pasted image 20250514232450.png]]
+### Applying DC Decay to sin input (Best Guess) ![[Pasted image 20250514234233.png]]![[Pasted image 20250514232305.png]]![[20250514232206.png]] ![[Pasted image 20250514232335.png]] ![[Pasted image 20250514232416.png]] ![[Pasted image 20250514232450.png]]
+![[Pasted image 20250515010108.png]]  ![[Pasted image 20250515010335.png]]
  

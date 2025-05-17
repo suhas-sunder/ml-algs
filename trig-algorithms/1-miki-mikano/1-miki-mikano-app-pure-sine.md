@@ -209,6 +209,64 @@ ylabel('Imaginary Axis');
 title('Estimated Phasors on Complex Plane (All samples)');
 
 hold off;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plot Frequency Analysis of Estimated Phasor using FFT
+
+phasor_complex = mag .* exp(1j * deg2rad(angle_deg)); % Variable phase
+
+phasor_const_phase = mag; % constant phase
+
+N = length(phasor_complex);
+
+half = floor(N/2);
+
+Y_var = fft(phasor_complex);
+
+Y_var_mag = abs(Y_var);
+
+Y_var_mag = Y_var_mag(1:half);
+
+Y_const = fft(phasor_const_phase);
+
+Y_const_mag = abs(Y_const);
+
+Y_const_mag = Y_const_mag(1:half);
+
+f = (0:half-1) * fs / N;
+
+figure;
+
+plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
+
+hold on;
+
+plot(f, Y_const_mag, 'r-', 'LineWidth', 1);
+
+set(gca, 'YScale', 'log');
+
+xlabel('Frequency (Hz)');
+
+ylabel('Magnitude');
+
+title('FFT Magnitude: Variable Phase (blue) vs Constant Phase (red)');
+
+legend('Variable Phase','Constant Phase');
+
+grid on;
+
+xlim([0 fs/2]);
+
+% Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
+
+xticks_vals = 0:f0:(fs/2);
+
+xticks(xticks_vals);
+
+% Optional: format tick labels as integers without decimals
+
+xtickformat('%d');
 ```
 ### A PURE 60Hz Sine Wave is passed through the algorithm "filter"
 
@@ -222,7 +280,7 @@ hold off;
 ### Expected Plots After Algorithm "Filter" is applied to input signal
 ![[Pasted image 20250514211706.png]] ![[Pasted image 20250514215245.png]]
  ![[Pasted image 20250514211737.png]]
-![[Pasted image 20250514230756.png]]
+![[20250514230756.png]]
 - In the "Phase" plot, the y-axis goes from -100 to 100. The professor told me this is not correct. It should go for -180 to 180. So that plot will look different, but only because our scaling is different.
 - I also got the phase plot to match 100% when I used the atan function instead of atan2, however, the imaginary values on the real axis are not accounted for when we use atan. So I think, based on that observation, using atan2 is the correct method. This may not make sense from just reading this so remind me to explain this part. It will make sense when I show you visually.
 - If you change the y-axis for the code below back to -100 to 100, it should match the lecture example.
