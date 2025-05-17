@@ -126,8 +126,10 @@ ylim([-180 180]);
 
 
 ### Expected Plot From Lecture Slide Vs MATLAB Plots
-![](../images/20250514210358.png) ![](../images/20250517184536.png)
- ![](../images/20250514210738.png) ![](../images/20250517184514.png)
+![](../images/20250514210358.png) 
+![](../images/20250517184536.png)
+![](../images/20250514210738.png) 
+![](../images/20250517184514.png)
 - These plots are modeled after the transfer function we solved for the real and imaginary parts:
 ![](../images/20250517184408.png)
 ![](../images/20250517183845.png)
