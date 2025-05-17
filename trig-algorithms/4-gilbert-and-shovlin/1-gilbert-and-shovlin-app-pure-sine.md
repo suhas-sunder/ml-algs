@@ -12,25 +12,15 @@ t = 0:T:0.1; % Time vector (0.1 seconds)
 
 f0 = 60; % Signal frequency (Hz)
 
-Vm = 10; % Sine amplitude
-
-A = 10; % Peak Voltage
-
-A_DC = 5; % Peak DC influence
-
-tau = 0.01; % Time constant of decay (s)
+Vm = 10; % Amplitude
 
 omega = 2 * pi * f0; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate shaped DC envelope (starts at 0, bumps up, then decays)
+% Generate 60 Hz sine wave input
 
-dc_shape = A_DC * exp(-t / tau);
-
-% Combined signal: sine + shaped DC
-
-x = Vm * sin(omega * t + pi/16) + dc_shape; % Input waveform
+x = Vm * sin(omega * t + pi/18); % Input waveform
 
 % Allocate arrays to store angles and magnitude values
 
@@ -56,7 +46,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm, Vm + 5]); % match amplitude range
+ylim([-Vm, Vm]); % match amplitude range
 
 grid on;
 
@@ -72,7 +62,7 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm, Vm + 5]); % same range for consistency
+ylim([-Vm, Vm]); % same range for consistency
 
 grid on;
 
@@ -90,11 +80,19 @@ V0 = x(n-1); % x[n-1] → center sample
 
 V_plus_1 = x(n); % x[n]
 
-den = (V_plus_1 - V_minus_1) / (2 * omega * T);
+% Phasor magnitude (squared), then square root
 
-angle_deg(n-1) = atan2(V0, den) * 180 / pi;
+mag_num = (V0^2 - V_plus_1 * V_minus_1);
 
-mag(n-1) = sqrt(V0^2 + den^2);
+mag_den = (sin(omega * T)^2);
+
+ang_num = 2 * V0 * sin(omega * T);
+
+ang_den = V_plus_1 - V_minus_1;
+
+mag(n - 1) = sqrt(mag_num/mag_den);
+
+angle_deg(n - 1) = atan2(ang_num, ang_den) * 180 / pi;
 
 end
 
@@ -258,9 +256,9 @@ xlabel('Frequency (Hz)');
 
 ylabel('Magnitude');
 
-title('FFT Magnitude: Variable Phase (blue) vs Constant Phase (red)');
+title('FFT Magnitude: Constant Phase (blue) vs Constant Phase (red)');
 
-legend('Variable Phase','Constant Phase');
+legend('Constant Phase','Constant Phase');
 
 grid on;
 
@@ -278,10 +276,10 @@ xtickformat('%d');
 ```
 
 
-![](../images/20250517165427.png)
+![](../images/20250517172922.png)
 
-![](../images/20250517165410.png)
+![](../images/20250517172910.png)
 
-![](../images/20250517165355.png)
+![](../images/20250517172857.png)
 
-![](../images/20250517165338.png)
+![](../images/20250517172707.png)

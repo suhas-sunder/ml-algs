@@ -1,4 +1,3 @@
-
 ```
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -10,33 +9,35 @@ T = 1 / fs; % Sampling period (s)
 
 t = 0:T:0.1; % Time vector (0.1 seconds)
 
-f0 = 60; % Signal frequency (Hz)
+f0 = 60; % Fundamental frequency (Hz)
 
-Vm = 10; % Sine amplitude
+Vm = 10; % Initial amplitude (before transient)
 
-A = 10; % Peak Voltage
-
-A_DC = 5; % Peak DC influence
-
-tau = 0.01; % Time constant of decay (s)
+Vm_spike = 50; % Amplitude after transient
 
 omega = 2 * pi * f0; % Angular frequency
 
+phi1 = pi/12; % Desired phase shift (radians)
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate shaped DC envelope (starts at 0, bumps up, then decays)
+%% Generate Transient Signal (Pure 60 Hz sine)
 
-dc_shape = A_DC * exp(-t / tau);
+x = zeros(size(t)); % Pre-allocate
 
-% Combined signal: sine + shaped DC
+% Before t = 0.03 s → base signal with phase shift
 
-x = Vm * sin(omega * t + pi/16) + dc_shape; % Input waveform
+x(t < 0.03) = Vm * sin(omega * t(t < 0.03) + phi1);
+
+% After t = 0.03 s → high amplitude, same frequency & phase
+
+x(t >= 0.03) = Vm_spike * sin(omega * t(t >= 0.03) + phi1);
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t) - 2);
+angle_deg = zeros(1, length(t)-2);
 
-mag = zeros(1, length(t) - 2);
+mag = zeros(1, length(t)-2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -56,7 +57,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm, Vm + 5]); % match amplitude range
+ylim([-Vm - 40, Vm + 40]); % match amplitude range
 
 grid on;
 
@@ -72,15 +73,15 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm, Vm + 5]); % same range for consistency
+ylim([-Vm - 40, Vm + 40]); % same range for consistency
 
 grid on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Apply the 3-sample phasor magnitude and angle estimator
+% Apply the 2-sample phasor magnitude and angle estimator
 
-% This is where we actually take 3 SAMPLES and APPLY THE FILTER
+% This is where we actually take 2 SAMPLES and APPLY THE FILTER
 
 for n = 3:length(t)
 
@@ -90,11 +91,19 @@ V0 = x(n-1); % x[n-1] → center sample
 
 V_plus_1 = x(n); % x[n]
 
-den = (V_plus_1 - V_minus_1) / (2 * omega * T);
+% Phasor magnitude (squared), then square root
 
-angle_deg(n-1) = atan2(V0, den) * 180 / pi;
+mag_num = (V0^2 - V_plus_1 * V_minus_1);
 
-mag(n-1) = sqrt(V0^2 + den^2);
+mag_den = (sin(omega * T)^2);
+
+ang_num = 2 * V0 * sin(omega * T);
+
+ang_den = V_plus_1 - V_minus_1;
+
+mag(n - 1) = sqrt(mag_num/mag_den);
+
+angle_deg(n - 1) = atan2(ang_num, ang_den) * 180 / pi;
 
 end
 
@@ -122,13 +131,13 @@ subplot(2,1,1);
 
 plot(t, mag, 'k', 'LineWidth', 1);
 
-title('Phasor Magnitude (3-sample estimate)');
+title('Phasor Magnitude (2-sample estimate)');
 
 xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 15]);
+ylim([0 70]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 grid on;
 
@@ -142,7 +151,7 @@ xlabel('Time (s)');
 
 ylabel('Angle (degrees)');
 
-ylim([-180 180]);
+ylim([-180 180]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 yticks(-150:50:150); % Set Y-axis ticks at 50-degree intervals
 
@@ -202,13 +211,13 @@ plot(phasor_real(idx_all), phasor_imag(idx_all), 'ko', 'MarkerFaceColor', 'none'
 
 % Axes formatting
 
-xlim([-axis_limit, axis_limit]);
+xlim([-axis_limit, axis_limit]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
-ylim([-axis_limit, axis_limit]);
+ylim([-axis_limit, axis_limit]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
-xticks(-axis_limit:1:axis_limit);
+xticks(-axis_limit:15:axis_limit);
 
-yticks(-axis_limit:1:axis_limit);
+yticks(-axis_limit:15:axis_limit);
 
 grid on;
 
@@ -248,10 +257,6 @@ f = (0:half-1) * fs / N;
 
 figure;
 
-%% plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
-
-%% hold on;
-
 plot(f, Y_const_mag, 'r-', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
@@ -264,7 +269,9 @@ legend('Variable Phase','Constant Phase');
 
 grid on;
 
-xlim([0 fs/2]);
+xlim([0 fs/2]); %%%%%%%%%%%%%%% CHANGE X-AXIS
+
+ylim([0, 1200]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 % Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
 
@@ -278,10 +285,10 @@ xtickformat('%d');
 ```
 
 
-![](../images/20250517165427.png)
+![](../images/20250517175102.png)
 
-![](../images/20250517165410.png)
+![](../images/20250517175045.png)
 
-![](../images/20250517165355.png)
+![](../images/20250517175028.png)
 
-![](../images/20250517165338.png)
+![](../images/20250517175012.png)

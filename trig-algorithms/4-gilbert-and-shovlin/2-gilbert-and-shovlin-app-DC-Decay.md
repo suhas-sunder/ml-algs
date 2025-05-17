@@ -14,9 +14,7 @@ f0 = 60; % Signal frequency (Hz)
 
 Vm = 10; % Sine amplitude
 
-A = 10; % Peak Voltage
-
-A_DC = 5; % Peak DC influence
+A = 10; % Peak DC influence
 
 tau = 0.01; % Time constant of decay (s)
 
@@ -90,11 +88,19 @@ V0 = x(n-1); % x[n-1] → center sample
 
 V_plus_1 = x(n); % x[n]
 
-den = (V_plus_1 - V_minus_1) / (2 * omega * T);
+% Phasor magnitude (squared), then square root
 
-angle_deg(n-1) = atan2(V0, den) * 180 / pi;
+mag_num = (V0^2 - V_plus_1 * V_minus_1);
 
-mag(n-1) = sqrt(V0^2 + den^2);
+mag_den = (sin(omega * T)^2);
+
+ang_num = 2 * V0 * sin(omega * T);
+
+ang_den = V_plus_1 - V_minus_1;
+
+mag(n - 1) = sqrt(mag_num/mag_den);
+
+angle_deg(n - 1) = atan2(ang_num, ang_den) * 180 / pi;
 
 end
 
@@ -206,9 +212,9 @@ xlim([-axis_limit, axis_limit]);
 
 ylim([-axis_limit, axis_limit]);
 
-xticks(-axis_limit:1:axis_limit);
+xticks(-axis_limit:2:axis_limit);
 
-yticks(-axis_limit:1:axis_limit);
+yticks(-axis_limit:2:axis_limit);
 
 grid on;
 
@@ -226,31 +232,27 @@ hold off;
 
 phasor_complex = mag .* exp(1j * deg2rad(angle_deg)); % Variable phase
 
-phasor_const_phase = mag; % constant phase
+phasor_const_phase = mag; % Constant phase
 
 N = length(phasor_complex);
-
-half = N/2 + 1;
 
 Y_var = fft(phasor_complex);
 
 Y_var_mag = abs(Y_var);
 
-Y_var_mag = Y_var_mag(1:half);
-
 Y_const = fft(phasor_const_phase);
 
 Y_const_mag = abs(Y_const);
 
-Y_const_mag = Y_const_mag(1:half);
-
-f = (0:half-1) * fs / N;
+f = (0:N-1) * fs / N; % Frequency axis from 0 to fs
 
 figure;
 
-%% plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
+% Uncomment if you want to plot the variable phase version
 
-%% hold on;
+% plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
+
+% hold on;
 
 plot(f, Y_const_mag, 'r-', 'LineWidth', 1);
 
@@ -258,30 +260,30 @@ xlabel('Frequency (Hz)');
 
 ylabel('Magnitude');
 
-title('FFT Magnitude: Variable Phase (blue) vs Constant Phase (red)');
+title('FFT Magnitude: Constant Phase (red)');
 
-legend('Variable Phase','Constant Phase');
+legend('Constant Phase');
 
 grid on;
 
-xlim([0 fs/2]);
+xlim([0 fs]); % Full frequency range
 
-% Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
+% Create dynamic xticks from 0 to fs using step f0
 
-xticks_vals = 0:f0:(fs/2);
+xticks_vals = 0:f0:fs;
 
 xticks(xticks_vals);
 
-% Optional: format tick labels as integers without decimals
+% Format tick labels as integers without decimals
 
 xtickformat('%d');
 ```
 
 
-![](../images/20250517165427.png)
+![](../images/20250517173620.png)
 
-![](../images/20250517165410.png)
+![](../images/20250517173607.png)
 
-![](../images/20250517165355.png)
+![](../images/20250517173553.png)
 
-![](../images/20250517165338.png)
+![](../images/20250517173537.png)

@@ -10,33 +10,29 @@ T = 1 / fs; % Sampling period (s)
 
 t = 0:T:0.1; % Time vector (0.1 seconds)
 
-f0 = 60; % Signal frequency (Hz)
+f0 = 60; % Fundamental frequency (Hz)
 
-Vm = 10; % Sine amplitude
+Vm = 10; % Fundamental amplitude
 
-A = 10; % Peak Voltage
-
-A_DC = 5; % Peak DC influence
-
-tau = 0.01; % Time constant of decay (s)
-
-omega = 2 * pi * f0; % Angular frequency
+omega = 2 * pi * f0; % Angular frequency of fundamental
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate shaped DC envelope (starts at 0, bumps up, then decays)
+% Generate 60 Hz sine wave input with 2nd harmonic at 120 Hz
 
-dc_shape = A_DC * exp(-t / tau);
+A2 = 7; % Amplitude of 2nd harmonic (example: 3V)
 
-% Combined signal: sine + shaped DC
+phi1 = pi/12; % Phase shift for fundamental
 
-x = Vm * sin(omega * t + pi/16) + dc_shape; % Input waveform
+phi2 = pi/6; % Phase shift for 2nd harmonic (you can change if needed)
+
+x = Vm * sin(omega * t + phi1) + A2 * sin(2 * omega * t + phi2); % Composite waveform
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t) - 2);
+angle_deg = zeros(1, length(t)-2);
 
-mag = zeros(1, length(t) - 2);
+mag = zeros(1, length(t)-2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -56,7 +52,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm, Vm + 5]); % match amplitude range
+ylim([-Vm - 10, Vm + 10]); % match amplitude range
 
 grid on;
 
@@ -72,7 +68,7 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm, Vm + 5]); % same range for consistency
+ylim([-Vm - 10, Vm + 10]); % same range for consistency
 
 grid on;
 
@@ -90,11 +86,19 @@ V0 = x(n-1); % x[n-1] → center sample
 
 V_plus_1 = x(n); % x[n]
 
-den = (V_plus_1 - V_minus_1) / (2 * omega * T);
+% Phasor magnitude (squared), then square root
 
-angle_deg(n-1) = atan2(V0, den) * 180 / pi;
+mag_num = (V0^2 - V_plus_1 * V_minus_1);
 
-mag(n-1) = sqrt(V0^2 + den^2);
+mag_den = (sin(omega * T)^2);
+
+ang_num = 2 * V0 * sin(omega * T);
+
+ang_den = V_plus_1 - V_minus_1;
+
+mag(n - 1) = sqrt(mag_num/mag_den);
+
+angle_deg(n - 1) = atan2(ang_num, ang_den) * 180 / pi;
 
 end
 
@@ -128,7 +132,7 @@ xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 15]);
+ylim([0 25]);
 
 grid on;
 
@@ -206,9 +210,9 @@ xlim([-axis_limit, axis_limit]);
 
 ylim([-axis_limit, axis_limit]);
 
-xticks(-axis_limit:1:axis_limit);
+xticks(-axis_limit:5:axis_limit);
 
-yticks(-axis_limit:1:axis_limit);
+yticks(-axis_limit:5:axis_limit);
 
 grid on;
 
@@ -277,11 +281,10 @@ xticks(xticks_vals);
 xtickformat('%d');
 ```
 
+![](../images/20250517174118.png)
 
-![](../images/20250517165427.png)
+![](../images/20250517174104.png)
 
-![](../images/20250517165410.png)
+![](../images/20250517174046.png)
 
-![](../images/20250517165355.png)
-
-![](../images/20250517165338.png)
+![](../images/20250517174013.png)
