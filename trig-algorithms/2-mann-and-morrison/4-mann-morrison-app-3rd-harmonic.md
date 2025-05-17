@@ -18,21 +18,21 @@ omega = 2 * pi * f0; % Angular frequency of fundamental
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate 60 Hz sine wave input with 2nd harmonic at 120 Hz
+% Generate 60 Hz sine wave input with 3rd harmonic at 180 Hz
 
-A2 = 7; % Amplitude of 2nd harmonic (example: 3V)
+A3 = 7; % Amplitude of 3rd harmonic (example: 7V)
 
 phi1 = pi/12; % Phase shift for fundamental
 
-phi2 = pi/6; % Phase shift for 2nd harmonic (you can change if needed)
+phi3 = pi/6; % Phase shift for 3rd harmonic
 
-x = Vm * sin(omega * t + phi1) + A2 * sin(2 * omega * t + phi2); % Composite waveform
+x = Vm * sin(omega * t + phi1) + A3 * sin(3 * omega * t + phi3); % Composite waveform
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t)-1);
+angle_deg = zeros(1, length(t)-2);
 
-mag = zeros(1, length(t)-1);
+mag = zeros(1, length(t)-2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -78,19 +78,19 @@ grid on;
 
 % This is where we actually take 2 SAMPLES and APPLY THE FILTER
 
-for n = 2:length(t)
+for n = 3:length(t)
 
-V0 = x(n); % Current sample
+V_minus_1 = x(n-2); % x[n-2]
 
-V1 = x(n-1); % Previous sample
+V0 = x(n-1); % x[n-1] → center sample
 
-num = V0;
+V_plus_1 = x(n); % x[n]
 
-den = (V0 * cos(omega*T) - V1) / sin(omega*T);
+den = (V_plus_1 - V_minus_1) / (2 * omega * T);
 
-angle_deg(n-1) = atan2(num, den) * 180/pi;
+angle_deg(n-1) = atan2(V0, den) * 180 / pi;
 
-mag(n-1) = sqrt(V0^2 + den^2); % 2-sample magnitude
+mag(n-1) = sqrt(V0^2 + den^2);
 
 end
 
@@ -270,10 +270,10 @@ xtickformat('%d');
 ```
 
 
-![](../images/20250517131527.png)
+![[Pasted image 20250517150425.png]]
 
-![](../images/20250517131504.png)
+![[Pasted image 20250517150400.png]]
 
-![](../images/20250517131440.png)
+![[Pasted image 20250517150317.png]]
 
-![](../images/20250517131420.png)
+![[Pasted image 20250517150257.png]]

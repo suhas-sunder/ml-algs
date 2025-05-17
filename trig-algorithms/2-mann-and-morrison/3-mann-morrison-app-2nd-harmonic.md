@@ -30,9 +30,9 @@ x = Vm * sin(omega * t + phi1) + A2 * sin(2 * omega * t + phi2); % Composite wav
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t)-1);
+angle_deg = zeros(1, length(t)-2);
 
-mag = zeros(1, length(t)-1);
+mag = zeros(1, length(t)-2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -52,7 +52,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm - 10, Vm + 10]); % match amplitude range
+ylim([-Vm, Vm]); % match amplitude range
 
 grid on;
 
@@ -68,29 +68,29 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm - 10, Vm + 10]); % same range for consistency
+ylim([-Vm, Vm]); % same range for consistency
 
 grid on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Apply the 2-sample phasor magnitude and angle estimator
+% Apply the 3-sample phasor magnitude and angle estimator
 
-% This is where we actually take 2 SAMPLES and APPLY THE FILTER
+% This is where we actually take 3 SAMPLES and APPLY THE FILTER
 
-for n = 2:length(t)
+for n = 3:length(t)
 
-V0 = x(n); % Current sample
+V_minus_1 = x(n-2); % x[n-2]
 
-V1 = x(n-1); % Previous sample
+V0 = x(n-1); % x[n-1] → center sample
 
-num = V0;
+V_plus_1 = x(n); % x[n]
 
-den = (V0 * cos(omega*T) - V1) / sin(omega*T);
+den = (V_plus_1 - V_minus_1) / (2 * omega * T);
 
-angle_deg(n-1) = atan2(num, den) * 180/pi;
+angle_deg(n-1) = atan2(V0, den) * 180 / pi;
 
-mag(n-1) = sqrt(V0^2 + den^2); % 2-sample magnitude
+mag(n-1) = sqrt(V0^2 + den^2);
 
 end
 
@@ -118,13 +118,13 @@ subplot(2,1,1);
 
 plot(t, mag, 'k', 'LineWidth', 1);
 
-title('Phasor Magnitude (2-sample estimate)');
+title('Phasor Magnitude (3-sample estimate)');
 
 xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 25]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([0 15]);
 
 grid on;
 
@@ -138,7 +138,7 @@ xlabel('Time (s)');
 
 ylabel('Angle (degrees)');
 
-ylim([-180 180]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([-180 180]);
 
 yticks(-150:50:150); % Set Y-axis ticks at 50-degree intervals
 
@@ -198,13 +198,13 @@ plot(phasor_real(idx_all), phasor_imag(idx_all), 'ko', 'MarkerFaceColor', 'none'
 
 % Axes formatting
 
-xlim([-axis_limit, axis_limit]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+xlim([-axis_limit, axis_limit]);
 
-ylim([-axis_limit, axis_limit]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([-axis_limit, axis_limit]);
 
-xticks(-axis_limit:2:axis_limit);
+xticks(-axis_limit:1:axis_limit);
 
-yticks(-axis_limit:2:axis_limit);
+yticks(-axis_limit:1:axis_limit);
 
 grid on;
 
@@ -244,6 +244,10 @@ f = (0:half-1) * fs / N;
 
 figure;
 
+%% plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
+
+%% hold on;
+
 plot(f, Y_const_mag, 'r-', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
@@ -256,7 +260,7 @@ legend('Variable Phase','Constant Phase');
 
 grid on;
 
-xlim([0 fs/2]); %%%%%%%%%%%%%%% CHANGE X-AXIS
+xlim([0 fs/2]);
 
 % Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
 
@@ -270,10 +274,11 @@ xtickformat('%d');
 ```
 
 
-![](../images/20250517131527.png)
 
-![](../images/20250517131504.png)
+![[Pasted image 20250517150142.png]]
 
-![](../images/20250517131440.png)
+![[Pasted image 20250517150043.png]]
 
-![](../images/20250517131420.png)
+![[Pasted image 20250517145923.png]]
+
+![[Pasted image 20250517145519.png]]

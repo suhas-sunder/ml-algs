@@ -12,27 +12,33 @@ t = 0:T:0.1; % Time vector (0.1 seconds)
 
 f0 = 60; % Fundamental frequency (Hz)
 
-Vm = 10; % Fundamental amplitude
+Vm = 10; % Initial amplitude (before transient)
 
-omega = 2 * pi * f0; % Angular frequency of fundamental
+Vm_spike = 50; % Amplitude after transient
+
+omega = 2 * pi * f0; % Angular frequency
+
+phi1 = pi/12; % Desired phase shift (radians)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate 60 Hz sine wave input with 2nd harmonic at 120 Hz
+%% Generate Transient Signal (Pure 60 Hz sine)
 
-A2 = 7; % Amplitude of 2nd harmonic (example: 3V)
+x = zeros(size(t)); % Pre-allocate
 
-phi1 = pi/12; % Phase shift for fundamental
+% Before t = 0.03 s → base signal with phase shift
 
-phi2 = pi/6; % Phase shift for 2nd harmonic (you can change if needed)
+x(t < 0.03) = Vm * sin(omega * t(t < 0.03) + phi1);
 
-x = Vm * sin(omega * t + phi1) + A2 * sin(2 * omega * t + phi2); % Composite waveform
+% After t = 0.03 s → high amplitude, same frequency & phase
+
+x(t >= 0.03) = Vm_spike * sin(omega * t(t >= 0.03) + phi1);
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t)-1);
+angle_deg = zeros(1, length(t)-2);
 
-mag = zeros(1, length(t)-1);
+mag = zeros(1, length(t)-2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -52,7 +58,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm - 10, Vm + 10]); % match amplitude range
+ylim([-Vm - 40, Vm + 40]); % match amplitude range
 
 grid on;
 
@@ -68,7 +74,7 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm - 10, Vm + 10]); % same range for consistency
+ylim([-Vm - 40, Vm + 40]); % same range for consistency
 
 grid on;
 
@@ -78,19 +84,19 @@ grid on;
 
 % This is where we actually take 2 SAMPLES and APPLY THE FILTER
 
-for n = 2:length(t)
+for n = 3:length(t)
 
-V0 = x(n); % Current sample
+V_minus_1 = x(n-2); % x[n-2]
 
-V1 = x(n-1); % Previous sample
+V0 = x(n-1); % x[n-1] → center sample
 
-num = V0;
+V_plus_1 = x(n); % x[n]
 
-den = (V0 * cos(omega*T) - V1) / sin(omega*T);
+den = (V_plus_1 - V_minus_1) / (2 * omega * T);
 
-angle_deg(n-1) = atan2(num, den) * 180/pi;
+angle_deg(n-1) = atan2(V0, den) * 180 / pi;
 
-mag(n-1) = sqrt(V0^2 + den^2); % 2-sample magnitude
+mag(n-1) = sqrt(V0^2 + den^2);
 
 end
 
@@ -124,7 +130,7 @@ xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 25]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([0 60]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 grid on;
 
@@ -202,9 +208,9 @@ xlim([-axis_limit, axis_limit]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 ylim([-axis_limit, axis_limit]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
-xticks(-axis_limit:2:axis_limit);
+xticks(-axis_limit:5:axis_limit);
 
-yticks(-axis_limit:2:axis_limit);
+yticks(-axis_limit:5:axis_limit);
 
 grid on;
 
@@ -258,6 +264,8 @@ grid on;
 
 xlim([0 fs/2]); %%%%%%%%%%%%%%% CHANGE X-AXIS
 
+ylim([0, 1200]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+
 % Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
 
 xticks_vals = 0:f0:(fs/2);
@@ -270,10 +278,9 @@ xtickformat('%d');
 ```
 
 
-![](../images/20250517131527.png)
 
-![](../images/20250517131504.png)
 
-![](../images/20250517131440.png)
-
-![](../images/20250517131420.png)
+![[Pasted image 20250517150902.png]]
+![[Pasted image 20250517150929.png]]
+![[Pasted image 20250517151113.png]]
+![[Pasted image 20250517151016.png]]
