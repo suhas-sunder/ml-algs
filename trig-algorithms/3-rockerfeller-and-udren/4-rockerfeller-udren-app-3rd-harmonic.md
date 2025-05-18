@@ -18,21 +18,33 @@ omega = 2 * pi * f0; % Angular frequency of fundamental
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% Initializing Variables with Parameters For INPUT SIGNAL
+
+fs_input = 720; % Sampling frequency (Hz)
+
+T_input = 1 / fs; % Sampling period (s)
+
+t_input = 0:T_input:0.1; % Time vector (0.1 seconds)
+
+f0_input = 60; % Signal frequency (Hz)
+
+Vm_input = 10; % Input Amplitude
+
+A = 7; % Amplitude of 3rd harmonic (example: 7V)
+
+omega_input = 2 * pi * f0_input; % Angular frequency
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Generate 60 Hz sine wave input with 3rd harmonic at 180 Hz
 
-A3 = 7; % Amplitude of 3rd harmonic (example: 7V)
-
-phi1 = pi/12; % Phase shift for fundamental
-
-phi3 = pi/6; % Phase shift for 3rd harmonic
-
-x = Vm * sin(omega * t + phi1) + A3 * sin(3 * omega * t + phi3); % Composite waveform
+x = Vm_input * sin(omega_input * t_input + pi/12) + A * sin(3 * omega_input * t_input + pi/6); % Composite waveform
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t)-2);
+angle_deg = zeros(1, length(t_input)-2);
 
-mag = zeros(1, length(t)-2);
+mag = zeros(1, length(t_input)-2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -280,10 +292,10 @@ xtickformat('%d');
 
 
 
-![[Pasted image 20250517155911.png]]
+![](../images/20250517155911.png)
 
-![[Pasted image 20250517155849.png]]
+![](../images/20250517155849.png)
 
-![[Pasted image 20250517155834.png]]
+![](../images/20250517155834.png)
 
-![[Pasted image 20250517155812.png]]
+![](../images/20250517155812.png)

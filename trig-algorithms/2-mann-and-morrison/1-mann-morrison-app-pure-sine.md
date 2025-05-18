@@ -18,15 +18,31 @@ omega = 2 * pi * f0; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% Initializing Variables with Parameters For INPUT SIGNAL
+
+fs_input = 720; % Sampling frequency (Hz)
+
+T_input = 1 / fs; % Sampling period (s)
+
+t_input = 0:T_input:0.1; % Time vector (0.1 seconds)
+
+f0_input = 60; % Signal frequency (Hz)
+
+Vm_input = 10; % Amplitude
+
+omega_input = 2 * pi * f0_input; % Angular frequency
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Generate 60 Hz sine wave input
 
-x = Vm * sin(omega * t + pi/18); % Input waveform
+x = Vm_input * sin(omega_input * t_input + pi/18); % Input waveform
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t) - 2);
+angle_deg = zeros(1, length(t_input)-1);
 
-mag = zeros(1, length(t) - 2);
+mag = zeros(1, length(t_input)-1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

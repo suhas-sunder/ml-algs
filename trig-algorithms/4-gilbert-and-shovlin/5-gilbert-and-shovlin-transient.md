@@ -1,3 +1,4 @@
+
 ```
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -13,31 +14,45 @@ f0 = 60; % Fundamental frequency (Hz)
 
 Vm = 10; % Initial amplitude (before transient)
 
-Vm_spike = 50; % Amplitude after transient
-
 omega = 2 * pi * f0; % Angular frequency
 
-phi1 = pi/12; % Desired phase shift (radians)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Initializing Variables with Parameters For INPUT SIGNAL
+
+fs_input = 720; % Sampling frequency (Hz)
+
+T_input = 1 / fs; % Sampling period (s)
+
+t_input = 0:T_input:0.1; % Time vector (0.1 seconds)
+
+f0_input = 60; % Signal frequency (Hz)
+
+Vm_input = 10; % Input Amplitude
+
+omega_input = 2 * pi * f0_input; % Angular frequency
+
+Vm_spike = 50; % Amplitude after transient
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Generate Transient Signal (Pure 60 Hz sine)
 
-x = zeros(size(t)); % Pre-allocate
+x = zeros(size(t_input)); % Pre-allocate
 
 % Before t = 0.03 s → base signal with phase shift
 
-x(t < 0.03) = Vm * sin(omega * t(t < 0.03) + phi1);
+x(t_input < 0.03) = Vm_input * sin(omega_input * t(t_input < 0.03) + pi/12);
 
 % After t = 0.03 s → high amplitude, same frequency & phase
 
-x(t >= 0.03) = Vm_spike * sin(omega * t(t >= 0.03) + phi1);
+x(t_input >= 0.03) = Vm_spike * sin(omega_input * t(t_input >= 0.03) + pi/12);
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t)-2);
+angle_deg = zeros(1, length(t_input)-1);
 
-mag = zeros(1, length(t)-2);
+mag = zeros(1, length(t_input)-1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -270,8 +285,6 @@ legend('Variable Phase','Constant Phase');
 grid on;
 
 xlim([0 fs/2]); %%%%%%%%%%%%%%% CHANGE X-AXIS
-
-ylim([0, 1200]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 % Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
 
