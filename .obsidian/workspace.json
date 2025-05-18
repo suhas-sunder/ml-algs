@@ -23,12 +23,14 @@
             "id": "355c4ec93432c64e",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "trig-algorithms/images/Pasted image 20250517231043.png"
+                "file": "trig-algorithms/3-rockerfeller-and-udren/0-rockerfeller-udren-filter.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20250517231043"
+              "icon": "lucide-file",
+              "title": "0-rockerfeller-udren-filter"
             }
           }
         ],
@@ -179,9 +181,10 @@
   },
   "active": "41bdb79f4402733e",
   "lastOpenFiles": [
+    "trig-algorithms/images/20250518001134.png",
+    "trig-algorithms/4-gilbert-and-shovlin/0-gilbert-and-shovlin-filter.md",
     "trig-algorithms/images/Pasted image 20250517235723.png",
     "trig-algorithms/images/Pasted image 20250517231043.png",
-    "trig-algorithms/4-gilbert-and-shovlin/0-gilbert-and-shovlin-filter.md",
     "trig-algorithms/3-rockerfeller-and-udren/0-rockerfeller-udren-filter.md",
     "trig-algorithms/3-rockerfeller-and-udren/1-rockerfeller-udren-app-pure-sine.md",
     "trig-algorithms/images/Pasted image 20250517235428.png",
