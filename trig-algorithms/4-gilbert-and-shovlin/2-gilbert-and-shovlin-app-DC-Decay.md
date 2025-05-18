@@ -2,7 +2,7 @@
 ```
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Initializing Variables with Parameters
+%% Initializing Variables with Parameters For Filter
 
 fs = 720; % Sampling frequency (Hz)
 
