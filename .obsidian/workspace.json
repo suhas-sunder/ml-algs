@@ -4,24 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "2445b770b52a57ed",
+        "id": "9e83da6398b8a5b3",
         "type": "tabs",
         "children": [
           {
-            "id": "731a538ddc2c9b74",
+            "id": "2e860f5ecfd1dde8",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
-                "mode": "source",
-                "source": false
+                "file": "trig-algorithms/images/Pasted image 20250517231043.png"
               },
-              "icon": "lucide-file",
-              "title": "0-miki-mikano-filter"
+              "icon": "lucide-image",
+              "title": "Pasted image 20250517231043"
+            }
+          },
+          {
+            "id": "355c4ec93432c64e",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "trig-algorithms/images/Pasted image 20250517231043.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20250517231043"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -166,20 +177,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "731a538ddc2c9b74",
+  "active": "41bdb79f4402733e",
   "lastOpenFiles": [
-    "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
+    "trig-algorithms/images/Pasted image 20250517235723.png",
+    "trig-algorithms/images/Pasted image 20250517231043.png",
+    "trig-algorithms/4-gilbert-and-shovlin/0-gilbert-and-shovlin-filter.md",
+    "trig-algorithms/3-rockerfeller-and-udren/0-rockerfeller-udren-filter.md",
+    "trig-algorithms/3-rockerfeller-and-udren/1-rockerfeller-udren-app-pure-sine.md",
+    "trig-algorithms/images/Pasted image 20250517235428.png",
+    "trig-algorithms/images/Pasted image 20250517235348.png",
+    "trig-algorithms/images/Pasted image 20250517234815.png",
+    "trig-algorithms/images/Pasted image 20250517234741.png",
+    "trig-algorithms/images/Pasted image 20250517234227.png",
+    "trig-algorithms/images/Pasted image 20250517233235.png",
+    "trig-algorithms/images/Pasted image 20250517233212.png",
+    "trig-algorithms/images/Pasted image 20250517233118.png",
+    "trig-algorithms/2-mann-and-morrison/0-mann-morrison-filter.md",
     "trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
-    "trig-algorithms/images/Pasted image 20250517183845.png",
-    "trig-algorithms/images/20250517184536.png",
-    "trig-algorithms/images/20250517184514.png",
-    "trig-algorithms/images/20250517184408.png",
-    "trig-algorithms/images/20250517184406.png",
-    "trig-algorithms/images/20250517184053.png",
-    "trig-algorithms/images/20250517184114.png",
-    "trig-algorithms/images/20250517183903.png",
-    "trig-algorithms/images/20250517183845.png",
-    "trig-algorithms/images/Pasted image 20250517184536.png",
+    "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
+    "trig-algorithms/2-mann-and-morrison/1-mann-morrison-app-pure-sine.md",
     "trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
     "trig-algorithms/4-gilbert-and-shovlin/5-gilbert-and-shovlin-transient.md",
     "trig-algorithms/4-gilbert-and-shovlin/4-gilbert-and-shovlin-3rd-harmonic.md",
@@ -191,21 +207,16 @@
     "trig-algorithms/4-gilbert-and-shovlin/1-gilbert-and-shovlin-app-pure-sine.md",
     "trig-algorithms/3-rockerfeller-and-udren/2-rockerfeller-udren-app-DC-Decay.md",
     "trig-algorithms/2-mann-and-morrison/2-mann-morrison-app-DC-Decay.md",
-    "trig-algorithms/3-rockerfeller-and-udren/1-rockerfeller-udren-app-pure-sine.md",
     "trig-algorithms/4-gilbert-and-shovlin/Pros and Cons of Gilbert algorithm.md",
-    "trig-algorithms/4-gilbert-and-shovlin/0-gilbert-and-shovlin-filter.md",
     "trig-algorithms/4-gilbert-and-shovlin/Untitled",
     "trig-algorithms/4-gilbert-and-shovlin/0",
     "trig-algorithms/images/renameImages.js",
-    "trig-algorithms/2-mann-and-morrison/1-mann-morrison-app-pure-sine.md",
     "trig-algorithms/2-mann-and-morrison/5-mann-morrison-app-transient.md",
     "trig-algorithms/2-mann-and-morrison/4-mann-morrison-app-3rd-harmonic.md",
     "trig-algorithms/2-mann-and-morrison/3-mann-morrison-app-2nd-harmonic.md",
     "trig-algorithms/3-rockerfeller-and-udren/Pros and Cons of Rockerfeller algorithm.md",
     "trig-algorithms/1-miki-mikano/Pros and Cons of Miki algorithm.md",
     "trig-algorithms/2-mann-and-morrison/Pros and Cons of Mann algorithm.md",
-    "trig-algorithms/2-mann-and-morrison/0-mann-morrison-filter.md",
-    "trig-algorithms/3-rockerfeller-and-udren/0-rockerfeller-udren-filter.md",
     "trig-algorithms/images",
     "trig-algorithms/4-gilbert-and-shovlin",
     "trig-algorithms/3-rockerfeller-and-udren",

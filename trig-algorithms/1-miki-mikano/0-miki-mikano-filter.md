@@ -9,9 +9,9 @@ fs = 720; % Sampling frequency
 
 T = 1 / fs; % Sampling period
 
-f_range = linspace(0, fs, 1000); % Frequency range for plotting
+f = linspace(0, fs, 1000); % Frequency range for plotting
 
-omega = 2 * pi * f_range; % Discrete angular frequency (radians/sample)
+omega = 2 * pi * f; % Discrete angular frequency (radians/sample)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -33,7 +33,7 @@ figure;
 
 subplot(2,1,1);
 
-plot(f_range, mag, 'b', 'LineWidth', 1);
+plot(f, mag, 'b', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
@@ -49,7 +49,7 @@ xlim([0 720]);
 
 subplot(2,1,2);
 
-plot(f_range, phi_corrected, 'r', 'LineWidth', 1);
+plot(f, phi, 'r', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
@@ -69,9 +69,9 @@ ylim([-180 180]);
 
 % --- H2(z) IMAGINARY PART Vp Sin(Theta) ---
 
-H2 = ones(size(z)); % constant 1 at all frequencies
+H2 = z.^0;
 
-mag2 = abs(H2); % will be all ones
+mag2 = abs(H2);
 
 phi2 = atan2(imag(H2), real(H2)) * 180 / pi; % will be zero everywhere
 
@@ -83,7 +83,7 @@ figure;
 
 subplot(2,1,1);
 
-plot(f_range, mag2, 'm', 'LineWidth', 1);
+plot(f, mag2, 'm', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
@@ -99,7 +99,7 @@ xlim([0 720]);
 
 subplot(2,1,2);
 
-plot(f_range, phi2_corrected, 'k', 'LineWidth', 1);
+plot(f, phi2, 'k', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
@@ -119,7 +119,7 @@ ylim([-180 180]);
 
 ### Expected Plot From Lecture Slide Vs MATLAB Plots
 ![](../images/20250514210358.png) 
-![](../images/20250517184536.png)
+![](../images/20250517231043.png)
 ![](../images/20250514210738.png) 
 ![](../images/20250517184514.png)
 - These plots are modeled after the transfer function we solved for the real and imaginary parts:
