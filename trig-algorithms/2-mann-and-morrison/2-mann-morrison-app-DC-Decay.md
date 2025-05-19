@@ -12,7 +12,7 @@ t = 0:T:0.1; % Time vector (0.1 seconds)
 
 f0 = 60; % Signal frequency (Hz)
 
-Vm = 10; % Sine amplitude
+Vm = 10; % Amplitude
 
 omega = 2 * pi * f0; % Angular frequency
 
@@ -28,29 +28,15 @@ t_input = 0:T_input:0.1; % Time vector (0.1 seconds)
 
 f0_input = 60; % Signal frequency (Hz)
 
-Vm_input = 10; % Input Amplitude
-
-A = 5; % DC Decay Amplitude
+Vm_input = 10; % Amplitude
 
 omega_input = 2 * pi * f0_input; % Angular frequency
 
-tau = 0.01; % Time constant of decay (s)
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate shaped DC envelope (starts at 0, bumps up, then decays)
+% Generate 60 Hz sine wave input
 
-dc_shape = A * exp(-t_input / tau);
-
-% Combined signal: sine + shaped DC
-
-x = Vm_input * sin(omega_input * t_input + pi/16) + dc_shape; % Input waveform
-
-% Allocate arrays to store angles and magnitude values
-
-angle_deg = zeros(1, length(t_input)-1);
-
-mag = zeros(1, length(t_input)-1);
+x = Vm_input * sin(omega_input * t_input + pi/18); % Input waveform
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -70,7 +56,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm, Vm + 5]); % match amplitude range
+ylim([-Vm, Vm]); % match amplitude range
 
 grid on;
 
@@ -86,11 +72,17 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm, Vm + 5]); % same range for consistency
+ylim([-Vm, Vm]); % same range for consistency
 
 grid on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Allocate arrays to store angles and magnitude values
+
+angle_deg = zeros(1, length(t_input)-1);
+
+mag = zeros(1, length(t_input)-1);
 
 % Apply the 3-sample phasor magnitude and angle estimator
 
@@ -114,17 +106,11 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Pad to align with time vector
+% Plot from 1 to end of array, with first index zero padded
 
-% Professors plots start at 0, so I'm zero padding the magnitude and phase.
+angle_deg = [0, angle_deg];
 
-% Without this code, the plot does not start at zero.
-
-angle_deg = [angle_deg(1), angle_deg];
-
-mag = [0, mag]; % Start magnitude at zero
-
-angle_deg(1) = 0; % Set the initial angle to 0 so that it doesn't start randomly on the y axis
+mag = [0, mag];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

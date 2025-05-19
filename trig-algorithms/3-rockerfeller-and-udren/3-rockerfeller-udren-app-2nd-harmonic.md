@@ -40,12 +40,6 @@ omega_input = 2 * pi * f0_input; % Angular frequency
 
 x = Vm_input * sin(omega_input * t_input + pi/12) + A * sin(2 * omega_input * t_input + pi/6); % Composite waveform
 
-% Allocate arrays to store angles and magnitude values
-
-angle_deg = zeros(1, length(t_input)-1);
-
-mag = zeros(1, length(t_input)-1);
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Plots the ORIGINAL Signal and SAMPLES, BEFORE FILTERING
@@ -86,6 +80,12 @@ grid on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Allocate arrays to store angles and magnitude values
+
+angle_deg = zeros(1, length(t_input)-1);
+
+mag = zeros(1, length(t_input)-1);
+
 % Apply the 3-sample phasor magnitude and angle estimator
 
 % This is where we actually take 3 SAMPLES and APPLY THE FILTER
@@ -112,17 +112,11 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Pad to align with time vector
+% Plot from 1 to end of array, with first index zero padded
 
-% Professors plots start at 0, so I'm zero padding the magnitude and phase.
+angle_deg = [0, angle_deg];
 
-% Without this code, the plot does not start at zero.
-
-angle_deg = [angle_deg(1), angle_deg];
-
-mag = [0, mag]; % Start magnitude at zero
-
-angle_deg(1) = 0; % Set the initial angle to 0 so that it doesn't start randomly on the y axis
+mag = [0, mag];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

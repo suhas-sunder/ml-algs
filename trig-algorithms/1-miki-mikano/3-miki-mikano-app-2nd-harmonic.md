@@ -86,6 +86,12 @@ grid on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Allocate arrays to store angles and magnitude values
+
+angle_deg = zeros(1, length(t) - 1);
+
+mag = zeros(1, length(t) - 1);
+
 % Apply the 2-sample phasor magnitude and angle estimator
 
 % This is where we actually take 2 SAMPLES and APPLY THE FILTER
@@ -100,25 +106,11 @@ num = V0;
 
 den = (V0 * cos(omega*T) - V1) / sin(omega*T);
 
-angle_deg(n-1) = atan2(num, den) * 180/pi;
+angle_deg(n) = atan2(num, den) * 180/pi;
 
-mag(n-1) = sqrt(V0^2 + den^2); % 2-sample magnitude
+mag(n) = sqrt(V0^2 + den^2); % 2-sample magnitude
 
 end
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Pad to align with time vector
-
-% Professors plots start at 0, so I'm zero padding the magnitude and phase.
-
-% Without this code, the plot does not start at zero.
-
-angle_deg = [angle_deg(1), angle_deg];
-
-mag = [0, mag]; % Start magnitude at zero
-
-angle_deg(1) = 0; % Set the initial angle to 0 so that it doesn't start randomly on the y axis
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -278,7 +270,7 @@ xticks(xticks_vals);
 
 % Optional: format tick labels as integers without decimals
 
-xtickformat('%d');
+xtickformat('%d');');
 ```
 
 
