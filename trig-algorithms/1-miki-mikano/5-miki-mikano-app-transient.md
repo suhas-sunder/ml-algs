@@ -58,7 +58,7 @@ figure;
 
 subplot(2,1,1);
 
-plot(t, x, 'b', 'LineWidth', 1);
+plot(t_input, x, 'b', 'LineWidth', 1);
 
 title('Original Continuous Signal');
 
@@ -66,7 +66,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm - 40, Vm + 40]); % match amplitude range
+ylim([-Vm_input - 40, Vm_input + 40]); % match amplitude range
 
 grid on;
 

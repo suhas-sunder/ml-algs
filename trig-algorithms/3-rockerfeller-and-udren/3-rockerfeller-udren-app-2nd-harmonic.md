@@ -50,7 +50,7 @@ figure;
 
 subplot(2,1,1);
 
-plot(t, x, 'b', 'LineWidth', 1);
+plot(t_input, x, 'b', 'LineWidth', 1);
 
 title('Original Continuous Signal');
 
@@ -58,7 +58,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm - 10, Vm + 10]); % match amplitude range
+ylim([-Vm_input - 10, Vm_input + 10]); % match amplitude range
 
 grid on;
 
@@ -66,7 +66,7 @@ grid on;
 
 subplot(2,1,2);
 
-stem(t, x, 'r', 'filled');
+stem(t_input, x, 'r', 'filled');
 
 title('Sampled Signal (Stems)');
 
@@ -74,7 +74,7 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm - 10, Vm + 10]); % same range for consistency
+ylim([-Vm_input - 10, Vm_input + 10]); % same range for consistency
 
 grid on;
 
