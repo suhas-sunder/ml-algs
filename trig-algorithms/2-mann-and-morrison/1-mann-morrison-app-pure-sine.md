@@ -38,11 +38,6 @@ omega_input = 2 * pi * f0_input; % Angular frequency
 
 x = Vm_input * sin(omega_input * t_input + pi/18); % Input waveform
 
-% Allocate arrays to store angles and magnitude values
-
-angle_deg = zeros(1, length(t_input)-1);
-
-mag = zeros(1, length(t_input)-1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -87,6 +82,12 @@ grid on;
 % Apply the 3-sample phasor magnitude and angle estimator
 
 % This is where we actually take 3 SAMPLES and APPLY THE FILTER
+
+% Allocate arrays to store angles and magnitude values
+
+angle_deg = zeros(1, length(t)-1);
+
+mag = zeros(1, length(t)-1);
 
 for n = 3:length(t)
 
