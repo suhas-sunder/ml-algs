@@ -92,19 +92,27 @@ mag = zeros(1, length(t) - 1);
 
 for n = 2:length(t)
 
-V0 = x(n); % Current sample
+V0 = x(n-1); % Current sample
 
-V1 = x(n-1); % Previous sample
+V1 = x(n); % Previous sample
 
 num = V0;
 
-den = (V0 * cos(omega*T) - V1) / sin(omega*T);
+den = (V1 - (V0 * cos(omega*T))) / sin(omega*T);
 
-angle_deg(n-1) = atan2(num, den) * 180/pi;
+angle_deg(n - 1) = atan2(num, den) * 180/pi;
 
-mag(n-1) = sqrt(V0^2 + den^2); % 2-sample magnitude
+mag(n - 1) = sqrt(V0^2 + den^2); % 2-sample magnitude
 
 end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plot from 1 to end of array, with first index zero padded
+
+angle_deg = [0, angle_deg];
+
+mag = [0, mag];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -268,10 +276,11 @@ xtickformat('%d');
 ```
 
 
-![](../images/20250517131527.png)
 
-![](../images/20250517131504.png)
+![](../../images/20250519164709.png)
 
-![](../images/20250517131440.png)
+![](../../images/20250519164638.png)
 
-![](../images/20250517131420.png)
+![](../../images/20250519164621.png)
+
+![](../../images/20250519164605.png)

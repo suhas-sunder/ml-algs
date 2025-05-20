@@ -30,15 +30,15 @@ f0_input = 60; % Signal frequency (Hz)
 
 Vm_input = 10; % Input Amplitude
 
-A = 7; % Amplitude of 2nd harmonic (example: 3V)
+A = 7; % Amplitude of 3rd harmonic (example: 7V)
 
 omega_input = 2 * pi * f0_input; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate 60 Hz sine wave input with 2nd harmonic at 120 Hz
+% Generate 60 Hz sine wave input with 3rd harmonic at 180 Hz
 
-x = Vm_input * sin(omega_input * t_input + pi/12) + A * sin(2 * omega_input * t_input + pi/6); % Composite waveform
+x = Vm_input * sin(omega_input * t_input + pi/12) + A * sin(3 * omega_input * t_input + pi/6); % Composite waveform
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -92,19 +92,27 @@ mag = zeros(1, length(t) - 1);
 
 for n = 2:length(t)
 
-V0 = x(n); % Current sample
+V0 = x(n-1); % Current sample
 
-V1 = x(n-1); % Previous sample
+V1 = x(n); % Previous sample
 
 num = V0;
 
-den = (V0 * cos(omega*T) - V1) / sin(omega*T);
+den = (V1 - (V0 * cos(omega*T))) / sin(omega*T);
 
-angle_deg(n-1) = atan2(num, den) * 180/pi;
+angle_deg(n - 1) = atan2(num, den) * 180/pi;
 
-mag(n-1) = sqrt(V0^2 + den^2); % 2-sample magnitude
+mag(n - 1) = sqrt(V0^2 + den^2); % 2-sample magnitude
 
 end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plot from 1 to end of array, with first index zero padded
+
+angle_deg = [0, angle_deg];
+
+mag = [0, mag];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -122,7 +130,7 @@ xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 25]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([0 30]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 grid on;
 
@@ -256,6 +264,8 @@ grid on;
 
 xlim([0 fs/2]); %%%%%%%%%%%%%%% CHANGE X-AXIS
 
+ylim([0, 1200]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+
 % Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
 
 xticks_vals = 0:f0:(fs/2);
@@ -268,10 +278,10 @@ xtickformat('%d');
 ```
 
 
-![](../images/20250517131527.png)
+![](../../images/20250519170133.png)
 
-![](../images/20250517131504.png)
+![](../../images/20250519170110.png)
 
-![](../images/20250517131440.png)
+![](../../images/20250519170039.png)
 
-![](../images/20250517131420.png)
+![](../../images/20250519165954.png)

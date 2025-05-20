@@ -10,11 +10,11 @@ T = 1 / fs; % Sampling period (s)
 
 t = 0:T:0.1; % Time vector (0.1 seconds)
 
-f0 = 60; % Fundamental frequency (Hz)
+f0 = 60; % Signal frequency (Hz)
 
-Vm = 10; % Fundamental amplitude
+Vm = 10; % Amplitude
 
-omega = 2 * pi * f0; % Angular frequency of fundamental
+omega = 2 * pi * f0; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -28,17 +28,15 @@ t_input = 0:T_input:0.1; % Time vector (0.1 seconds)
 
 f0_input = 60; % Signal frequency (Hz)
 
-Vm_input = 10; % Input Amplitude
-
-A = 7; % Amplitude of 2nd harmonic (example: 3V)
+Vm_input = 10; % Amplitude
 
 omega_input = 2 * pi * f0_input; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate 60 Hz sine wave input with 2nd harmonic at 120 Hz
+% Generate 60 Hz sine wave input
 
-x = Vm_input * sin(omega_input * t_input + pi/12) + A * sin(2 * omega_input * t_input + pi/6); % Composite waveform
+x = Vm_input * sin(omega_input * t + pi/18); % Input waveform
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -58,7 +56,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm_input - 10, Vm_input + 10]); % match amplitude range
+ylim([-Vm_input, Vm_input]); % match amplitude range
 
 grid on;
 
@@ -74,7 +72,7 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm_input - 10, Vm_input + 10]); % same range for consistency
+ylim([-Vm_input, Vm_input]); % same range for consistency
 
 grid on;
 
@@ -82,9 +80,9 @@ grid on;
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t) - 1);
+angle_deg = zeros(1, length(t_input)-1);
 
-mag = zeros(1, length(t) - 1);
+mag = zeros(1, length(t_input)-1);
 
 % Apply the 2-sample phasor magnitude and angle estimator
 
@@ -92,19 +90,27 @@ mag = zeros(1, length(t) - 1);
 
 for n = 2:length(t)
 
-V0 = x(n); % Current sample
+V0 = x(n-1); % Current sample
 
-V1 = x(n-1); % Previous sample
+V1 = x(n); % Previous sample
 
 num = V0;
 
-den = (V0 * cos(omega*T) - V1) / sin(omega*T);
+den = (V1 - (V0 * cos(omega*T))) / sin(omega*T);
 
-angle_deg(n-1) = atan2(num, den) * 180/pi;
+angle_deg(n - 1) = atan2(num, den) * 180/pi;
 
-mag(n-1) = sqrt(V0^2 + den^2); % 2-sample magnitude
+mag(n - 1) = sqrt(V0^2 + den^2); % 2-sample magnitude
 
 end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plot from 1 to end of array, with first index zero padded
+
+angle_deg = [0, angle_deg];
+
+mag = [0, mag];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -122,7 +128,7 @@ xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 25]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([0 15]);
 
 grid on;
 
@@ -136,7 +142,7 @@ xlabel('Time (s)');
 
 ylabel('Angle (degrees)');
 
-ylim([-180 180]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([-180 180]);
 
 yticks(-150:50:150); % Set Y-axis ticks at 50-degree intervals
 
@@ -196,13 +202,13 @@ plot(phasor_real(idx_all), phasor_imag(idx_all), 'ko', 'MarkerFaceColor', 'none'
 
 % Axes formatting
 
-xlim([-axis_limit, axis_limit]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+xlim([-axis_limit, axis_limit]);
 
-ylim([-axis_limit, axis_limit]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([-axis_limit, axis_limit]);
 
-xticks(-axis_limit:2:axis_limit);
+xticks(-axis_limit:1:axis_limit);
 
-yticks(-axis_limit:2:axis_limit);
+yticks(-axis_limit:1:axis_limit);
 
 grid on;
 
@@ -242,6 +248,10 @@ f = (0:half-1) * fs / N;
 
 figure;
 
+%% plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
+
+%% hold on;
+
 plot(f, Y_const_mag, 'r-', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
@@ -254,7 +264,7 @@ legend('Variable Phase','Constant Phase');
 
 grid on;
 
-xlim([0 fs/2]); %%%%%%%%%%%%%%% CHANGE X-AXIS
+xlim([0 fs/2]);
 
 % Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
 
@@ -268,10 +278,10 @@ xtickformat('%d');
 ```
 
 
-![](../images/20250517131527.png)
+![](../../images/20250519145706.png)
 
-![](../images/20250517131504.png)
+![](../../images/20250519145653.png)
 
-![](../images/20250517131440.png)
+![](../../images/20250519145639.png)
 
-![](../images/20250517131420.png)
+![](../../images/20250519145622.png)

@@ -12,9 +12,9 @@ t = 0:T:0.1; % Time vector (0.1 seconds)
 
 f0 = 60; % Fundamental frequency (Hz)
 
-Vm = 10; % Fundamental amplitude
+Vm = 10; % Initial amplitude (before transient)
 
-omega = 2 * pi * f0; % Angular frequency of fundamental
+omega = 2 * pi * f0; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -30,15 +30,23 @@ f0_input = 60; % Signal frequency (Hz)
 
 Vm_input = 10; % Input Amplitude
 
-A = 7; % Amplitude of 2nd harmonic (example: 3V)
-
 omega_input = 2 * pi * f0_input; % Angular frequency
+
+Vm_spike = 50; % Amplitude after transient
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate 60 Hz sine wave input with 2nd harmonic at 120 Hz
+%% Generate Transient Signal (Pure 60 Hz sine)
 
-x = Vm_input * sin(omega_input * t_input + pi/12) + A * sin(2 * omega_input * t_input + pi/6); % Composite waveform
+x = zeros(size(t_input)); % Pre-allocate
+
+% Before t = 0.03 s → base signal with phase shift
+
+x(t_input < 0.03) = Vm_input * sin(omega_input * t(t_input < 0.03) + pi/12);
+
+% After t = 0.03 s → high amplitude, same frequency & phase
+
+x(t_input >= 0.03) = Vm_spike * sin(omega_input * t(t_input >= 0.03) + pi/12);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -58,7 +66,7 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm_input - 10, Vm_input + 10]); % match amplitude range
+ylim([-Vm_input - 40, Vm_input + 40]); % match amplitude range
 
 grid on;
 
@@ -66,7 +74,7 @@ grid on;
 
 subplot(2,1,2);
 
-stem(t_input, x, 'r', 'filled');
+stem(t, x, 'r', 'filled');
 
 title('Sampled Signal (Stems)');
 
@@ -74,7 +82,7 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm_input - 10, Vm_input + 10]); % same range for consistency
+ylim([-Vm - 40, Vm + 40]); % same range for consistency
 
 grid on;
 
@@ -92,19 +100,27 @@ mag = zeros(1, length(t) - 1);
 
 for n = 2:length(t)
 
-V0 = x(n); % Current sample
+V0 = x(n-1); % Current sample
 
-V1 = x(n-1); % Previous sample
+V1 = x(n); % Previous sample
 
 num = V0;
 
-den = (V0 * cos(omega*T) - V1) / sin(omega*T);
+den = (V1 - (V0 * cos(omega*T))) / sin(omega*T);
 
-angle_deg(n-1) = atan2(num, den) * 180/pi;
+angle_deg(n - 1) = atan2(num, den) * 180/pi;
 
-mag(n-1) = sqrt(V0^2 + den^2); % 2-sample magnitude
+mag(n - 1) = sqrt(V0^2 + den^2); % 2-sample magnitude
 
 end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plot from 1 to end of array, with first index zero padded
+
+angle_deg = [0, angle_deg];
+
+mag = [0, mag];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -122,7 +138,7 @@ xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 25]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
+ylim([0 60]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 grid on;
 
@@ -200,9 +216,9 @@ xlim([-axis_limit, axis_limit]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
 ylim([-axis_limit, axis_limit]); %%%%%%%%%%%%%%% CHANGE Y-AXIS
 
-xticks(-axis_limit:2:axis_limit);
+xticks(-axis_limit:5:axis_limit);
 
-yticks(-axis_limit:2:axis_limit);
+yticks(-axis_limit:5:axis_limit);
 
 grid on;
 
@@ -268,10 +284,10 @@ xtickformat('%d');
 ```
 
 
-![](../images/20250517131527.png)
+![](../../images/20250519165437.png)
 
-![](../images/20250517131504.png)
+![](../../images/20250519165418.png)
 
-![](../images/20250517131440.png)
+![](../../images/20250519165328.png)
 
-![](../images/20250517131420.png)
+![](../../images/20250519165311.png)
