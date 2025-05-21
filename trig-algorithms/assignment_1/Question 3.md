@@ -54,10 +54,6 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-yticks(-Vm_input:5:Vm_input)
-
-ylim([-Vm_input, Vm_input]); % match amplitude range
-
 grid on;
 
 % Bottom subplot: Sampled signal (stem)
@@ -71,10 +67,6 @@ title('Sampled Signal (Stems)');
 xlabel('Time (s)');
 
 ylabel('Sample Value');
-
-yticks(-Vm_input:5:Vm_input)
-
-ylim([-Vm_input, Vm_input]); % same range for consistency
 
 grid on;
 
@@ -133,8 +125,6 @@ title('Phasor Magnitude (2-sample estimate)');
 xlabel('Time (s)');
 
 ylabel('Magnitude');
-
-ylim([0, max(mag) + 5]);
 
 grid on;
 
@@ -209,8 +199,6 @@ plot(phasor_real(idx_all), phasor_imag(idx_all), 'ko', 'MarkerFaceColor', 'none'
 % Axes formatting
 
 xlim([-axis_limit, axis_limit]);
-
-ylim([-axis_limit, axis_limit]);
 
 xticks(-axis_limit:1:axis_limit);
 
