@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "trig-algorithms/assignment_1/Question 3 With Data Points Plotting.md",
+                "file": "trig-algorithms/assignment_1/Question 3.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Question 3 With Data Points Plotting"
+              "title": "Question 3"
             }
           },
           {
@@ -182,8 +182,8 @@
   },
   "active": "355c4ec93432c64e",
   "lastOpenFiles": [
-    "trig-algorithms/assignment_1/Question 3.md",
     "trig-algorithms/assignment_1/Question 3 With Data Points Plotting.md",
+    "trig-algorithms/assignment_1/Question 3.md",
     "trig-algorithms/3-rockerfeller-and-udren/1-rockerfeller-udren-app-pure-sine.md",
     "trig-algorithms/assignment_1/Question 2 filter.md",
     "trig-algorithms/3-rockerfeller-and-udren/0-rockerfeller-udren-filter.md",
