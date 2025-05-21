@@ -100,9 +100,9 @@ num = V0;
 
 den = (V0 * cos(omega*T) - V1) / sin(omega*T);
 
-angle_deg(n-1) = atan2(num, den) * 180/pi;
+angle_deg(n) = atan2(num, den) * 180/pi;
 
-mag(n-1) = sqrt(V0^2 + den^2); % 2-sample magnitude
+mag(n) = sqrt(V0^2 + den^2); % 2-sample magnitude
 
 end
 

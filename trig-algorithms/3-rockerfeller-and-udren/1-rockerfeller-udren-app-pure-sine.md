@@ -12,8 +12,6 @@ t = 0:T:0.1; % Time vector (0.1 seconds)
 
 f0 = 60; % Signal frequency (Hz)
 
-Vm = 10; % Amplitude
-
 omega = 2 * pi * f0; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -56,6 +54,8 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
+yticks(-Vm_input:5:Vm_input)
+
 ylim([-Vm_input, Vm_input]); % match amplitude range
 
 grid on;
@@ -72,6 +72,8 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
+yticks(-Vm_input:5:Vm_input)
+
 ylim([-Vm_input, Vm_input]); % same range for consistency
 
 grid on;
@@ -80,7 +82,7 @@ grid on;
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t_input)-1);
+phase_angle_deg = zeros(1, length(t_input)-1);
 
 mag = zeros(1, length(t_input)-1);
 
@@ -98,13 +100,13 @@ V_plus_1 = x(n); % x[n]
 
 % Second derivative (acceleration estimate)
 
-num = (V_plus_1 - 2 * V0 + V_minus_1) / (omega^2 * T^2);
+imaginary_part_Vp_sin_theta = (V_plus_1 - 2 * V0 + V_minus_1) / (omega^2 * T^2);
 
-den = (V_plus_1 - V_minus_1) / (2 * omega * T);
+real_part_Vp_cos_theta = (V_plus_1 - V_minus_1) / (2 * omega * T);
 
-angle_deg(n - 1) = atan2(num, den) * 180 / pi;
+phase_angle_deg(n - 1) = atan2(imaginary_part_Vp_sin_theta, real_part_Vp_cos_theta) * 180 / pi;
 
-mag(n - 1) = sqrt(num^2 + den^2);
+mag(n - 1) = sqrt(imaginary_part_Vp_sin_theta^2 + real_part_Vp_cos_theta^2);
 
 end
 
@@ -112,7 +114,7 @@ end
 
 % Plot from 1 to end of array, with first index zero padded
 
-angle_deg = [0, angle_deg];
+phase_angle_deg = [0, phase_angle_deg];
 
 mag = [0, mag];
 
@@ -124,21 +126,21 @@ figure;
 
 subplot(2,1,1);
 
-plot(t, mag, 'k', 'LineWidth', 1);
+plot(t, mag, 'b', 'LineWidth', 1);
 
-title('Phasor Magnitude (3-sample estimate)');
+title('Phasor Magnitude (2-sample estimate)');
 
 xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 15]);
+ylim([0, max(mag) + 5]);
 
 grid on;
 
 subplot(2,1,2);
 
-plot(t, angle_deg, 'm', 'LineWidth', 1);
+plot(t, phase_angle_deg, 'r', 'LineWidth', 1);
 
 title('Phasor Phase Angle (atan-based)');
 
@@ -148,7 +150,7 @@ ylabel('Angle (degrees)');
 
 ylim([-180 180]);
 
-yticks(-150:50:150); % Set Y-axis ticks at 50-degree intervals
+yticks(-180:60:180); % Set Y-axis ticks at 50-degree intervals
 
 grid on;
 
@@ -168,9 +170,9 @@ idx_all = 1:(length(t)-1);
 
 % Compute phasor coordinates
 
-phasor_real = mag .* cosd(angle_deg);
+phasor_real = mag .* cosd(phase_angle_deg);
 
-phasor_imag = mag .* sind(angle_deg);
+phasor_imag = mag .* sind(phase_angle_deg);
 
 % Find the max extent across real/imaginary axes
 
@@ -194,7 +196,7 @@ figure; hold on; axis equal;
 
 theta = linspace(0, 2*pi, 300);
 
-plot(Vm * cos(theta), Vm * sin(theta), 'r--', 'LineWidth', 1);
+plot(round(max(abs(x))) * cos(theta), round(max(abs(x))) * sin(theta), 'r--', 'LineWidth', 1);
 
 % Origin point
 
@@ -228,7 +230,7 @@ hold off;
 
 % Plot Frequency Analysis of Estimated Phasor using FFT
 
-phasor_complex = mag .* exp(1j * deg2rad(angle_deg)); % Variable phase
+phasor_complex = mag .* exp(1j * deg2rad(phase_angle_deg)); % Variable phase
 
 phasor_const_phase = mag; % constant phase
 
@@ -262,9 +264,9 @@ xlabel('Frequency (Hz)');
 
 ylabel('Magnitude');
 
-title('FFT Magnitude: Constant Phase (blue) vs Constant Phase (red)');
+title('FFT Magnitude: Variable Phase (blue) vs Constant Phase (red)');
 
-legend('Constant Phase','Constant Phase');
+legend('Variable Phase','Constant Phase');
 
 grid on;
 

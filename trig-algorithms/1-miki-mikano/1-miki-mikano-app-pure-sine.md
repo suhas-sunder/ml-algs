@@ -12,8 +12,6 @@ t = 0:T:0.1; % Time vector (0.1 seconds)
 
 f0 = 60; % Signal frequency (Hz)
 
-Vm = 10; % Amplitude
-
 omega = 2 * pi * f0; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,7 +34,7 @@ omega_input = 2 * pi * f0_input; % Angular frequency
 
 % Generate 60 Hz sine wave input
 
-x = Vm_input * sin(omega_input * t + pi/18); % Input waveform
+x = Vm_input * sin(omega_input * t_input + pi/18); % Input waveform
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -56,6 +54,8 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
+yticks(-Vm_input:5:Vm_input)
+
 ylim([-Vm_input, Vm_input]); % match amplitude range
 
 grid on;
@@ -72,17 +72,19 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
+yticks(-Vm_input:5:Vm_input)
+
 ylim([-Vm_input, Vm_input]); % same range for consistency
 
 grid on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Allocate arrays to store angles and magnitude values
-
-angle_deg = zeros(1, length(t_input) - 1);
+% Allocate arrays to store angles and magnitude values of FILTERED SIGNAL OUTPUT
 
 mag = zeros(1, length(t_input) - 1);
+
+phase_angle_deg = zeros(1, length(t_input) - 1);
 
 % Apply the 2-sample phasor magnitude and angle estimator
 
@@ -94,13 +96,17 @@ V0 = x(n); % Current sample
 
 V1 = x(n-1); % Previous sample
 
-num = V0;
+% Equations for real and imaginary parts of filter
 
-den = (V0 * cos(omega*T) - V1) / sin(omega*T);
+real_part_Vp_sin_theta = (V0 * cos(omega*T) - V1) / sin(omega*T);
 
-angle_deg(n) = atan2(num, den) * 180/pi;
+imaginary_part_Vp_cos_theta = V0;
 
-mag(n) = sqrt(V0^2 + den^2); % 2-sample magnitude
+% Apply above equations to Phasor Estimation
+
+mag(n) = sqrt(imaginary_part_Vp_cos_theta^2 + real_part_Vp_sin_theta^2); % 2-sample magnitude
+
+phase_angle_deg(n) = atan2(imaginary_part_Vp_cos_theta, real_part_Vp_sin_theta) * 180/pi;
 
 end
 
@@ -112,7 +118,7 @@ figure;
 
 subplot(2,1,1);
 
-plot(t, mag, 'k', 'LineWidth', 1);
+plot(t, mag, 'b', 'LineWidth', 1);
 
 title('Phasor Magnitude (2-sample estimate)');
 
@@ -120,13 +126,13 @@ xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 15]);
+ylim([0, max(mag) + 5]);
 
 grid on;
 
 subplot(2,1,2);
 
-plot(t, angle_deg, 'm', 'LineWidth', 1);
+plot(t, phase_angle_deg, 'r', 'LineWidth', 1);
 
 title('Phasor Phase Angle (atan-based)');
 
@@ -136,7 +142,7 @@ ylabel('Angle (degrees)');
 
 ylim([-180 180]);
 
-yticks(-150:50:150); % Set Y-axis ticks at 50-degree intervals
+yticks(-180:60:180); % Set Y-axis ticks at 50-degree intervals
 
 grid on;
 
@@ -156,9 +162,9 @@ idx_all = 1:(length(t)-1);
 
 % Compute phasor coordinates
 
-phasor_real = mag .* cosd(angle_deg);
+phasor_real = mag .* cosd(phase_angle_deg);
 
-phasor_imag = mag .* sind(angle_deg);
+phasor_imag = mag .* sind(phase_angle_deg);
 
 % Find the max extent across real/imaginary axes
 
@@ -182,7 +188,7 @@ figure; hold on; axis equal;
 
 theta = linspace(0, 2*pi, 300);
 
-plot(Vm * cos(theta), Vm * sin(theta), 'r--', 'LineWidth', 1);
+plot(round(max(abs(x))) * cos(theta), round(max(abs(x))) * sin(theta), 'r--', 'LineWidth', 1);
 
 % Origin point
 
@@ -216,7 +222,7 @@ hold off;
 
 % Plot Frequency Analysis of Estimated Phasor using FFT
 
-phasor_complex = mag .* exp(1j * deg2rad(angle_deg)); % Variable phase
+phasor_complex = mag .* exp(1j * deg2rad(phase_angle_deg)); % Variable phase
 
 phasor_const_phase = mag; % constant phase
 
@@ -267,6 +273,7 @@ xticks(xticks_vals);
 % Optional: format tick labels as integers without decimals
 
 xtickformat('%d');
+
 ```
 ### A PURE 60Hz Sine Wave is passed through the algorithm "filter"
 
