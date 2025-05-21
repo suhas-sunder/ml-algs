@@ -98,15 +98,15 @@ V1 = x(n-1); % Previous sample
 
 % Equations for real and imaginary parts of filter
 
-real_part_Vp_sin_theta = (V0 * cos(omega*T) - V1) / sin(omega*T);
+real_part_Vp_cos_theta = (V0 * cos(omega*T) - V1) / sin(omega*T);
 
-imaginary_part_Vp_cos_theta = V0;
+imaginary_part_Vp_sin_theta = V0;
 
 % Apply above equations to Phasor Estimation
 
-mag(n) = sqrt(imaginary_part_Vp_cos_theta^2 + real_part_Vp_sin_theta^2); % 2-sample magnitude
+mag(n) = sqrt(imaginary_part_Vp_sin_theta^2 + real_part_Vp_cos_theta^2); % 2-sample magnitude
 
-phase_angle_deg(n) = atan2(imaginary_part_Vp_cos_theta, real_part_Vp_sin_theta) * 180/pi;
+phase_angle_deg(n) = atan2(imaginary_part_Vp_sin_theta, real_part_Vp_cos_theta) * 180/pi;
 
 end
 
