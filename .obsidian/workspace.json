@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "assignment_1/Question 1.md",
+                "file": "trig-algorithms/assignment_1/Question 1.md",
                 "mode": "source",
                 "source": false
               },
@@ -180,11 +180,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "355c4ec93432c64e",
+  "active": "41bdb79f4402733e",
   "lastOpenFiles": [
     "trig-algorithms/4-gilbert-and-shovlin/1-gilbert-and-shovlin-app-pure-sine.md",
-    "assignment_1/Question 1.md",
-    "assignment_1",
+    "trig-algorithms/assignment_1/Question 1.md",
+    "trig-algorithms/assignment_1",
     "trig-algorithms/3-rockerfeller-and-udren/1-rockerfeller-udren-app-pure-sine.md",
     "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
     "trig-algorithms/2-mann-and-morrison/1-mann-morrison-app-pure-sine.md",
