@@ -1,11 +1,5 @@
 
 ```
-clc;
-
-clear;
-
-close all;
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initializing Variables with Parameters For Filter
@@ -36,47 +30,11 @@ Vm_input = 2314; % Amplitude
 
 omega_input = 2 * pi * f0_input; % Angular frequency
 
-x_samples = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699]; % Given digitized voltages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-N = length(x_samples); % Number of samples
+% Generate 60 Hz sine wave input
 
-t_samples = (0:N-1)/fs_input; % Sample times [seconds]
-
-%% Sinusoidal Model Function
-
-% params(1) = Amplitude A
-
-% params(2) = Phase phi
-
-model = @(params, t_input) params(1) * sin(2 * pi * f0_input * t_input + params(2));
-
-%% Initial Guess for [Amplitude, Phase]
-
-A_guess = max(abs(x_samples));
-
-phi_guess = 0;
-
-initial_guess = [A_guess, phi_guess];
-
-%% Curve Fitting: Find best amplitude and phase
-
-options = optimset('Display','off'); % Suppress output
-
-params_est = lsqcurvefit(model, initial_guess, t_samples, x_samples, [], [], options);
-
-A_est = params_est(1);
-
-phi_est = params_est(2);
-
-fprintf('Estimated Amplitude: %.2f\n', A_est);
-
-fprintf('Estimated Phase (radians): %.4f\n', phi_est);
-
-%% Generate Modeled Signal for Full Time Vector
-
-t_fine = 0:1/fs_input:0.1; % Fine time vector, 0 to 0.1 seconds at 480 Hz sampling
-
-x = A_est * sin(2 * pi * f0_input * t_fine + phi_est);
+x = Vm_input * sin(2 * pi * f0_input * t_input + 0.31); % Input waveform
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -168,8 +126,6 @@ xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0, max(mag) + max(mag)* 0.25]);
-
 grid on;
 
 subplot(2,1,2);
@@ -241,6 +197,12 @@ plot(0, 0, 'ko', 'MarkerFaceColor', 'none', 'MarkerSize', 4.5);
 plot(phasor_real(idx_all), phasor_imag(idx_all), 'ko', 'MarkerFaceColor', 'none', 'MarkerSize', 4.5);
 
 % Axes formatting
+
+xlim([-axis_limit, axis_limit]);
+
+xticks(-axis_limit:1:axis_limit);
+
+yticks(-axis_limit:1:axis_limit);
 
 grid on;
 
