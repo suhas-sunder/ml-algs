@@ -1,5 +1,11 @@
 
 ```
+clc;
+
+clear;
+
+close all;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initializing Variables with Parameters For Filter
@@ -32,9 +38,9 @@ omega_input = 2 * pi * f0_input; % Angular frequency
 
 x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
 
-t_input = (0:length(x_samples)-1) * T_input;
+t_input = (0:length(x)-1) * T_input;
 
-t = (0:length(x_samples)-1) * T_input; % Time vector (0.1 seconds)
+t = (0:length(x)-1) * T_input; % Time vector (0.1 seconds)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
