@@ -240,8 +240,6 @@ plot(0, 0, 'ko', 'MarkerFaceColor', 'none', 'MarkerSize', 4.5);
 
 plot(phasor_real(idx_all), phasor_imag(idx_all), 'ko', 'MarkerFaceColor', 'none', 'MarkerSize', 4.5);
 
-% Axes formatting
-
 grid on;
 
 xlabel('Real Axis');
@@ -309,4 +307,3 @@ xticks(xticks_vals);
 xtickformat('%d');
 ```
 
-Code will be pasted above.

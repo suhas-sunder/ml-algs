@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "trig-algorithms/assignment_1/Question 3.md",
+                "file": "trig-algorithms/assignment_1/Question 3 With Data Points Plotting.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Question 3"
+              "title": "Question 3 With Data Points Plotting"
             }
           },
           {
@@ -182,12 +182,13 @@
   },
   "active": "355c4ec93432c64e",
   "lastOpenFiles": [
+    "trig-algorithms/assignment_1/Question 3.md",
+    "trig-algorithms/3-rockerfeller-and-udren/1-rockerfeller-udren-app-pure-sine.md",
+    "trig-algorithms/assignment_1/Question 3 With Data Points Plotting.md",
     "trig-algorithms/assignment_1/Question 2 filter.md",
     "trig-algorithms/3-rockerfeller-and-udren/0-rockerfeller-udren-filter.md",
-    "trig-algorithms/assignment_1/Question 3.md",
     "trig-algorithms/4-gilbert-and-shovlin/1-gilbert-and-shovlin-app-pure-sine.md",
     "trig-algorithms/4-gilbert-and-shovlin/0-gilbert-and-shovlin-filter.md",
-    "trig-algorithms/3-rockerfeller-and-udren/1-rockerfeller-udren-app-pure-sine.md",
     "trig-algorithms/2-mann-and-morrison/1-mann-morrison-app-pure-sine.md",
     "trig-algorithms/2-mann-and-morrison/0-mann-morrison-filter.md",
     "trig-algorithms/1-miki-mikano/1-miki-mikano-app-pure-sine.md",
@@ -226,7 +227,6 @@
     "trig-algorithms/swap-v0-start/1-miki-mikano",
     "trig-algorithms/swap-v0-start",
     "trig-algorithms/swap-v0-start",
-    "trig-algorithms/2-mann-and-morrison/3-mann-morrison-app-2nd-harmonic.md",
     "trig-algorithms/4-gilbert-and-shovlin/Untitled"
   ]
 }
