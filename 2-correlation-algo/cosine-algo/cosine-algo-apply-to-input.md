@@ -256,8 +256,8 @@ grid on;
 
 
 ### Pure Sine:
-![[Pasted image 20250522185306.png]]
-![[Pasted image 20250522185807.png]]
-![[Pasted image 20250522185749.png]]
-![[Pasted image 20250522185727.png]]
-![[Pasted image 20250522185711.png]]
+![](../images/20250522185306.png)
+![](../images/20250522185807.png)
+![](../images/20250522185749.png)
+![](../images/20250522185727.png)
+![](../images/20250522185711.png)

@@ -11,12 +11,14 @@
             "id": "829f9d6fe3247584",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "2-correlation-algo/images/Pasted image 20250522185306.png"
+                "file": "2-correlation-algo/cosine-algo/cosine-algo-apply-to-input.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20250522185306"
+              "icon": "lucide-file",
+              "title": "cosine-algo-apply-to-input"
             }
           },
           {
@@ -178,21 +180,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "41bdb79f4402733e",
+  "active": "829f9d6fe3247584",
   "lastOpenFiles": [
-    "2-correlation-algo/cosine-algo/cosine-algo-apply-to-input.md",
-    "2-correlation-algo/images/Pasted image 20250522185807.png",
-    "2-correlation-algo/images/Pasted image 20250522185749.png",
-    "2-correlation-algo/images/Pasted image 20250522185727.png",
-    "2-correlation-algo/images/Pasted image 20250522185711.png",
     "2-correlation-algo/images/Pasted image 20250522185306.png",
-    "Pasted image 20250522185246.png",
+    "2-correlation-algo/images/20250522185807.png",
+    "2-correlation-algo/images/20250522185727.png",
+    "2-correlation-algo/images/20250522185749.png",
+    "2-correlation-algo/images/20250522185711.png",
+    "2-correlation-algo/images/20250522185306.png",
+    "2-correlation-algo/images/20250522181255.png",
+    "2-correlation-algo/images/20250522181241.png",
+    "2-correlation-algo/images/20250522181229.png",
+    "2-correlation-algo/images/20250522181218.png",
+    "2-correlation-algo/images/20250522181216.png",
+    "2-correlation-algo/images/renameImages.js",
+    "2-correlation-algo/renameImages.js",
+    "2-correlation-algo/cosine-algo/cosine-algo-apply-to-input.md",
     "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
     "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input.md",
-    "2-correlation-algo/images/Pasted image 20250522175904.png",
-    "2-correlation-algo/images/Pasted image 20250522181255.png",
-    "2-correlation-algo/images/Pasted image 20250522181241.png",
-    "2-correlation-algo/images/Pasted image 20250522181229.png",
     "old-outdated-trig-algorithms/2-mann-and-morrison/5-mann-morrison-app-transient.md",
     "old-outdated-trig-algorithms/2-mann-and-morrison/4-mann-morrison-app-3rd-harmonic.md",
     "old-outdated-trig-algorithms/2-mann-and-morrison/3-mann-morrison-app-2nd-harmonic.md",
@@ -222,8 +227,6 @@
     "1-trig-algorithms/4-gilbert-and-shovlin",
     "1-trig-algorithms/3-rockerfeller-and-udren",
     "1-trig-algorithms/2-mann-and-morrison",
-    "1-trig-algorithms/images/renameImages.js",
-    "1-trig-algorithms/images",
-    "assignments/images"
+    "1-trig-algorithms/images/renameImages.js"
   ]
 }

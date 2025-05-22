@@ -253,41 +253,41 @@ grid on;
 
 
 ### Pure Sine Wave:
-(First image below is the "wrong version" that matches lecture notes. Just posting it here for reference to show that it matches.)![[Pasted image 20250522172021.png]]
-![[Pasted image 20250522171810.png]]
+(First image below is the "wrong version" that matches lecture notes. Just posting it here for reference to show that it matches.)![](../images/20250522172021.png)
+![](../images/20250522171810.png)
 
-![[Pasted image 20250522171747.png]]
+![](../images/20250522171747.png)
 
-![[Pasted image 20250522171730.png]]
-![[Pasted image 20250522171711.png]]
+![](../images/20250522171730.png)
+![](../images/20250522171711.png)
 
 
 ### Decaying DC:
-![[Pasted image 20250522173913.png]]
-![[Pasted image 20250522173858.png]]
-![[Pasted image 20250522173840.png]]
-![[Pasted image 20250522173814.png]]
+![](../images/20250522173913.png)
+![](../images/20250522173858.png)
+![](../images/20250522173840.png)
+![](../images/20250522173814.png)
 
 ### 2nd Harmonic:
-![[Pasted image 20250522174518.png]]
-![[Pasted image 20250522174500.png]]
-![[Pasted image 20250522174429.png]]
-![[Pasted image 20250522174414.png]]
+![](../images/20250522174518.png)
+![](../images/20250522174500.png)
+![](../images/20250522174429.png)
+![](../images/20250522174414.png)
 ### 3rd Harmonic:
-![[Pasted image 20250522174800.png]]
-![[Pasted image 20250522174741.png]]
-![[Pasted image 20250522174717.png]]
-![[Pasted image 20250522174650.png]]
+![](../images/20250522174800.png)
+![](../images/20250522174741.png)
+![](../images/20250522174717.png)
+![](../images/20250522174650.png)
 ### Transient:
 
 
 
 
 
-![[Pasted image 20250522175050.png]]
-![[Pasted image 20250522174958.png]]
-![[Pasted image 20250522174945.png]]
-![[Pasted image 20250522174927.png]]
+![](../images/20250522175050.png)
+![](../images/20250522174958.png)
+![](../images/20250522174945.png)
+![](../images/20250522174927.png)
 
 
 
