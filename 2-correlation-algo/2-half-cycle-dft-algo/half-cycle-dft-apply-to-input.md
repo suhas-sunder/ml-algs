@@ -1,5 +1,11 @@
 
 ```
+clc;
+
+clear;
+
+close all;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initializing Variables with Parameters For Filter
@@ -11,8 +17,6 @@ T = 1 / fs; % Sampling period (s)
 t = 0:T:0.1; % Time vector (0.1 seconds)
 
 f0 = 60; % Signal frequency (Hz)
-
-Vm = 10; % Amplitude
 
 omega = 2 * pi * f0; % Angular frequency
 
@@ -30,21 +34,23 @@ f0_input = 60; % Signal frequency (Hz)
 
 Vm_input = 10; % Input Amplitude
 
-A = 5; % DC Decay Amplitude
-
 omega_input = 2 * pi * f0_input; % Angular frequency
 
-tau = 0.01; % Time constant of decay (s)
+Vm_spike = 50; % Amplitude after transient
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate shaped DC envelope (starts at 0, bumps up, then decays)
+%% Generate Transient Signal (Pure 60 Hz sine)
 
-dc_shape = A * exp(-t_input / tau);
+x = zeros(size(t_input)); % Pre-allocate
 
-% Combined signal: sine + shaped DC
+% Before t = 0.03 s → base signal with phase shift
 
-x = Vm_input * sin(omega_input * t_input + pi/16) + dc_shape; % Input waveform
+x(t_input < 0.03) = Vm_input * sin(omega_input * t(t_input < 0.03) + pi/12);
+
+% After t = 0.03 s → high amplitude, same frequency & phase
+
+x(t_input >= 0.03) = Vm_spike * sin(omega_input * t(t_input >= 0.03) + pi/12);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -64,8 +70,6 @@ xlabel('Time (s)');
 
 ylabel('Amplitude');
 
-ylim([-Vm_input, Vm_input]); % match amplitude range
-
 grid on;
 
 % Bottom subplot: Sampled signal (stem)
@@ -80,15 +84,13 @@ xlabel('Time (s)');
 
 ylabel('Sample Value');
 
-ylim([-Vm_input, Vm_input]); % same range for consistency
-
 grid on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Allocate arrays to store angles and magnitude values
 
-angle_deg = zeros(1, length(t_input)-1);
+phase_angle_deg = zeros(1, length(t_input)-1);
 
 mag = zeros(1, length(t_input)-1);
 
@@ -96,29 +98,39 @@ mag = zeros(1, length(t_input)-1);
 
 % This is where we actually take 3 SAMPLES and APPLY THE FILTER
 
-for n = 3:length(t)
+real_values = [0, 0.5, 0.866, 1.0, 0.866, 0.5];
 
-V_minus_1 = x(n-2); % x[n-2]
+imaginary_values = [1.0, 0.866, 0.5, 0, -0.5, -0.866];
 
-V0 = x(n-1); % x[n-1] → center sample
+window_size = length(real_values);
 
-V_plus_1 = x(n); % x[n]
+V_real = zeros(1, window_size);
 
-den = (V_plus_1 - V_minus_1) / (2 * omega * T);
+V_imaginary = zeros(1, window_size);
 
-angle_deg(n-1) = atan2(V0, den) * 180 / pi;
+x_buffer = zeros(1, window_size); % sliding buffer for x
 
-mag(n-1) = sqrt(V0^2 + den^2);
+for n = 1:length(t)
+
+% Slide buffer: drop oldest, append new sample
+
+x_buffer = [x_buffer(2:end), x(n)]; % This takes all elements of x_buffer except the first one, destructures the array, then we add the result of x(n) at the end
+
+% Apply weights to current buffer
+
+V_real = real_values .* x_buffer;
+
+V_imaginary = imaginary_values .* x_buffer;
+
+imaginary_part_Vp_cos_theta = sum(V_imaginary)/(0.5 * window_size);
+
+real_part_Vp_sin_theta = sum(V_real)/(0.5 * window_size);
+
+phase_angle_deg(n) = atan2(imaginary_part_Vp_cos_theta, real_part_Vp_sin_theta) * 180 / pi;
+
+mag(n) = sqrt(imaginary_part_Vp_cos_theta^2 + real_part_Vp_sin_theta^2);
 
 end
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Plot from 1 to end of array, with first index zero padded
-
-angle_deg = [0, angle_deg];
-
-mag = [0, mag];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -128,21 +140,21 @@ figure;
 
 subplot(2,1,1);
 
-plot(t, mag, 'k', 'LineWidth', 1);
+plot(t, mag, 'b', 'LineWidth', 1);
 
-title('Phasor Magnitude (3-sample estimate)');
+title('Phasor Magnitude (2-sample estimate)');
 
 xlabel('Time (s)');
 
 ylabel('Magnitude');
 
-ylim([0 15]);
+ylim([0, max(mag) + max(mag) * 0.2]);
 
 grid on;
 
 subplot(2,1,2);
 
-plot(t, angle_deg, 'm', 'LineWidth', 1);
+plot(t, phase_angle_deg, 'r', 'LineWidth', 1);
 
 title('Phasor Phase Angle (atan-based)');
 
@@ -152,7 +164,7 @@ ylabel('Angle (degrees)');
 
 ylim([-180 180]);
 
-yticks(-150:50:150); % Set Y-axis ticks at 50-degree intervals
+yticks(-180:60:180); % Set Y-axis ticks at 50-degree intervals
 
 grid on;
 
@@ -172,25 +184,11 @@ idx_all = 1:(length(t)-1);
 
 % Compute phasor coordinates
 
-phasor_real = mag .* cosd(angle_deg);
+phasor_real = mag .* cosd(phase_angle_deg);
 
-phasor_imag = mag .* sind(angle_deg);
+phasor_imag = mag .* sind(phase_angle_deg);
 
-% Find the max extent across real/imaginary axes
-
-max_extent = max(abs([phasor_real, phasor_imag]));
-
-% Use 10 if all values fit; otherwise, round up to next multiple of 5
-
-if max_extent <= 10
-
-axis_limit = 10;
-
-else
-
-axis_limit = ceil(max_extent / 5) * 5;
-
-end
+% Plot
 
 figure; hold on; axis equal;
 
@@ -198,7 +196,7 @@ figure; hold on; axis equal;
 
 theta = linspace(0, 2*pi, 300);
 
-plot(Vm * cos(theta), Vm * sin(theta), 'r--', 'LineWidth', 1);
+plot(round(max(abs(x))) * cos(theta), round(max(abs(x))) * sin(theta), 'r--', 'LineWidth', 1);
 
 % Origin point
 
@@ -207,16 +205,6 @@ plot(0, 0, 'ko', 'MarkerFaceColor', 'none', 'MarkerSize', 4.5);
 % All phasor dots (black hollow circles)
 
 plot(phasor_real(idx_all), phasor_imag(idx_all), 'ko', 'MarkerFaceColor', 'none', 'MarkerSize', 4.5);
-
-% Axes formatting
-
-xlim([-axis_limit, axis_limit]);
-
-ylim([-axis_limit, axis_limit]);
-
-xticks(-axis_limit:1:axis_limit);
-
-yticks(-axis_limit:1:axis_limit);
 
 grid on;
 
@@ -232,19 +220,13 @@ hold off;
 
 % Plot Frequency Analysis of Estimated Phasor using FFT
 
-phasor_complex = mag .* exp(1j * deg2rad(angle_deg)); % Variable phase
+phasor_complex = mag .* exp(1j * deg2rad(phase_angle_deg)); % Variable phase
 
 phasor_const_phase = mag; % constant phase
 
 N = length(phasor_complex);
 
 half = N/2 + 1;
-
-Y_var = fft(phasor_complex);
-
-Y_var_mag = abs(Y_var);
-
-Y_var_mag = Y_var_mag(1:half);
 
 Y_const = fft(phasor_const_phase);
 
@@ -254,11 +236,9 @@ Y_const_mag = Y_const_mag(1:half);
 
 f = (0:half-1) * fs / N;
 
+% Plot
+
 figure;
-
-%% plot(f, Y_var_mag, 'b--', 'LineWidth', 1);
-
-%% hold on;
 
 plot(f, Y_const_mag, 'r-', 'LineWidth', 1);
 
@@ -271,25 +251,52 @@ title('FFT Magnitude: Variable Phase (blue) vs Constant Phase (red)');
 legend('Variable Phase','Constant Phase');
 
 grid on;
-
-xlim([0 fs/2]);
-
-% Create dynamic xticks from 0 to fs/2 with step size f0 (don't hardcode 50 or 60)
-
-xticks_vals = 0:f0:(fs/2);
-
-xticks(xticks_vals);
-
-% Optional: format tick labels as integers without decimals
-
-xtickformat('%d');
 ```
 
 
-![](old-outdated-trig-algorithms/images/20250517165427.png)
 
-![](old-outdated-trig-algorithms/images/20250517165410.png)
+### Pure Sine Wave:
 
-![](old-outdated-trig-algorithms/images/20250517165355.png)
+![[Pasted image 20250522175904.png]]
+![[Pasted image 20250522180057.png]]
+![[Pasted image 20250522180041.png]]
+![[Pasted image 20250522180016.png]]
+![[Pasted image 20250522175958.png]]
 
-![](old-outdated-trig-algorithms/images/20250517165338.png)
+
+### Decaying DC:
+
+![[Pasted image 20250522180553.png]]
+![[Pasted image 20250522180536.png]]
+![[Pasted image 20250522180515.png]]
+![[Pasted image 20250522180447.png]]
+
+
+### 2nd Harmonic:
+
+![[Pasted image 20250522180750.png]]
+![[Pasted image 20250522180706.png]]
+![[Pasted image 20250522180652.png]]
+![[Pasted image 20250522180639.png]]
+
+### 3rd Harmonic:
+
+![[Pasted image 20250522181049.png]]
+![[Pasted image 20250522181024.png]]
+![[Pasted image 20250522181000.png]]
+![[Pasted image 20250522180941.png]]
+
+
+### Transient:
+
+![[Pasted image 20250522181255.png]]
+![[Pasted image 20250522181241.png]]
+![[Pasted image 20250522181229.png]]
+![[Pasted image 20250522181218.png]]
+
+
+
+
+
+
+

@@ -112,7 +112,7 @@ for n = 1:length(t)
 
 % Slide buffer: drop oldest, append new sample
 
-x_buffer = [x_buffer(2:end), x(n)];
+x_buffer = [x_buffer(2:end), x(n)]; % This takes all elements of x_buffer except the first one, destructures the array, then we add the result of x(n) at the end
 
 % Apply weights to current buffer
 
@@ -253,10 +253,41 @@ grid on;
 
 
 ### Pure Sine Wave:
-
+(First image below is the "wrong version" that matches lecture notes. Just posting it here for reference to show that it matches.)![[Pasted image 20250522172021.png]]
 ![[Pasted image 20250522171810.png]]
-(Below is the "wrong version" that matches lecture notes. Just posting it here for reference to show that it matches.)![[Pasted image 20250522172021.png]]
+
 ![[Pasted image 20250522171747.png]]
 
 ![[Pasted image 20250522171730.png]]
 ![[Pasted image 20250522171711.png]]
+
+
+### Decaying DC:
+![[Pasted image 20250522173913.png]]
+![[Pasted image 20250522173858.png]]
+![[Pasted image 20250522173840.png]]
+![[Pasted image 20250522173814.png]]
+
+### 2nd Harmonic:
+![[Pasted image 20250522174518.png]]
+![[Pasted image 20250522174500.png]]
+![[Pasted image 20250522174429.png]]
+![[Pasted image 20250522174414.png]]
+### 3rd Harmonic:
+![[Pasted image 20250522174800.png]]
+![[Pasted image 20250522174741.png]]
+![[Pasted image 20250522174717.png]]
+![[Pasted image 20250522174650.png]]
+### Transient:
+
+
+
+
+
+![[Pasted image 20250522175050.png]]
+![[Pasted image 20250522174958.png]]
+![[Pasted image 20250522174945.png]]
+![[Pasted image 20250522174927.png]]
+
+
+
