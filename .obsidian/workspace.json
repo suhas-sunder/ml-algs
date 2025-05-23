@@ -11,12 +11,14 @@
             "id": "829f9d6fe3247584",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "2-correlation-algo/images/Pasted image 20250523002801.png"
+                "file": "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20250523002801"
+              "icon": "lucide-file",
+              "title": "even-and-odd-apply-to-input"
             }
           },
           {
@@ -178,8 +180,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "41bdb79f4402733e",
+  "active": "829f9d6fe3247584",
   "lastOpenFiles": [
+    "2-correlation-algo/images/Pasted image 20250523002801.png",
     "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input.md",
     "2-correlation-algo/images/Pasted image 20250523004120.png",
     "old-outdated-trig-algorithms/1-miki-mikano/5-miki-mikano-app-transient.md",
@@ -190,7 +193,6 @@
     "2-correlation-algo/images/Pasted image 20250523003247.png",
     "2-correlation-algo/images/Pasted image 20250523002953.png",
     "old-outdated-trig-algorithms/2-mann-and-morrison/2-mann-morrison-app-DC-Decay.md",
-    "2-correlation-algo/images/Pasted image 20250523002801.png",
     "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
     "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input.md",
     "assignments/1-assignment-1/Question 2 filter.md",
