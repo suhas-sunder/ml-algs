@@ -273,7 +273,7 @@ grid on;
 
 ### Pure Sine:
 
-![[Pasted image 20250523002801.png]]
+![](20250523002801.png)
 
 
 
@@ -286,7 +286,7 @@ grid on;
 
 ### Decaying DC:
 
-![[Pasted image 20250523002953.png]]
+![](20250523002953.png)
 
 
 
@@ -296,7 +296,7 @@ grid on;
 
 
 ### 2nd Harmonic:
-![[Pasted image 20250523003247.png]]
+![](20250523003247.png)
 
 
 
@@ -306,7 +306,7 @@ grid on;
 
 ### 3rd Harmonic:
 
-![[Pasted image 20250523003627.png]]
+![](20250523003627.png)
 
 
 
@@ -315,7 +315,7 @@ grid on;
 
 
 ### Transient:
-![[Pasted image 20250523004120.png]]
+![](20250523004120.png)
 
 
 
