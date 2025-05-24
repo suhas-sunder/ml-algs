@@ -150,7 +150,7 @@ ylim([-180 180]);
 ```
 
 
-![](../images/Pasted image 20250524005041.png)
+![](../images/20250524005041.png)
 
 
-![](../images/Pasted image 20250524005022.png)
+![](../images/20250524005022.png)

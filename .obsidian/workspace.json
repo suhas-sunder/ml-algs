@@ -94,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "2-correlation-algo/5-cosine-algo/0-cosine-algo-filter.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for 0-cosine-algo-filter"
             }
           },
           {
@@ -165,8 +166,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "41bdb79f4402733e",
+  "active": "829f9d6fe3247584",
   "lastOpenFiles": [
+    "2-correlation-algo/images/Pasted image 20250524004117.png",
     "2-correlation-algo/images/20250524005041.png",
     "2-correlation-algo/images/20250524004626.png",
     "2-correlation-algo/images/20250524005022.png",
@@ -182,7 +184,6 @@
     "2-correlation-algo/images/Pasted image 20250524005022.png",
     "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
     "2-correlation-algo/3-even-and-odd-algo/0-even-and-odd-filter.md",
-    "2-correlation-algo/images/Pasted image 20250524004626.png",
     "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input.md",
     "2-correlation-algo/2-half-cycle-dft-algo/0-half-cycle-dft-filter.md",
     "old-outdated-trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",

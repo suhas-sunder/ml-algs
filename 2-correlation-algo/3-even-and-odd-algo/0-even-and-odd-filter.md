@@ -149,6 +149,6 @@ ylim([-180 180]);
 
 
 
-![](../images/Pasted image 20250524004552.png)
+![](../images/20250524004552.png)
 
-![](../images/Pasted image 20250524004626.png)
+![](../images/20250524004626.png)
