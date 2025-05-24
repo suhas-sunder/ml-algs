@@ -20,39 +20,63 @@ omega = 2 * pi * f; % Discrete angular frequency (radians/sample)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% --- H(z) REAL PART Vp COS(Theta) ---
-
 z = exp(1j * omega * T);
 
-% Real impulse response values (e.g., 12-point cosine shape)
+% --- H(z) REAL PART Vp COS(Theta) --- The singal itself can be sine or cos
 
 real_values = [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
 
-imaginary_values = [1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5, 0, 0.5, 0.866];
+real_values = flip(real_values);
+
+% Length of real and imaginary should be the same, so let's pick real for
+
+% sample length.
 
 N = length(real_values);
 
-% Calculate H(z) = sum(h[n] * z^(-n))
+H_real = zeros(1,length(z));
 
-H_real = zeros(1,length(N));
+% --- H(z) IMAGINARY PART Vp SIN(Theta) --- The singal itself can be sine or cos
 
-H_imaginary = zeros(1,length(N));
+imaginary_values = [1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5, 0, 0.5, 0.866];
 
-for n = 1:N
+imaginary_values = flip(imaginary_values);
+
+H_imaginary = zeros(1,length(z));
+
+% Determine H(z) values for real and imaginary
+
+for n = N:-1:1
 
 H_real = H_real + real_values(n) * z.^(-(n-1));
 
 H_imaginary = H_imaginary + imaginary_values(n) * z.^(-(n-1));
 
+% Printing order of H(z) to confirm consecutive order
+
+fprintf("HRe(z) = " + num2str(real_values(n)) + " * z^" + num2str(-(n-1)));
+
+fprintf(" || ");
+
+fprintf("HIm(z) = " + num2str(imaginary_values(n)) + " * z^" + num2str(-(n-1)));
+
+disp(" ");
+
 end
+
+% Divide real and imaginary values by 1/2 N because the mangnitude is too high.
 
 H_real = H_real/(0.5 * N);
 
 H_imaginary = H_imaginary/(0.5 * N);
 
-mag_H1 = abs(H_real);
+% Magnitude of real
 
-phase_angle_H1 = atan2(imag(H_real), real(H_real)) * 180 / pi;
+mag_H_real = abs(H_real);
+
+% Phase of real
+
+phase_angle_H_real = atan2(imag(H_real), real(H_real)) * 180 / pi;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -62,13 +86,13 @@ figure;
 
 subplot(2,1,1);
 
-plot(f, mag_H1, 'b', 'LineWidth', 1);
+plot(f, mag_H_real, 'b', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
 ylabel('Magnitude');
 
-title('Magnitude Response of H1(z) Real');
+title('Magnitude Response of H(z) Real');
 
 grid on;
 
@@ -78,13 +102,13 @@ xlim([0 fs]);
 
 subplot(2,1,2);
 
-plot(f, phase_angle_H1, 'r', 'LineWidth', 1);
+plot(f, phase_angle_H_real, 'r', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
 ylabel('Phase (degrees)');
 
-title('Phase Response of H1(z) Real');
+title('Phase Response of H(z) Real');
 
 grid on;
 
@@ -100,9 +124,13 @@ ylim([-180 180]);
 
 % --- H2(z) IMAGINARY PART Vp Sin(Theta) ---
 
-mag_H2 = abs(H_imaginary);
+% Magnitude of imaginary
 
-phase_angle_H2 = atan2(imag(H_imaginary), real(H_imaginary)) * 180 / pi; % will be zero everywhere
+mag_H_imaginary = abs(H_imaginary);
+
+% Phase of imaginary
+
+phase_angle_H_imaginary = atan2(imag(H_imaginary), real(H_imaginary)) * 180 / pi; % will be zero everywhere
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -112,13 +140,13 @@ figure;
 
 subplot(2,1,1);
 
-plot(f, mag_H2, 'b', 'LineWidth', 1);
+plot(f, mag_H_imaginary, 'b', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
 ylabel('Magnitude');
 
-title('Magnitude Response of H2(z) Imaginary');
+title('Magnitude Response of H(z) Imaginary');
 
 grid on;
 
@@ -128,13 +156,13 @@ xlim([0 fs]);
 
 subplot(2,1,2);
 
-plot(f, phase_angle_H2, 'r', 'LineWidth', 1);
+plot(f, phase_angle_H_imaginary, 'r', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
 
 ylabel('Phase (degrees)');
 
-title('Phase Response of H2(z) Imaginary');
+title('Phase Response of H(z) Imaginary');
 
 grid on;
 
@@ -148,7 +176,6 @@ ylim([-180 180]);
 ```
 
 
-![](../images/20250524004117.png)
+![[Pasted image 20250524184810.png]]
 
-![](../images/20250524004137.png)
-
+![[Pasted image 20250524184826.png]]

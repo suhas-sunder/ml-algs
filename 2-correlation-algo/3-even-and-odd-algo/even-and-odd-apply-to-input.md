@@ -104,6 +104,8 @@ imaginary_values = [1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1];
 
 window_size = length(real_values);
 
+% Calculate factor A
+
 sine_wave_samples = sin(2*pi*(1:window_size)/window_size);
 
 V_real = zeros(1, window_size);
@@ -112,19 +114,11 @@ V_imaginary = zeros(1, window_size);
 
 x_buffer = zeros(1, window_size); % sliding buffer for x
 
-% Calculate factor A
-
 X_For_Factor_A = sum(sine_wave_samples .* real_values);
 
 Y_For_Factor_A = sum(sine_wave_samples .* imaginary_values);
 
 factor_A = sqrt(X_For_Factor_A^2 + Y_For_Factor_A^2);
-
-fprintf('X = %.3f\n', X_For_Factor_A);
-
-fprintf('Y = %.3f\n', Y_For_Factor_A);
-
-fprintf('A = %.3f\n', factor_A);
 
 for n = 1:length(t)
 

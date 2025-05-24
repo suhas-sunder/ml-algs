@@ -124,7 +124,7 @@ imaginary_part_Vp_cos_theta = sum(V_imaginary)/(0.5 * window_size);
 
 real_part_Vp_sin_theta = sum(V_real)/(0.5 * window_size);
 
-phase_angle_deg(n) = atan(imaginary_part_Vp_cos_theta/ real_part_Vp_sin_theta) * 180 / pi;
+phase_angle_deg(n) = atan2(imaginary_part_Vp_cos_theta, real_part_Vp_sin_theta) * 180 / pi;
 
 mag(n) = sqrt(imaginary_part_Vp_cos_theta^2 + real_part_Vp_sin_theta^2);
 
@@ -259,3 +259,34 @@ grid on;
 ![](../images/20250522185749.png)
 ![](../images/20250522185727.png)
 ![](../images/20250522185711.png)
+
+
+### Decaying DC:
+
+
+
+
+
+
+### 2nd Harmonic:
+
+
+
+
+
+
+### 3rd Harmonic:
+
+
+
+
+
+
+### Transient:
+
+
+
+
+
+
+
