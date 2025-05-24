@@ -94,7 +94,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2-correlation-algo/5-cosine-algo/0-cosine-algo-filter.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +103,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 0-cosine-algo-filter"
+              "title": "Backlinks"
             }
           },
           {
@@ -166,26 +165,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "829f9d6fe3247584",
+  "active": "41bdb79f4402733e",
   "lastOpenFiles": [
+    "2-correlation-algo/images/20250524005041.png",
+    "2-correlation-algo/images/20250524004626.png",
+    "2-correlation-algo/images/20250524005022.png",
+    "2-correlation-algo/images/20250524004552.png",
+    "2-correlation-algo/images/20250524004411.png",
+    "2-correlation-algo/images/20250524004357.png",
+    "2-correlation-algo/images/20250524004137.png",
+    "2-correlation-algo/images/20250524004117.png",
+    "2-correlation-algo/5-cosine-algo/0-cosine-algo-filter.md",
     "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
     "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
-    "2-correlation-algo/5-cosine-algo/0-cosine-algo-filter.md",
-    "Pasted image 20250524005041.png",
-    "Pasted image 20250524005022.png",
+    "2-correlation-algo/images/Pasted image 20250524005041.png",
+    "2-correlation-algo/images/Pasted image 20250524005022.png",
     "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
     "2-correlation-algo/3-even-and-odd-algo/0-even-and-odd-filter.md",
-    "Pasted image 20250524004626.png",
-    "Pasted image 20250524004552.png",
+    "2-correlation-algo/images/Pasted image 20250524004626.png",
     "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input.md",
     "2-correlation-algo/2-half-cycle-dft-algo/0-half-cycle-dft-filter.md",
-    "Pasted image 20250524004411.png",
-    "Pasted image 20250524004357.png",
-    "Pasted image 20250524004137.png",
-    "Pasted image 20250524004117.png",
     "old-outdated-trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
-    "2-correlation-algo/images/20250523004120.png",
-    "2-correlation-algo/images/20250523003627.png",
     "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input.md",
     "old-outdated-trig-algorithms/1-miki-mikano/5-miki-mikano-app-transient.md",
     "old-outdated-trig-algorithms/2-mann-and-morrison/5-mann-morrison-app-transient.md",
