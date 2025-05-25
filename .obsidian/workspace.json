@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "3d9784f29737f833",
+        "id": "5bcc080530a9f953",
         "type": "tabs",
         "children": [
           {
-            "id": "829f9d6fe3247584",
+            "id": "26d2eb69758efc12",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "assignments/images/Pasted image 20250524224917.png"
+                "file": "2-correlation-algo/3-orthogonality-check-me.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20250524224917"
+              "icon": "lucide-file",
+              "title": "3-orthogonality-check-me"
             }
           }
         ]
@@ -165,14 +167,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "41bdb79f4402733e",
+  "active": "26d2eb69758efc12",
   "lastOpenFiles": [
-    "2-correlation-algo/1-orthogonality-check-mags.md",
-    "assignments/images/Pasted image 20250524225100.png",
     "2-correlation-algo/2 - orthogonality-check-harm.md",
-    "assignments/images/Pasted image 20250524225015.png",
+    "2-correlation-algo/images/Pasted image 20250524224917.png",
+    "2-correlation-algo/images/20250524225015.png",
+    "2-correlation-algo/images/20250524224917.png",
+    "2-correlation-algo/images/20250524225100.png",
+    "2-correlation-algo/1-orthogonality-check-mags.md",
+    "2-correlation-algo/images/Pasted image 20250524225100.png",
+    "2-correlation-algo/images/Pasted image 20250524225015.png",
     "2-correlation-algo/3-orthogonality-check-me.md",
-    "assignments/images/Pasted image 20250524224917.png",
     "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
     "2-correlation-algo/orthogonality-check.md",
     "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
@@ -180,9 +185,7 @@
     "2-correlation-algo/images/20250524201754.png",
     "2-correlation-algo/images/20250524201622.png",
     "2-correlation-algo/images/20250524201439.png",
-    "2-correlation-algo/images/Pasted image 20250524201754.png",
     "old-outdated-trig-algorithms/2-mann-and-morrison/5-mann-morrison-app-transient.md",
-    "2-correlation-algo/images/Pasted image 20250524201622.png",
     "old-outdated-trig-algorithms/2-mann-and-morrison/4-mann-morrison-app-3rd-harmonic.md",
     "old-outdated-trig-algorithms/1-miki-mikano/4-miki-mikano-app-3rd-harmonic.md",
     "old-outdated-trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
@@ -190,7 +193,6 @@
     "old-outdated-trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
     "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input.md",
     "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input.md",
-    "2-correlation-algo/images/Pasted image 20250524180452.png",
     "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
     "2-correlation-algo/2-half-cycle-dft-algo/0-half-cycle-dft-filter.md",
     "old-outdated-trig-algorithms/1-miki-mikano/5-miki-mikano-app-transient.md",
