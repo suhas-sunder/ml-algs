@@ -30,29 +30,21 @@ t_input = 0:T_input:0.1; % Time vector (0.1 seconds)
 
 f0_input = 60; % Signal frequency (Hz)
 
-Vm_input = 10; % Input Amplitude
+Vm_input = 10; % Amplitude
 
 omega_input = 2 * pi * f0_input; % Angular frequency
 
-Vm_spike = 50; % Amplitude after transient
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Generate Transient Signal (Pure 60 Hz sine)
+% Works with both data points and formula
 
-x = zeros(size(t_input)); % Pre-allocate
+% x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
 
-% Before t = 0.03 s → base signal with phase shift
+x = Vm_input * sin(omega_input * t_input ); % Input waveform
 
-x(t_input < 0.03) = Vm_input * sin(omega_input * t_input(t_input < 0.03));
+% This resets the length of t_input if x is not an equation (data points instead)
 
-% After t = 0.03 s → high amplitude, same frequency & phase
-
-x(t_input >= 0.03) = Vm_spike * sin(omega_input * t_input(t_input >= 0.03));
-
-t_input = (0:length(x)-1) * T_input;
-
-t = (0:length(x)-1) * T_input; % Time vector (0.1 seconds)
+t_input = (0:length(x)-1) * T_input; % Time vector
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -92,9 +84,9 @@ grid on;
 
 % Allocate arrays to store angles and magnitude values
 
-phase_angle_deg = zeros(1, length(t));
+phase_angle_deg = zeros(1, length(t_input));
 
-mag = zeros(1, length(t));
+mag = zeros(1, length(t_input));
 
 % This is where we do the setup before the for loop
 
@@ -120,7 +112,7 @@ Y_For_Factor_A = sum(sine_wave_samples .* imaginary_values);
 
 factor_A = sqrt(X_For_Factor_A^2 + Y_For_Factor_A^2);
 
-for n = 1:length(t)
+for n = 1:length(t_input)
 
 % Slide buffer: drop oldest, append new sample
 
@@ -152,7 +144,7 @@ figure;
 
 subplot(2,1,1);
 
-plot(t, mag, 'b', 'LineWidth', 1);
+plot(t_input, mag, 'b', 'LineWidth', 1);
 
 title('Phasor Magnitude (2-sample estimate)');
 
@@ -166,7 +158,7 @@ grid on;
 
 subplot(2,1,2);
 
-plot(t, phase_angle_deg, 'r', 'LineWidth', 1);
+plot(t_input, phase_angle_deg, 'r', 'LineWidth', 1);
 
 title('Phasor Phase Angle (atan-based)');
 
@@ -186,13 +178,13 @@ grid on;
 
 % We need to account for every sample that needs to be plotted on real/imaginary plane
 
-% Not only every sample, but every sample for multiple cycles for time t
+% Not only every sample, but every sample for multiple cycles for time t_input
 
 samples_per_cycle = round(fs / f0);
 
-num_cycles = floor((length(t)-1) / samples_per_cycle);
+num_cycles = floor((length(t_input)) / samples_per_cycle);
 
-idx_all = 1:(length(t)-1);
+idx_all = 1:(length(t_input));
 
 % Compute phasor coordinates
 

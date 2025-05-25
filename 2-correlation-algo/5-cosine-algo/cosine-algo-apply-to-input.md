@@ -40,13 +40,11 @@ omega_input = 2 * pi * f0_input; % Angular frequency
 
 % x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
 
-x = Vm_input * sin(omega_input * t_input); % Input waveform
+x = Vm_input * sin(omega_input * t_input ); % Input waveform
 
-% This resets the length of t if x is not an equation (data points instead)
+% This resets the length of t_input if x is not an equation (data points instead)
 
-t_input = (0:length(x)-1) * T_input;
-
-t = (0:length(x)-1) * T_input; % Time vector (0.1 seconds)
+t_input = (0:length(x)-1) * T_input; % Time vector
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -86,9 +84,9 @@ grid on;
 
 % Allocate arrays to store angles and magnitude values
 
-phase_angle_deg = zeros(1, length(t_input)-1);
+phase_angle_deg = zeros(1, length(t_input));
 
-mag = zeros(1, length(t_input)-1);
+mag = zeros(1, length(t_input));
 
 % This is where we actually take 3 SAMPLES and APPLY THE FILTER
 
@@ -108,7 +106,7 @@ V_imaginary = zeros(1, window_size);
 
 x_buffer = zeros(1, window_size); % sliding buffer for x
 
-for n = 1:length(t)
+for n = 1:length(t_input)
 
 % Slide buffer: drop oldest, append new sample
 
@@ -138,7 +136,7 @@ figure;
 
 subplot(2,1,1);
 
-plot(t, mag, 'b', 'LineWidth', 1);
+plot(t_input, mag, 'b', 'LineWidth', 1);
 
 title('Phasor Magnitude (2-sample estimate)');
 
@@ -152,7 +150,7 @@ grid on;
 
 subplot(2,1,2);
 
-plot(t, phase_angle_deg, 'r', 'LineWidth', 1);
+plot(t_input, phase_angle_deg, 'r', 'LineWidth', 1);
 
 title('Phasor Phase Angle (atan-based)');
 
@@ -172,13 +170,13 @@ grid on;
 
 % We need to account for every sample that needs to be plotted on real/imaginary plane
 
-% Not only every sample, but every sample for multiple cycles for time t
+% Not only every sample, but every sample for multiple cycles for time t_input
 
 samples_per_cycle = round(fs / f0);
 
-num_cycles = floor((length(t)-1) / samples_per_cycle);
+num_cycles = floor((length(t_input)) / samples_per_cycle);
 
-idx_all = 1:(length(t)-1);
+idx_all = 1:(length(t_input));
 
 % Compute phasor coordinates
 
@@ -262,28 +260,17 @@ grid on;
 
 
 ### Decaying DC:
-
-
-
-
-
+![](../images/20250524192212.png)
 
 ### 2nd Harmonic:
-
-
-
-
-
+![](../images/20250524192313.png)
 
 ### 3rd Harmonic:
-
-
-
-
+![](../images/20250524192546.png)
 
 
 ### Transient:
-
+![](../images/20250524192931.png)
 
 
 
