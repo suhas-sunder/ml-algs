@@ -18,27 +18,35 @@ f0_input = 60; % Signal frequency (Hz)
 
 samples = fs_input / f0_input;
 
-t_input = 0:T_input:0.1; % Time vector (0.1 seconds)
+half_samples = samples / 6;
+
+t_input = 0:T_input:half_samples / f0_input; % Time vector (duration = 1 cycle / 6)
 
 omega_input = 2 * pi * f0_input; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Works with both data points and formula
+% ORTHOGONAL SIGNAL. CHANGE THIS LINE TO OBTAIN DATA POINTS!
 
-orthogonal_function = sin(omega_input * t_input ); % Input waveform
+orthogonal_function = sin(omega_input * t_input); % Input waveform
 
-t_input = (0:length(orthogonal_function)-1) * T_input; % Time vector
+t_input = (0:length(orthogonal_function)-1) * T_input; % Re-adjusted time vector
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Plots the ORIGINAL Signal and SAMPLES, BEFORE FILTERING
+% Display Sampled Values in Array Format
 
-% Top subplot: Original continuous signal
+fprintf('\northogonal_function = [');
+
+fprintf('%.4f, ', orthogonal_function(1:samples - 1));
+
+fprintf('%.4f]\n', orthogonal_function(samples));
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plotting the Signal as Stems
 
 figure;
-
-subplot(1,1,1);
 
 stem(t_input, orthogonal_function, 'r', 'filled');
 

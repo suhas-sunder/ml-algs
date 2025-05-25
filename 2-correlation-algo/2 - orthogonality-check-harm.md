@@ -108,7 +108,7 @@ ylabel('y');
 
 subplot(4,1,3);
 
-plot(t_input, product, 'g', 'LineWidth', 2);
+plot(t_input, product, 'k', 'LineWidth', 2);
 
 hold on;
 
@@ -130,7 +130,7 @@ negative_area = integral(@(t) min(x(t).*y(t), 0), a, b);
 
 % Annotate areas on the plot
 
-text(a + 0.05*(b-a), -max(product)*6, sprintf('Positive Area = %.4f\nNegative Area = %.4f', positive_area, negative_area), 'FontSize', 16, 'Color', 'red');
+text(0, -8, sprintf('Positive Area = %.4f\nNegative Area = %.4f', positive_area, negative_area), 'FontSize', 16, 'Color', 'red');
 
 else
 
@@ -200,7 +200,7 @@ end
 
 yline(0, 'k:');
 
-title('x[n]·y[n] (Shaded Area)');
+title('x[n]·y[n]');
 
 xlabel('n');
 
@@ -214,7 +214,7 @@ negative_area = sum(product(product < 0));
 
 % Annotate area totals
 
-text(-n(end)/2, -max(product)*3.9, sprintf('Positive Area = %.2f\nNegative Area = %.2f', positive_area, negative_area), 'FontSize', 16, 'Color', 'red');
+text(-1, -40, sprintf('Positive Area = %.2f\nNegative Area = %.2f', positive_area, negative_area), 'FontSize', 16, 'Color', 'red');
 
 end
 
@@ -239,6 +239,10 @@ set(gcf, 'Position', [100, 100, 800, 700]); % [left, bottom, width, height]
 % Display orthogonality status below plots
 
 annotation('textbox', [0.1, 0.01, 0.8, 0.45], 'String', status, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 16, 'FontWeight', 'bold', 'EdgeColor', 'none', 'Color', 'red');
+
+fprintf(status);
+
+fprintf(sprintf('\nPositive Area = %.2f\nNegative Area = %.2f\n', positive_area, negative_area));
 ```
 
 

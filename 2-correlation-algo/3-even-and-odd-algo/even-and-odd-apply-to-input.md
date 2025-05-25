@@ -24,7 +24,7 @@ omega = 2 * pi * f0; % Angular frequency
 
 fs_input = 720; % Sampling frequency (Hz)
 
-T_input = 1 / fs; % Sampling period (s)
+T_input = 1 / fs_input; % Sampling period (s)
 
 t_input = 0:T_input:0.1; % Time vector (0.1 seconds)
 

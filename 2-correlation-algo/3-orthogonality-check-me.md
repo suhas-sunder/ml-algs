@@ -16,7 +16,7 @@ T_input = 1 / fs_input; % Sampling period (s)
 
 % Uncomment for continuous-time signals (function handles)
 
-x = @(t) cos(2*pi*60*t);
+x = @(t) sin(2*pi*60*t);
 
 y = @(t) 3.5*sin(2*pi*60*t);
 
@@ -90,6 +90,8 @@ grid on;
 
 title('Plotting both functions');
 
+legend('function 1', 'function 2');
+
 xlabel('t (s)');
 
 ylabel('Amplitude');
@@ -130,7 +132,7 @@ negative_area = integral(@(t) min(x(t).*y(t), 0), a, b);
 
 % Annotate areas on the plot
 
-text(a * .8, -max(product)*0.9, sprintf('Positive Area = %.4f\nNegative Area = %.4f', positive_area, negative_area), 'FontSize', 11, 'Color', 'black', 'BackgroundColor', 'yellow');
+text(0, 0, sprintf('Positive Area = %.4f\nNegative Area = %.4f', positive_area, negative_area), 'FontSize', 11, 'Color', 'black', 'BackgroundColor', 'yellow');
 
 else
 
@@ -206,11 +208,11 @@ tolerance = 1e-10;
 
 if abs(inner_product) < tolerance
 
-status = 'Both functions are orthogonal.';
+status = 'Both functions ARE orthogonal.';
 
 else
 
-status = sprintf('Both functions are not orthogonal.\nInner Product = %.6f', inner_product);
+status = sprintf('Both functions ARE NOT orthogonal.\nResult = %.6f, which does not = 0!', inner_product);
 
 end
 
@@ -225,6 +227,10 @@ set(gcf, 'Position', [100, 100, 800, 700]); % [left, bottom, width, height]
 % Display orthogonality status below plots
 
 annotation('textbox', [0, 0.01, 0.4, 0.95], 'String', status, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12, 'FontWeight', 'bold', 'EdgeColor', 'none', 'Color', 'magenta');
+
+fprintf(status);
+
+fprintf(sprintf('\nPositive Area = %.2f\nNegative Area = %.2f\n', positive_area, negative_area));
 ```
 
 

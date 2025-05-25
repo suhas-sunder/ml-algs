@@ -6,21 +6,33 @@ clear;
 
 close all;
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Parameters
 
-fs = 720;
+fs_input = 720; % Sampling frequency (Hz)
 
-T = 1 / fs;
+T_input = 1 / fs_input; % Sampling period (s)
 
-t = T(1):T:0.02;
+f0_input = 60; % Signal frequency (Hz)
 
-% Original signal (ONLY change this line)
+samples = fs_input / f0_input;
 
-orthogonal_function = sin(2 * pi * 60 * t);
+half_samples = samples / 6;
+
+t_input = T_input(1):T_input:half_samples / f0_input; % Time vector (duration = 1 cycle / 6)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ORTHOGONAL SIGNAL. CHANGE THIS LINE TO OBTAIN DATA POINTS!
+
+orthogonal_function = sin(2 * pi * 60 * t_input);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Mapped symbolic signal
 
-x_sign = sign(orthogonal_function); % Will be -1, 0, or 1 based on the value of orthogonal_function
+x_sign = sign(orthogonal_function); % -1, 0, or 1
 
 % Even and Odd parts of mapped signal
 
@@ -30,13 +42,21 @@ x_even = 0.5 * (x_sign + x_sign_rev);
 
 x_odd = 0.5 * (x_sign - x_sign_rev);
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Print x_sign values to console
+
+fprintf('\nx_sign = [');
+
+fprintf('%d, ', x_sign(1:samples-1));
+
+fprintf('%d]\n', x_sign(samples));
+
 % Plotting
 
 figure;
 
-subplot(1,1,1);
-
-stem(t, x_sign, 'k', 'filled');
+stem(t_input, x_sign, 'k', 'filled');
 
 title('Even Odd Functions');
 

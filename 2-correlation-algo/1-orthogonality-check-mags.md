@@ -152,7 +152,7 @@ negative_area = integral(@(t) min(x(t).*y(t), 0), a, b);
 
 % Annotate areas on the plot
 
-text(a + 0.05*(b-a), max(product)*0.9, sprintf('Positive Area = %.4f\nNegative Area = %.4f', positive_area, negative_area), 'FontSize', 11, 'Color', 'black', 'BackgroundColor', 'white');
+text(0, -1, sprintf('Positive Area = %.4f\nNegative Area = %.4f', positive_area, negative_area), 'FontSize', 11, 'Color', 'black', 'BackgroundColor', 'white');
 
 else
 
@@ -260,11 +260,11 @@ tolerance = 1e-10;
 
 if abs(inner_product) < tolerance
 
-status = '✅ f(t) and g(t) are orthogonal.';
+status = sprintf('f(t) and g(t) are orthogonal. \n Integral f * g = 0');
 
 else
 
-status = sprintf('❌ f(t) and g(t) are NOT orthogonal.\nInner Product = %.6f', inner_product);
+status = sprintf('f(t) and g(t) are NOT orthogonal.\nIntegral f * g = %.6f', inner_product);
 
 end
 
@@ -278,7 +278,14 @@ set(gcf, 'Position', [100, 100, 800, 700]); % [left, bottom, width, height]
 
 % Display orthogonality status below plots
 
-annotation('textbox', [0.1, 0.01, 0.8, 0.07], 'String', status, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12, 'FontWeight', 'bold', 'EdgeColor', 'none', 'Color', 'magenta');
+annotation('textbox', [0.1, 0.01, 0.8, 0.07], 'String', status, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12, 'FontWeight', 'bold', 'EdgeColor', 'none', 'Color', 'black');
+
+fprintf(status);
+
+fprintf(sprintf('\nPositive Area = %.2f\nNegative Area = %.2f\n', positive_area, negative_area));
 ```
 
-![](../images/20250524225100.png)
+
+![[Pasted image 20250525185352.png]]
+
+![[Pasted image 20250525185409.png]]
