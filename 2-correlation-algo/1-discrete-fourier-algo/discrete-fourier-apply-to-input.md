@@ -136,7 +136,7 @@ subplot(2,1,1);
 
 plot(t_input, mag, 'b', 'LineWidth', 1);
 
-title('Phasor Magnitude (2-sample estimate)');
+title('Phasor Magnitude');
 
 xlabel('Time (s)');
 
@@ -150,7 +150,7 @@ subplot(2,1,2);
 
 plot(t_input, phase_angle_deg, 'r', 'LineWidth', 1);
 
-title('Phasor Phase Angle (atan-based)');
+title('Phasor Phase Angle');
 
 xlabel('Time (s)');
 
@@ -206,7 +206,7 @@ xlabel('Real Axis');
 
 ylabel('Imaginary Axis');
 
-title('Estimated Phasors on Complex Plane (All samples)');
+title('Estimated Phasors on Complex Plane');
 
 hold off;
 
@@ -240,7 +240,7 @@ xlabel('Frequency (Hz)');
 
 ylabel('Magnitude');
 
-title('FFT Magnitude: Variable Phase (blue) vs Constant Phase (red)');
+title('Estimated Phasor FFT');
 
 legend('Variable Phase','Constant Phase');
 
