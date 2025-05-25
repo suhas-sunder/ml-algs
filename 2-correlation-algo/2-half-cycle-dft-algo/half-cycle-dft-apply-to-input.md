@@ -250,7 +250,7 @@ grid on;
 
 
 ### Pure Sine Wave:
-
+(First image below is the "wrong version" that matches lecture notes. Just posting it here for reference to show that it matches.)
 ![](../images/20250522175904.png)
 ![](../images/20250522180057.png)
 ![](../images/20250522180041.png)

@@ -258,7 +258,7 @@ grid on;
 ```
 
 ### Pure Sine:
-
+(First image below is the "wrong version" that matches lecture notes. Just posting it here for reference to show that it matches.)
 ![](../images/20250523002801.png)
 
 

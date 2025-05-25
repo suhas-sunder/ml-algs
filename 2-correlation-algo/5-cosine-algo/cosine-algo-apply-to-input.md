@@ -252,6 +252,7 @@ grid on;
 
 
 ### Pure Sine:
+(First image below is the "wrong version" that matches lecture notes. Just posting it here for reference to show that it matches.)
 ![](../images/20250522185306.png)
 ![](../images/20250522185807.png)
 ![](../images/20250522185749.png)
@@ -263,13 +264,16 @@ grid on;
 ![](../images/20250524192212.png)
 
 ### 2nd Harmonic:
+![](../images/20250524201439.png)
 ![](../images/20250524192313.png)
 
 ### 3rd Harmonic:
+![](../images/20250524201622.png)
 ![](../images/20250524192546.png)
 
 
 ### Transient:
+![](../images/20250524201754.png)
 ![](../images/20250524192931.png)
 
 
