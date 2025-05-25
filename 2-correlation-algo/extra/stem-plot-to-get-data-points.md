@@ -20,17 +20,15 @@ samples = fs_input / f0_input;
 
 t_input = 0:T_input:0.1; % Time vector (0.1 seconds)
 
-Vm_input = 10; % Amplitude
-
 omega_input = 2 * pi * f0_input; % Angular frequency
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Works with both data points and formula
 
-x = Vm_input * sin(omega_input * t_input ); % Input waveform
+orthogonal_function = sin(omega_input * t_input ); % Input waveform
 
-t_input = (0:length(x)-1) * T_input; % Time vector
+t_input = (0:length(orthogonal_function)-1) * T_input; % Time vector
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -42,7 +40,7 @@ figure;
 
 subplot(1,1,1);
 
-stem(t_input, x, 'r', 'filled');
+stem(t_input, orthogonal_function, 'r', 'filled');
 
 title('Sampled Signal (Stems)');
 

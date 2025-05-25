@@ -16,11 +16,11 @@ t = T(1):T:0.02;
 
 % Original signal (ONLY change this line)
 
-x = sin(2 * pi * 60 * t);
+orthogonal_function = sin(2 * pi * 60 * t);
 
 % Mapped symbolic signal
 
-x_sign = sign(x); % Will be -1, 0, or 1 based on the value of x
+x_sign = sign(orthogonal_function); % Will be -1, 0, or 1 based on the value of orthogonal_function
 
 % Even and Odd parts of mapped signal
 
@@ -38,7 +38,7 @@ subplot(1,1,1);
 
 stem(t, x_sign, 'k', 'filled');
 
-title('Symbolic Signal (sign of x(t))');
+title('Even Odd Functions');
 
 xlabel('Time (s)');
 
