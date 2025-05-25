@@ -22,9 +22,9 @@ y = @(t) 3.5*sin(2*pi*60*t);
 
 % Uncomment for discrete signals (data vectors)
 
-x = [1, 2, 3, 4, 5];
+% x = [1, 2, 3, 4, 5];
 
-y = [5, 4, 3, -2, -1];
+% y = [5, 4, 3, -2, -1];
 
 % Determine signal type
 
@@ -88,13 +88,11 @@ plot(t_input, y_vals, 'm', 'LineWidth', 2);
 
 grid on;
 
-title('x(t) and y(t)');
+title('Plotting both functions');
 
 xlabel('t (s)');
 
 ylabel('Amplitude');
-
-legend('x(t)', 'y(t)');
 
 % Prepare shaded product components
 
@@ -118,7 +116,7 @@ yline(0, 'k:');
 
 grid on;
 
-title('x(t)·y(t) and Shaded Area');
+title('Overlapping Area');
 
 xlabel('t (s)');
 
@@ -186,7 +184,7 @@ end
 
 yline(0, 'k:');
 
-title('Bar Chart Plotting Area');
+title('Overlapping Area');
 
 xlabel('n');
 
@@ -228,3 +226,6 @@ set(gcf, 'Position', [100, 100, 800, 700]); % [left, bottom, width, height]
 
 annotation('textbox', [0, 0.01, 0.4, 0.95], 'String', status, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12, 'FontWeight', 'bold', 'EdgeColor', 'none', 'Color', 'magenta');
 ```
+
+
+![](../images/20250524224917.png)

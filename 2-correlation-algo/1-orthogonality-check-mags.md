@@ -280,3 +280,5 @@ set(gcf, 'Position', [100, 100, 800, 700]); % [left, bottom, width, height]
 
 annotation('textbox', [0.1, 0.01, 0.8, 0.07], 'String', status, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12, 'FontWeight', 'bold', 'EdgeColor', 'none', 'Color', 'magenta');
 ```
+
+![](../images/20250524225100.png)

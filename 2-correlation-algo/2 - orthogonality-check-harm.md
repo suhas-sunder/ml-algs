@@ -22,9 +22,9 @@ y = @(t) 3.5*sin(2*pi*60*t);
 
 % Uncomment for discrete signals (data vectors)
 
-x = [1, 2, 3, 4, 5];
+% x = [1, 2, 3, 4, 5];
 
-y = [5, 4, 3, -2, -1];
+% y = [5, 4, 3, -2, -1];
 
 % Determine signal type
 
@@ -240,3 +240,6 @@ set(gcf, 'Position', [100, 100, 800, 700]); % [left, bottom, width, height]
 
 annotation('textbox', [0.1, 0.01, 0.8, 0.45], 'String', status, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 16, 'FontWeight', 'bold', 'EdgeColor', 'none', 'Color', 'red');
 ```
+
+
+![](../images/20250524225015.png)
