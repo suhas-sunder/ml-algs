@@ -286,6 +286,6 @@ fprintf(sprintf('\nPositive Area = %.2f\nNegative Area = %.2f\n', positive_area,
 ```
 
 
-![[Pasted image 20250525185352.png]]
+![](../images/20250525185352.png)
 
-![[Pasted image 20250525185409.png]]
+![](../images/20250525185409.png)
