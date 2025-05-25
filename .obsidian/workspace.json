@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2-correlation-algo/orthogonality-check.md",
+                "file": "2-correlation-algo/3-orthogonality-check-me.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "orthogonality-check"
+              "title": "3-orthogonality-check-me"
             }
           }
         ]
@@ -169,8 +169,12 @@
   },
   "active": "829f9d6fe3247584",
   "lastOpenFiles": [
-    "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
+    "2-correlation-algo/1-orthogonality-check-mags.md",
+    "2-correlation-algo/2 - orthogonality-check-harm.md",
+    "2-correlation-algo/3-orthogonality-check-me.md",
+    "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
     "2-correlation-algo/orthogonality-check.md",
+    "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
     "2-correlation-algo/images/Pasted image 20250524201439.png",
     "2-correlation-algo/images/20250524201754.png",
     "2-correlation-algo/images/20250524201622.png",
@@ -185,7 +189,6 @@
     "old-outdated-trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
     "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input.md",
     "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input.md",
-    "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
     "2-correlation-algo/images/Pasted image 20250524180452.png",
     "2-correlation-algo/images/20250524192931.png",
     "2-correlation-algo/images/20250524192546.png",
@@ -204,12 +207,9 @@
     "2-correlation-algo/3-even-and-odd-algo",
     "assignments/1-assignment-1/Question 3 - 15 Samples Only.md",
     "assignments/1-assignment-1/Question.md",
-    "assignments/1-assignment-1/Question 1.md",
     "2-correlation-algo/images/renameImages.js",
     "2-correlation-algo/renameImages.js",
-    "old-outdated-trig-algorithms/2-mann-and-morrison/1-mann-morrison-app-pure-sine.md",
     "2-correlation-algo/2-half-cycle-dft-algo",
-    "old-outdated-trig-algorithms/assignment_1/Question 3.md",
     "2-correlation-algo/1-discrete-fourier-algo",
     "2-correlation-algo/5-cosine-algo",
     "2-correlation-algo/images",
