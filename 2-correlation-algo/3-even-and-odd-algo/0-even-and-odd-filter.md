@@ -66,7 +66,7 @@ end
 
 % Calculate factor A
 
-sine_wave_samples = sin(2*pi*(1:N)/N);
+sine_wave_samples = sin(2*pi*(1:N)/N); % [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
 
 V_real = zeros(1, N);
 
@@ -187,8 +187,6 @@ yticks(-180:60:180);
 ylim([-180 180]);
 ```
 
+![[Pasted image 20250525164350.png]]
 
-
-![](../images/20250524004552.png)
-
-![](../images/20250524004626.png)
+![[Pasted image 20250525164410.png]]

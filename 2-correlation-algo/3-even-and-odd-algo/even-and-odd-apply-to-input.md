@@ -98,7 +98,7 @@ window_size = length(real_values);
 
 % Calculate factor A
 
-sine_wave_samples = sin(2*pi*(1:window_size)/window_size);
+sine_wave_samples = sin(2*pi*(1:window_size)/window_size); % [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
 
 V_real = zeros(1, window_size);
 
