@@ -18,7 +18,7 @@ f0_input = 60; % Signal frequency (Hz)
 
 samples = fs_input / f0_input;
 
-half_samples = samples / 6;
+half_samples = samples / 6; % I made this more than half because we don't need to see more than 1-2 cycles for this plot to get our data samples
 
 t_input = T_input(1):T_input:half_samples / f0_input; % Time vector (duration = 1 cycle / 6)
 

@@ -26,9 +26,13 @@ fs_input = 720; % Sampling frequency (Hz)
 
 T_input = 1 / fs_input; % Sampling period (s)
 
-t_input = 0:T_input:0.1; % Time vector (0.1 seconds)
-
 f0_input = 60; % Signal frequency (Hz)
+
+samples = fs_input/f0_input;
+
+cycles = (samples/2)/f0_input;
+
+t_input = 0:T_input:cycles; % Time vector (0.1 seconds)
 
 Vm_input = 10; % Amplitude
 
@@ -94,7 +98,7 @@ real_values = [1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1];
 
 imaginary_values = [1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1];
 
-window_size = length(real_values);
+window_size = samples; % Window size is same as sample size
 
 % Calculate factor A
 

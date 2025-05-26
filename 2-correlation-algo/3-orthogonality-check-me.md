@@ -14,6 +14,12 @@ fs_input = 720; % Sampling frequency (Hz)
 
 T_input = 1 / fs_input; % Sampling period (s)
 
+f0_input = 60; % Professor may not give you this frequency. This doesn't affect the function. It's to display the full cycle so no need to change if not necessary!
+
+samples = fs_input / f0_input;
+
+half_samples = samples/2;
+
 % Uncomment for continuous-time signals (function handles)
 
 x = @(t) sin(2*pi*60*t);
@@ -36,7 +42,7 @@ if isFunction
 
 % Define a fine time vector over one sample period (adjust as needed)
 
-t_input = 0:T_input:0.1;
+t_input = 0:T_input:half_samples / f0_input;
 
 else
 

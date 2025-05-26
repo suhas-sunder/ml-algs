@@ -94,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for discrete-fourier-apply-to-input"
             }
           },
           {
@@ -153,7 +154,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -165,27 +167,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "41bdb79f4402733e",
+  "active": "26d2eb69758efc12",
   "lastOpenFiles": [
+    "2-correlation-algo/1-orthogonality-check-mags.md",
+    "2-correlation-algo/2 - orthogonality-check-harm.md",
+    "2-correlation-algo/3-orthogonality-check-me.md",
+    "2-correlation-algo/extra/stem-plot-to-get-data-points.md",
+    "2-correlation-algo/extra/even-odd-input-conversion-to-get-data-points.md",
+    "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
+    "2-correlation-algo/5-cosine-algo/0-cosine-algo-filter.md",
+    "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input.md",
+    "2-correlation-algo/3-even-and-odd-algo/0-even-and-odd-filter.md",
+    "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
+    "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
+    "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input.md",
+    "2-correlation-algo/2-half-cycle-dft-algo/0-half-cycle-dft-filter.md",
+    "2-correlation-algo/images/Pasted image 20250525185352.png",
     "2-correlation-algo/images/20250525185409.png",
     "2-correlation-algo/images/20250525185352.png",
-    "2-correlation-algo/3-orthogonality-check-me.md",
-    "2-correlation-algo/2 - orthogonality-check-harm.md",
-    "2-correlation-algo/1-orthogonality-check-mags.md",
     "2-correlation-algo/images/Pasted image 20250525185409.png",
-    "2-correlation-algo/images/Pasted image 20250525185352.png",
-    "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
-    "2-correlation-algo/extra/even-odd-input-conversion-to-get-data-points.md",
-    "2-correlation-algo/extra/stem-plot-to-get-data-points.md",
-    "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
-    "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input.md",
-    "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input.md",
-    "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
-    "2-correlation-algo/3-even-and-odd-algo/0-even-and-odd-filter.md",
     "old-outdated-trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
     "old-outdated-trig-algorithms/2-mann-and-morrison/2-mann-morrison-app-DC-Decay.md",
-    "2-correlation-algo/2-half-cycle-dft-algo/0-half-cycle-dft-filter.md",
-    "2-correlation-algo/5-cosine-algo/0-cosine-algo-filter.md",
     "2-correlation-algo/extra",
     "2-correlation-algo/images/Pasted image 20250525164350.png",
     "2-correlation-algo/images/20250525164410.png",
@@ -198,7 +200,6 @@
     "1-trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
     "2-correlation-algo/images/Pasted image 20250524224917.png",
     "2-correlation-algo/images/20250524225015.png",
-    "2-correlation-algo/images/20250524224917.png",
     "2-correlation-algo/orthogonality-check.md",
     "old-outdated-trig-algorithms/2-mann-and-morrison/5-mann-morrison-app-transient.md",
     "old-outdated-trig-algorithms/2-mann-and-morrison/4-mann-morrison-app-3rd-harmonic.md",
