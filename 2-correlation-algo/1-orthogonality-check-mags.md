@@ -12,43 +12,37 @@ close all;
 
 fs_input = 720; % Sampling frequency (Hz)
 
+f0_input = 60; % Signal frequency (Hz)
+
+samples_per_cycle = fs_input/f0_input;
+
+one_cycle = 1/f0_input; % We only want to plot one cycle to check for orthogonality. From 0 to 2Pi/omega = 1/f0
+
 T_input = 1 / fs_input; % Sampling period (s)
 
 % Uncomment for continuous-time signals (function handles)
 
-x = @(t) cos(2*pi*60*t);
+% x = @(t) cos(2*pi*60*t);
 
-y = @(t) 3.5*sin(2*pi*60*t);
+% y = @(t) 3.5*sin(2*pi*60*t);
 
 % Uncomment for discrete signals (data vectors)
 
-% x = [1, 2, 3, 4, 5];
+x = [1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1 ];
 
-% y = [5, 4, 3, -2, -1];
+y = [1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1];
+
+x = x(1:samples_per_cycle);
+
+y = y(1:samples_per_cycle);
+
+t_input = 0:T_input:one_cycle;
+
+n = 0:length(x)-1;
 
 % Determine signal type
 
 isFunction = isa(x, 'function_handle') && isa(y, 'function_handle');
-
-if isFunction
-
-% Continuous-time signals
-
-% Define a fine time vector over one sample period (adjust as needed)
-
-t_input = 0:T_input:0.1;
-
-else
-
-% Discrete signals
-
-% Define discrete sample indices and corresponding time vector
-
-n = 0:length(x)-1;
-
-t_input = n * T_input;
-
-end
 
 % -------- PROCESSING --------
 
@@ -250,7 +244,7 @@ negative_area = sum(product(product < 0));
 
 % Annotate area totals
 
-text(n(end)+0.5, max(product)*0.9, sprintf('Positive Area = %.2f\nNegative Area = %.2f', positive_area, negative_area), 'FontSize', 11, 'Color', 'black');
+text(n(end)-0.5, max(product), sprintf('Positive Area = %.2f\nNegative Area = %.2f', positive_area, negative_area), 'Background', 'white', 'FontSize', 11, 'Color', 'black');
 
 end
 
@@ -270,7 +264,7 @@ end
 
 % Add unified title and message box at bottom
 
-sgtitle('Orthogonality Check');
+sgtitle('Orthogonality Check ~ Over One Cycle');
 
 % Resize figure to create space for annotation
 

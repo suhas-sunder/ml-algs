@@ -12,49 +12,35 @@ close all;
 
 fs_input = 720; % Sampling frequency (Hz)
 
+f0_input = 60; % Signal frequency (Hz)
+
+samples_per_cycle = fs_input/f0_input;
+
+one_cycle = 1/f0_input; % We only want to plot one cycle to check for orthogonality. From 0 to 2Pi/omega = 1/f0
+
 T_input = 1 / fs_input; % Sampling period (s)
-
-f0_input = 60; % Professor may not give you this frequency. This doesn't affect the function. It's to display the full cycle so no need to change if not necessary!
-
-samples = fs_input / f0_input;
-
-half_samples = samples/2;
 
 % Uncomment for continuous-time signals (function handles)
 
-x = @(t) sin(2*pi*60*t);
+% x = @(t) cos(2*pi*60*t);
 
-y = @(t) 3.5*sin(2*pi*60*t);
+% y = @(t) 3.5*sin(2*pi*60*t);
 
 % Uncomment for discrete signals (data vectors)
 
-% x = [1, 2, 3, 4, 5];
+x = [1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1 ];
 
-% y = [5, 4, 3, -2, -1];
+y = [1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1];
 
-% Determine signal type
+x = x(1:samples_per_cycle);
 
-isFunction = isa(x, 'function_handle') && isa(y, 'function_handle');
+y = y(1:samples_per_cycle);
 
-if isFunction
-
-% Continuous-time signals
-
-% Define a fine time vector over one sample period (adjust as needed)
-
-t_input = 0:T_input:half_samples / f0_input;
-
-else
-
-% Discrete signals
-
-% Define discrete sample indices and corresponding time vector
+t_input = 0:T_input:one_cycle;
 
 n = 0:length(x)-1;
 
-t_input = n * T_input;
-
-end
+isFunction = isa(x, 'function_handle') && isa(y, 'function_handle');
 
 % -------- PROCESSING --------
 
@@ -154,21 +140,31 @@ inner_product = sum(product);
 
 % Combined plot: x[n] and y[n]
 
-subplot(2,1,1);
+subplot(4,1,1);
 
-plot(n, x_vals, 'k-o', 'LineWidth', 2); hold on;
-
-plot(n, y_vals, 'm-o', 'LineWidth', 2);
+stem(n, x_vals, 'b-o', 'LineWidth', 2);
 
 grid on;
 
-title('Plotting data points');
+title('Function 1 Data Points');
+
+xlabel('n');
+
+ylabel('x');
+
+% Plot y[t]
+
+subplot(4,1,2);
+
+stem(n, y_vals, 'r-o', 'LineWidth', 2);
+
+grid on;
+
+title('Function 2 Data Points');
 
 xlabel('n');
 
 ylabel('Amplitude');
-
-legend('function 1', 'function 2');
 
 % Combined plot: x[n]·y[n] with shaded bars
 
@@ -204,7 +200,7 @@ positive_area = sum(product(product > 0));
 
 negative_area = sum(product(product < 0));
 
-text(n(end), -max(product)*0.9, sprintf('Positive Area = %.2f\nNegative Area = %.2f', positive_area, negative_area), 'FontSize', 11, 'Color', 'black', 'BackgroundColor', 'yellow');
+text(n(end)-1.5, -max(product)*1.3, sprintf('Positive Area = %.2f\nNegative Area = %.2f', positive_area, negative_area), 'FontSize', 11, 'Color', 'black', 'BackgroundColor', 'yellow');
 
 end
 
@@ -224,7 +220,7 @@ end
 
 % Add unified title and message box at bottom
 
-sgtitle('');
+sgtitle('Orthogonality Test for 2 Functions (One Cycle)');
 
 % Resize figure to create space for annotation
 
