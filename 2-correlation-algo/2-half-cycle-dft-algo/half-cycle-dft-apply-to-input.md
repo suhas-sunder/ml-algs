@@ -8,18 +8,6 @@ close all;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Initializing Variables with Parameters For Filter
-
-fs = 720; % Sampling frequency (Hz)
-
-T = 1 / fs; % Sampling period (s)
-
-f0 = 60; % Signal frequency (Hz)
-
-omega = 2 * pi * f0; % Angular frequency
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %% Initializing Variables with Parameters For INPUT SIGNAL
 
 fs_input = 720; % Sampling frequency (Hz)
@@ -38,17 +26,21 @@ Vm_input = 10; % Amplitude
 
 omega_input = 2 * pi * f0_input; % Angular frequency
 
+datapoints = true;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Works with both data points and formula
 
-% x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
+x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
 
-x = Vm_input * sin(omega_input * t_input ); % Input waveform
+% x = Vm_input * sin(omega_input * t_input + pi/18); % Input waveform
+
+% datapoints = false;
 
 % This resets the length of t_input if x is not an equation (data points instead)
 
-t_input = (0:length(x)-1) * T_input; % Time vector (0.1 seconds)
+t_input = 0:T_input:((length(x)-1) * T_input);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -66,6 +58,16 @@ title('Original Continuous Signal');
 
 xlabel('Time (s)');
 
+if(datapoints)
+
+xlim([t_input(1), t_input(end)]);
+
+xticks(0:T_input:t_input(end))
+
+xtickformat('%.4f'); % shows more precise decimals
+
+end
+
 ylabel('Amplitude');
 
 grid on;
@@ -79,6 +81,16 @@ stem(t_input, x, 'r', 'filled');
 title('Sampled Signal (Stems)');
 
 xlabel('Time (s)');
+
+if(datapoints)
+
+xlim([t_input(1), t_input(end)]);
+
+xticks(0:T_input:t_input(end))
+
+xtickformat('%.4f'); % shows more precise decimals
+
+end
 
 ylabel('Sample Value');
 
@@ -96,11 +108,15 @@ mag = zeros(1, length(t_input));
 
 % This is where we actually take 3 SAMPLES and APPLY THE FILTER
 
+window_size = samples/2; % Window size is same as sample size halved (because of half cycle DFT)
+
 real_values = [0, 0.5, 0.866, 1.0, 0.866, 0.5];
+
+real_values = [real_values(1:window_size)]; % Resize imaginary based on window size
 
 imaginary_values = [1.0, 0.866, 0.5, 0, -0.5, -0.866];
 
-window_size = samples/2; % Window size is same as sample size halved (because of half cycle DFT)
+imaginary_values = [imaginary_values(1:window_size)]; % Resize imaginary based on window size
 
 V_real = zeros(1, window_size);
 
@@ -144,6 +160,16 @@ title('Phasor Magnitude');
 
 xlabel('Time (s)');
 
+if(datapoints)
+
+xlim([t_input(1), t_input(end)]);
+
+xticks(0:T_input:t_input(end))
+
+xtickformat('%.4f'); % shows more precise decimals
+
+end
+
 ylabel('Magnitude');
 
 ylim([0, max(mag) + max(mag) * 0.2]);
@@ -157,6 +183,16 @@ plot(t_input, phase_angle_deg, 'r', 'LineWidth', 1);
 title('Phasor Phase Angle');
 
 xlabel('Time (s)');
+
+if(datapoints)
+
+xlim([t_input(1), t_input(end)]);
+
+xticks(0:T_input:t_input(end))
+
+xtickformat('%.4f'); % shows more precise decimals
+
+end
 
 ylabel('Angle (degrees)');
 
@@ -174,7 +210,7 @@ grid on;
 
 % Not only every sample, but every sample for multiple cycles for time t_input
 
-samples_per_cycle = round(fs / f0);
+samples_per_cycle = round(fs_input / f0_input);
 
 num_cycles = floor((length(t_input)) / samples_per_cycle);
 
@@ -232,7 +268,7 @@ Y_const_mag = abs(Y_const);
 
 Y_const_mag = Y_const_mag(1:half);
 
-f = (0:half-1) * fs / N;
+f = (0:half-1) * fs_input / N;
 
 % Plot
 
@@ -241,6 +277,8 @@ figure;
 plot(f, Y_const_mag, 'r-', 'LineWidth', 1);
 
 xlabel('Frequency (Hz)');
+
+xlim([f(1), f(end)]);
 
 ylabel('Magnitude');
 
