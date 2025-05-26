@@ -13,15 +13,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
+                "file": "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "cosine-algo-apply-to-input"
+              "title": "0-discrete-fourier-filter"
+            }
+          },
+          {
+            "id": "bc0340cfca509311",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2-correlation-algo/1-orthogonality-check-mags.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1-orthogonality-check-mags"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -167,20 +182,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "26d2eb69758efc12",
+  "active": "bc0340cfca509311",
   "lastOpenFiles": [
+    "2-correlation-algo/extra/even-odd-input-conversion-to-get-data-points.md",
+    "3-least-error-square-algo/least-error-filter-with-overlap.md",
+    "Untitled.md",
+    "3-least-error-square-algo",
+    "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
+    "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
     "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input.md",
     "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input.md",
     "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
-    "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
-    "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
     "2-correlation-algo/3-even-and-odd-algo/0-even-and-odd-filter.md",
     "2-correlation-algo/2 - orthogonality-check-harm.md",
     "2-correlation-algo/3-orthogonality-check-me.md",
     "2-correlation-algo/1-orthogonality-check-mags.md",
     "assignments/2-assignment-2/Question.md",
     "2-correlation-algo/extra/stem-plot-to-get-data-points.md",
-    "2-correlation-algo/extra/even-odd-input-conversion-to-get-data-points.md",
     "2-correlation-algo/5-cosine-algo/0-cosine-algo-filter.md",
     "2-correlation-algo/2-half-cycle-dft-algo/0-half-cycle-dft-filter.md",
     "2-correlation-algo/images/Pasted image 20250525185352.png",
@@ -193,7 +211,6 @@
     "2-correlation-algo/images/Pasted image 20250525164350.png",
     "2-correlation-algo/images/20250525164410.png",
     "2-correlation-algo/images/20250525164350.png",
-    "Untitled.md",
     "2-correlation-algo/images/Pasted image 20250525164410.png",
     "old-outdated-trig-algorithms/1-miki-mikano/5-miki-mikano-app-transient.md",
     "old-outdated-trig-algorithms/1-miki-mikano/4-miki-mikano-app-3rd-harmonic.md",
@@ -205,7 +222,6 @@
     "old-outdated-trig-algorithms/2-mann-and-morrison/5-mann-morrison-app-transient.md",
     "old-outdated-trig-algorithms/2-mann-and-morrison/4-mann-morrison-app-3rd-harmonic.md",
     "old-outdated-trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
-    "old-outdated-trig-algorithms/2-mann-and-morrison/3-mann-morrison-app-2nd-harmonic.md",
     "2-correlation-algo/4-walsh-algo",
     "2-correlation-algo/3-even-and-odd-algo",
     "2-correlation-algo/images/renameImages.js",
@@ -213,7 +229,6 @@
     "2-correlation-algo/2-half-cycle-dft-algo",
     "2-correlation-algo/1-discrete-fourier-algo",
     "2-correlation-algo/5-cosine-algo",
-    "2-correlation-algo/images",
-    "1-trig-algorithms/4-gilbert-and-shovlin"
+    "2-correlation-algo/images"
   ]
 }
