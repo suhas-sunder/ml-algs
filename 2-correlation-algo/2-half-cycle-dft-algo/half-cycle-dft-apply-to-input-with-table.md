@@ -32,7 +32,7 @@ col_names = {'Input','Sine','Input * Sin','Real_Part','Cosine','Input * Cos','Im
 
 array_for_table_columns = length(col_names);
 
-array_for_table_rows = samples;
+array_for_table_rows = samples/2;
 
 array_for_table = zeros(array_for_table_rows, array_for_table_columns);
 
@@ -42,15 +42,11 @@ array_for_table = zeros(array_for_table_rows, array_for_table_columns);
 
 x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
 
-% x = Vm_input * sin(omega_input * t_input ); % Input waveform
+% x = Vm_input * sin(omega_input * t_input + pi/18); % Input waveform
 
 % datapoints = false;
 
 % This resets the length of t_input if x is not an equation (data points instead)
-
-% Insert x into first column of table
-
-array_for_table(1:samples, 1) = x(1:samples);
 
 t_input = 0:T_input:((length(x)-1) * T_input);
 
@@ -120,15 +116,15 @@ mag = zeros(1, length(t_input));
 
 % This is where we actually take 3 SAMPLES and APPLY THE FILTER
 
-window_size = samples; % Window size is same as sample size
+window_size = samples/2; % Window size is same as sample size halved (because of half cycle DFT)
 
-real_values = [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
+real_values = [0, 0.5, 0.866, 1.0, 0.866, 0.5];
 
-real_values = [real_values(1:window_size)]; % Scale based on sample size
+real_values = [real_values(1:window_size)]; % Resize imaginary based on window size
 
-imaginary_values = [1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5, 0, 0.5, 0.866];
+imaginary_values = [1.0, 0.866, 0.5, 0, -0.5, -0.866];
 
-imaginary_values = [imaginary_values(1:window_size)]; % Scale based on sample size
+imaginary_values = [imaginary_values(1:window_size)]; % Resize imaginary based on window size
 
 V_real = zeros(1, window_size);
 
