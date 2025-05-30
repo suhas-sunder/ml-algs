@@ -192,15 +192,15 @@ if strcmp(target_filter, current_filter)
 
 switch current_filter
 
-case {"fundamental", "2ndHarmonic", "3rdHarmonic", "4thHarmonic", "5thHarmonic"}
+case {"fundamental", "2ndHarmonic", "3rdHarmonic", "4thHarmonic", "5thHarmonic", "DC"}
 
 real_values = A_left_pinv(target_array_location, :);
 
 imaginary_values = A_left_pinv(target_array_location + 1, :);
 
-case "DC"
+% increment every iteration, whether matched or not
 
-dc_filter = true;
+target_array_location = target_array_location + 2;
 
 end
 
