@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3-least-error-square-algo/least-error-square-filter.md",
+                "file": "1-trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "least-error-square-filter"
+              "title": "0-miki-mikano-filter"
             }
           }
         ]
@@ -166,5 +166,7 @@
     }
   },
   "active": "b34f6fb401ef7766",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "3-least-error-square-algo/least-error-square-filter.md"
+  ]
 }
