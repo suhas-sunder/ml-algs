@@ -198,23 +198,19 @@ real_values = A_left_pinv(target_array_location, :);
 
 imaginary_values = A_left_pinv(target_array_location + 1, :);
 
-% increment every iteration, whether matched or not
+end
+
+end
+
+% Only increment for filters that are in the active list
+
+if ismember(i, track_active_filter)
 
 target_array_location = target_array_location + 2;
 
 end
 
 end
-
-% increment every iteration, whether matched or not
-
-target_array_location = target_array_location + 2;
-
-end
-
-disp(real_values);
-
-disp(imaginary_values);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -255,18 +251,6 @@ disp(" ");
 z_power = z_power + 1;
 
 end
-
-disp(H_real)
-
-disp(H_imaginary)
-
-disp(real_values);
-
-disp(size(real_values));
-
-disp(imaginary_values);
-
-disp(size(imaginary_values));
 
 % Magnitude of real
 
@@ -371,4 +355,59 @@ xlim([0 fs]);
 yticks(-180:60:180);
 
 ylim([-180 180]);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plot overlapping magnitudes of H_real and H_imaginary
+
+figure;
+
+plot(f_range, mag_H_real, 'b', 'LineWidth', 1.5); hold on;
+
+plot(f_range, mag_H_imaginary, 'r--', 'LineWidth', 1.5);
+
+xlabel('Frequency (Hz)');
+
+ylabel('Magnitude');
+
+title('Magnitude Response: Real vs Imaginary Parts of H(z)');
+
+legend('Real Part', 'Imaginary Part');
+
+grid on;
+
+xticks(0:60:fs);
+
+xlim([0 fs]);
 ```
+
+
+### 60Hz Filter:
+![](20250529222231.png)
+![](20250529222255.png)
+
+
+
+### 120Hz Filter:
+![](20250529222404.png)
+![](20250529222434.png)
+
+
+### 180Hz Filter:
+![](20250529222534.png)
+![](20250529222558.png)
+
+### 240Hz Filter:
+![](20250529225022.png)
+![](20250529225048.png)
+
+
+
+### DC Filter:
+![](20250529224857.png)
+![](20250529224829.png)
+
+
+
+
+

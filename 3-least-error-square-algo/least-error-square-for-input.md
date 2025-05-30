@@ -1,4 +1,5 @@
 
+
 ```
 clc;
 
@@ -30,23 +31,9 @@ datapoints = true;
 
 x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
 
-% x = Vm_input * sin(omega_input * t_input ); % Input waveform
+% x = Vm_input * sin(omega_input * t_input + pi/18 ); % Input waveform
 
 % datapoints = false;
-
-% This resets the length of t_input if x is not an equation (data points instead)
-
-% Insert x into first column of table
-
-col_names = {'Input','Sine','Input * Sin','Real_Part','Cosine','Input * Cos','Imag_Part','Vp', 'Phase_Angle(deg)'};
-
-array_for_table_columns = length(col_names);
-
-array_for_table_rows = length(x);
-
-array_for_table = zeros(array_for_table_rows, array_for_table_columns);
-
-array_for_table(1:length(x), 1) = x(1:length(x));
 
 t_input = 0:T_input:((length(x)-1) * T_input);
 
@@ -184,6 +171,20 @@ target_filter = filters{filter_choice};
 
 %-----------------------------------------------------------
 
+% Initialize Data Table
+
+col_names = {'Input','Real Filter','Input * Real Vals','Filtered Real Part', 'Imag Filter','Input * Imag Vals','Filtered Imag Part','Vp', 'Phase Angle(deg)'};
+
+array_for_table_columns = length(col_names);
+
+array_for_table_rows = length(x);
+
+array_for_table = zeros(array_for_table_rows, array_for_table_columns);
+
+array_for_table(1:length(x), 1) = x(1:length(x));
+
+%-----------------------------------------------------------
+
 sample_offset = 1; % Change this to whatever you need. Prof said it should be minimum 1.
 
 % Initialize sample count
@@ -296,17 +297,17 @@ real_values = A_left_pinv(target_array_location, :);
 
 imaginary_values = A_left_pinv(target_array_location + 1, :);
 
-% increment every iteration, whether matched or not
-
-target_array_location = target_array_location + 2;
-
 end
 
 end
 
-% increment every iteration, whether matched or not
+% Only increment for filters that are in the active list
+
+if ismember(i, track_active_filter)
 
 target_array_location = target_array_location + 2;
+
+end
 
 end
 
