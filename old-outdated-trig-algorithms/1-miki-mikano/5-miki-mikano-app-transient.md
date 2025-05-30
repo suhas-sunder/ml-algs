@@ -42,11 +42,11 @@ x = zeros(size(t_input)); % Pre-allocate
 
 % Before t = 0.03 s → base signal with phase shift
 
-x(t_input < 0.03) = Vm_input * sin(omega_input * t(t_input < 0.03) + pi/12);
+x(t_input < 0.03) = Vm_input * sin(omega_input * t_input(t_input < 0.03) + pi/12);
 
 % After t = 0.03 s → high amplitude, same frequency & phase
 
-x(t_input >= 0.03) = Vm_spike * sin(omega_input * t(t_input >= 0.03) + pi/12);
+x(t_input >= 0.03) = Vm_spike * sin(omega_input * t_input(t_input >= 0.03) + pi/12);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
