@@ -11,10 +11,14 @@
             "id": "b34f6fb401ef7766",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "3-least-error-square-algo/least-error-square-filter.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "least-error-square-filter"
             }
           }
         ]
