@@ -10,15 +10,15 @@ close all;
 
 %% Initializing Variables with Parameters
 
-fs = 720; % Sampling frequency
+fs = 960; % Sampling frequency
+
+f0 = 120;
 
 T = 1 / fs; % Sampling period
 
-f0 = 60;
+samples = (fs/f0)/2;
 
-samples = (fs/f0)/2; % Halved for half cycle
-
-cycles = samples/f0;
+cycles = (samples/2)/f0;
 
 f = linspace(0, fs, 1000); % Frequency range for plotting
 
@@ -185,7 +185,3 @@ yticks(-180:60:180);
 ylim([-180 180]);
 ```
 
-
-![](../images/20250524004357.png)
-
-![](../images/20250524004411.png)

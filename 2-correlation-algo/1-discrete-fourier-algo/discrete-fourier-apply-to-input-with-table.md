@@ -50,7 +50,7 @@ x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99
 
 % Insert x into first column of table
 
-array_for_table(1:samples, 1) = x(1:samples);
+array_for_table(1:array_for_table_rows, 1) = x(1:array_for_table_rows);
 
 t_input = 0:T_input:((length(x)-1) * T_input);
 
@@ -122,11 +122,11 @@ mag = zeros(1, length(t_input));
 
 window_size = samples; % Window size is same as sample size
 
-real_values = [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
+real_values = sin((2 * pi * f0_input)*(0:T_input:cycles));
 
 real_values = [real_values(1:window_size)]; % Scale based on sample size
 
-imaginary_values = [1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5, 0, 0.5, 0.866];
+imaginary_values = cos((2 * pi * f0_input)*(0:T_input:cycles));
 
 imaginary_values = [imaginary_values(1:window_size)]; % Scale based on sample size
 
@@ -160,21 +160,21 @@ if(n == window_size)
 
 % Insert real and imaginary filter values into columns of table
 
-array_for_table(1:window_size, 2) = real_values(1:window_size);
+array_for_table(1:window_size, 2) = round(real_values(1:window_size), 4);
 
-array_for_table(1:window_size, 5) = imaginary_values(1:window_size);
+array_for_table(1:window_size, 5) = round(imaginary_values(1:window_size), 4);
 
 % Insert calculated values into columns for table after calculation is done.
 
-array_for_table(1:window_size, 3) = V_real(1:window_size);
+array_for_table(1:window_size, 3) = round(V_real(1:window_size));
 
-array_for_table(1:window_size, 6) = V_imaginary(1:window_size);
+array_for_table(1:window_size, 6) = round(V_imaginary(1:window_size));
 
-array_for_table(1:window_size, 4) = cumsum(V_real(1:window_size));
+array_for_table(1:window_size, 4) = round(cumsum(V_real(1:window_size)));
 
-array_for_table(1:window_size, 7) = cumsum(V_imaginary(1:window_size));
+array_for_table(1:window_size, 7) = round(cumsum(V_imaginary(1:window_size)));
 
-% Insert magnitude and phase into columns of table
+% Insert magnitude and phase into columns of table (no rounding)
 
 array_for_table(1:window_size, 8) = mag(1:window_size);
 
@@ -322,8 +322,6 @@ ylabel('Magnitude');
 
 title('Estimated Phasor FFT');
 
-legend('Variable Phase','Constant Phase');
-
 grid on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -388,3 +386,44 @@ colWidths = repmat({baseWidth * 1.5}, 1, numCols);
 
 t = uitable('Parent', fig,'Data', formattedData,'ColumnName', my_table.Properties.VariableNames, 'Units', 'normalized', 'Position', [0 0 1 1], 'RowName', [], 'ColumnWidth', colWidths);
 ```
+
+
+
+### Pure Sine Wave:
+(First image below is the "wrong version" that matches lecture notes. Just posting it here for reference to show that it matches.)![](../images/20250522172021.png)
+![](../images/20250522171810.png)
+
+![](../images/20250522171747.png)
+
+![](../images/20250522171730.png)
+![](../images/20250522171711.png)
+
+
+### Decaying DC:
+![](../images/20250522173913.png)
+![](../images/20250522173858.png)
+![](../images/20250522173840.png)
+![](../images/20250522173814.png)
+
+### 2nd Harmonic:
+![](../images/20250522174518.png)
+![](../images/20250522174500.png)
+![](../images/20250522174429.png)
+![](../images/20250522174414.png)
+### 3rd Harmonic:
+![](../images/20250522174800.png)
+![](../images/20250522174741.png)
+![](../images/20250522174717.png)
+![](../images/20250522174650.png)
+### Transient:
+
+
+
+
+
+![](../images/20250522175050.png)
+![](../images/20250522174958.png)
+![](../images/20250522174945.png)
+![](../images/20250522174927.png)
+
+

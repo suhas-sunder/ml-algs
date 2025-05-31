@@ -14,6 +14,12 @@ fs = 720; % Sampling frequency
 
 T = 1 / fs; % Sampling period
 
+f0 = 60;
+
+samples = fs/f0;
+
+cycles = samples/f0;
+
 f = linspace(0, fs, 1000); % Frequency range for plotting
 
 omega = 2 * pi * f; % Discrete angular frequency (radians/sample)
@@ -24,7 +30,9 @@ z = exp(1j * omega * T);
 
 % --- H(z) REAL PART Vp COS(Theta) --- The singal itself can be sine or cos
 
-real_values = [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
+real_values = sin((2 * pi * f0)*(0:T:cycles));
+
+real_values = real_values(1:samples);
 
 quarter_of_real = floor(length(real_values)/4);
 
@@ -176,6 +184,6 @@ ylim([-180 180]);
 ```
 
 
-![](../images/20250524184810.png]]
+![](../images/20250524184810.png)
 
-![](../images/20250524184826.png]]
+![](../images/20250524184826.png)

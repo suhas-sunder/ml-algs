@@ -10,11 +10,11 @@ close all;
 
 %% Initializing Variables with Parameters
 
-fs = 720; % Sampling frequency
+fs = 960; % Sampling frequency
 
 T = 1 / fs; % Sampling period
 
-f0 = 60;
+f0 = 120;
 
 samples = (fs/f0)/2; % Halved for half cycle
 
@@ -184,8 +184,3 @@ yticks(-180:60:180);
 
 ylim([-180 180]);
 ```
-
-
-![](../images/20250524004357.png)
-
-![](../images/20250524004411.png)

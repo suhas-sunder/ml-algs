@@ -48,6 +48,8 @@ x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99
 
 % This resets the length of t_input if x is not an equation (data points instead)
 
+array_for_table(1:array_for_table_rows, 1) = x(1:array_for_table_rows);
+
 t_input = 0:T_input:((length(x)-1) * T_input);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -118,11 +120,11 @@ mag = zeros(1, length(t_input));
 
 window_size = samples/2; % Window size is same as sample size halved (because of half cycle DFT)
 
-real_values = [0, 0.5, 0.866, 1.0, 0.866, 0.5];
+real_values = sin((2 * pi * f0_input)*(0:T_input:cycles));
 
 real_values = [real_values(1:window_size)]; % Resize imaginary based on window size
 
-imaginary_values = [1.0, 0.866, 0.5, 0, -0.5, -0.866];
+imaginary_values = cos((2 * pi * f0_input)*(0:T_input:cycles));
 
 imaginary_values = [imaginary_values(1:window_size)]; % Resize imaginary based on window size
 
@@ -156,21 +158,21 @@ if(n == window_size)
 
 % Insert real and imaginary filter values into columns of table
 
-array_for_table(1:window_size, 2) = real_values(1:window_size);
+array_for_table(1:window_size, 2) = round(real_values(1:window_size), 4);
 
-array_for_table(1:window_size, 5) = imaginary_values(1:window_size);
+array_for_table(1:window_size, 5) = round(imaginary_values(1:window_size), 4);
 
 % Insert calculated values into columns for table after calculation is done.
 
-array_for_table(1:window_size, 3) = V_real(1:window_size);
+array_for_table(1:window_size, 3) = round(V_real(1:window_size));
 
-array_for_table(1:window_size, 6) = V_imaginary(1:window_size);
+array_for_table(1:window_size, 6) = round(V_imaginary(1:window_size));
 
-array_for_table(1:window_size, 4) = cumsum(V_real(1:window_size));
+array_for_table(1:window_size, 4) = round(cumsum(V_real(1:window_size)));
 
-array_for_table(1:window_size, 7) = cumsum(V_imaginary(1:window_size));
+array_for_table(1:window_size, 7) = round(cumsum(V_imaginary(1:window_size)));
 
-% Insert magnitude and phase into columns of table
+% Insert magnitude and phase into columns of table (no rounding)
 
 array_for_table(1:window_size, 8) = mag(1:window_size);
 
@@ -384,3 +386,48 @@ colWidths = repmat({baseWidth * 1.5}, 1, numCols);
 
 t = uitable('Parent', fig,'Data', formattedData,'ColumnName', my_table.Properties.VariableNames, 'Units', 'normalized', 'Position', [0 0 1 1], 'RowName', [], 'ColumnWidth', colWidths);
 ```
+
+
+
+### Pure Sine Wave:
+(First image below is the "wrong version" that matches lecture notes. Just posting it here for reference to show that it matches.)
+![](../images/20250522175904.png)
+![](../images/20250522180057.png)
+![](../images/20250522180041.png)
+![](../images/20250522180016.png)
+![](../images/20250522175958.png)
+
+
+### Decaying DC:
+
+![](../images/20250522180553.png)
+![](../images/20250522180536.png)
+![](../images/20250522180515.png)
+![](../images/20250522180447.png)
+
+
+### 2nd Harmonic:
+
+![](../images/20250522180750.png)
+![](../images/20250522180706.png)
+![](../images/20250522180652.png)
+![](../images/20250522180639.png)
+
+### 3rd Harmonic:
+
+![](../images/20250522181049.png)
+![](../images/20250522181024.png)
+![](../images/20250522181000.png)
+![](../images/20250522180941.png)
+
+
+### Transient:
+
+![](../images/20250522181255.png)
+![](../images/20250522181241.png)
+![](../images/20250522181229.png)
+![](../images/20250522181218.png)
+
+
+
+

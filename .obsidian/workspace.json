@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1-trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
+                "file": "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0-miki-mikano-filter"
+              "title": "0-discrete-fourier-filter"
             }
           }
         ]
@@ -167,6 +167,34 @@
   },
   "active": "b34f6fb401ef7766",
   "lastOpenFiles": [
+    "2-correlation-algo/2-half-cycle-dft-algo/0-half-cycle-dft-filter.md",
+    "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
+    "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input-with-table.md",
+    "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input-with-table.md",
+    "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input-with-table.md",
+    "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input-with-table.md",
+    "2-correlation-algo/5-cosine-algo/0-cosine-algo-filter.md",
+    "2-correlation-algo/3-even-and-odd-algo/0-even-and-odd-filter.md",
+    "old-outdated-trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
+    "old-outdated-trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
+    "2-correlation-algo/extra/even-odd-input-conversion-to-get-data-points.md",
+    "assignments/2-assignment-2/Half Cycle DFT Filter.md",
+    "2-correlation-algo/extra/stem-plot-to-get-data-points.md",
+    "assignments/2-assignment-2/Half Cycle DFT with Input.md",
+    "Pasted image 20250531010949.png",
+    "Pasted image 20250531014047.png",
+    "Pasted image 20250531011213.png",
+    "Pasted image 20250531011034.png",
+    "2-correlation-algo/3-orthogonality-check-me.md",
+    "2-correlation-algo/1-orthogonality-check-mags.md",
+    "2-correlation-algo/2 - orthogonality-check-harm.md",
+    "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
+    "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input.md",
+    "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
+    "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input.md",
+    "Pasted image 20250531011156.png",
+    "Pasted image 20250531011053.png",
+    "1-trig-algorithms/1-miki-mikano/0-miki-mikano-filter.md",
     "3-least-error-square-algo/least-error-square-filter.md"
   ]
 }

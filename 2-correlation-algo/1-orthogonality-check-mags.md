@@ -22,9 +22,9 @@ T_input = 1 / fs_input; % Sampling period (s)
 
 % Uncomment for continuous-time signals (function handles)
 
-% x = @(t) cos(2*pi*60*t);
+% x = @(t) sin(2*pi*f0_input*t);
 
-% y = @(t) 3.5*sin(2*pi*60*t);
+% y = @(t) cos(2*pi*f0_input*t);
 
 % Uncomment for discrete signals (data vectors)
 

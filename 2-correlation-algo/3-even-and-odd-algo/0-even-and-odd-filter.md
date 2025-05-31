@@ -14,6 +14,12 @@ fs = 720; % Sampling frequency
 
 T = 1 / fs; % Sampling period
 
+f0 = 60;
+
+samples = fs/f0;
+
+cycles = samples/f0;
+
 f = linspace(0, fs, 1000); % Frequency range for plotting
 
 omega = 2 * pi * f; % Discrete angular frequency (radians/sample)
@@ -24,7 +30,21 @@ z = exp(1j * omega * T);
 
 % --- H(z) REAL PART Vp COS(Theta) --- The singal itself can be sine or cos
 
-real_values = [1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1];
+real_values = sin((2 * pi * f0)*(0:T:cycles));
+
+x_sign = sign(real_values); % -1, 0, or 1
+
+% Even and Odd parts of mapped signal
+
+x_sign_rev = fliplr(x_sign);
+
+x_even = 0.5 * (x_sign + x_sign_rev);
+
+x_odd = 0.5 * (x_sign - x_sign_rev);
+
+real_values = x_even + x_odd;
+
+real_values = real_values(2:samples + 1);
 
 real_values = flip(real_values);
 
@@ -38,7 +58,23 @@ H_real = zeros(1,length(z));
 
 % --- H(z) IMAGINARY PART Vp SIN(Theta) --- The singal itself can be sine or cos
 
-imaginary_values = [1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1];
+imaginary_values = cos((2 * pi * f0)*(0:T:cycles));
+
+x_sign = sign(imaginary_values); % -1, 0, or 1
+
+% Even and Odd parts of mapped signal
+
+x_sign_rev = fliplr(x_sign);
+
+x_even = 0.5 * (x_sign + x_sign_rev);
+
+x_odd = 0.5 * (x_sign - x_sign_rev);
+
+imaginary_values = x_even + x_odd;
+
+imaginary_values = imaginary_values(2:samples + 1);
+
+disp(imaginary_values)
 
 imaginary_values = flip(imaginary_values);
 
