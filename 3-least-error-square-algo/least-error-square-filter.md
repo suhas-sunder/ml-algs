@@ -212,6 +212,22 @@ end
 
 end
 
+fprintf("Full matrix A after left pseudo inverse:");
+
+fprintf("\n");
+
+disp(A_left_pinv);
+
+fprintf("\n");
+
+fprintf("First row below is real values. Second row below is Imaginary. Filter choice is: %s\n", target_filter);
+
+fprintf("\n");
+
+disp(real_values);
+
+disp(imaginary_values);
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 z = exp(1j * 2 * pi * f_range * T);

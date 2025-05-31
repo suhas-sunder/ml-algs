@@ -171,20 +171,6 @@ target_filter = filters{filter_choice};
 
 %-----------------------------------------------------------
 
-% Initialize Data Table
-
-col_names = {'Input','Real Filter','Input * Real Vals','Filtered Real Part', 'Imag Filter','Input * Imag Vals','Filtered Imag Part','Vp', 'Phase Angle(deg)'};
-
-array_for_table_columns = length(col_names);
-
-array_for_table_rows = length(x);
-
-array_for_table = zeros(array_for_table_rows, array_for_table_columns);
-
-array_for_table(1:length(x), 1) = x(1:length(x));
-
-%-----------------------------------------------------------
-
 sample_offset = 1; % Change this to whatever you need. Prof said it should be minimum 1.
 
 % Initialize sample count
@@ -311,6 +297,32 @@ end
 
 end
 
+%-----------------------------------------------------------
+
+% Initialize Data Table
+
+col_names = {'Input','Real Filter','Input * Real Vals','Filtered Real Part', 'Imag Filter','Input * Imag Vals','Filtered Imag Part','Vp', 'Phase Angle(deg)'};
+
+array_for_table_columns = length(col_names);
+
+array_for_table_rows = samples;
+
+array_for_table = zeros(array_for_table_rows, array_for_table_columns);
+
+array_for_table(1:samples, 1) = x(1:samples);
+
+fprintf("Full matrix A after left pseudo inverse:");
+
+fprintf("\n");
+
+disp(A_left_pinv);
+
+fprintf("\n");
+
+fprintf("First row below is real values. Second row below is Imaginary. Filter choice is: %s\n", target_filter);
+
+fprintf("\n");
+
 disp(real_values);
 
 disp(imaginary_values);
@@ -359,21 +371,21 @@ if(n == window_size)
 
 % Insert real and imaginary filter values into columns of table
 
-array_for_table(1:window_size, 2) = real_values(1:window_size);
+array_for_table(1:window_size, 2) = round(real_values(1:window_size), 4);
 
-array_for_table(1:window_size, 5) = imaginary_values(1:window_size);
+array_for_table(1:window_size, 5) = round(imaginary_values(1:window_size), 4);
 
 % Insert calculated values into columns for table after calculation is done.
 
-array_for_table(1:window_size, 3) = V_real(1:window_size);
+array_for_table(1:window_size, 3) = round(V_real(1:window_size));
 
-array_for_table(1:window_size, 6) = V_imaginary(1:window_size);
+array_for_table(1:window_size, 6) = round(V_imaginary(1:window_size));
 
-array_for_table(1:window_size, 4) = cumsum(V_real(1:window_size));
+array_for_table(1:window_size, 4) = round(cumsum(V_real(1:window_size)));
 
-array_for_table(1:window_size, 7) = cumsum(V_imaginary(1:window_size));
+array_for_table(1:window_size, 7) = round(cumsum(V_imaginary(1:window_size)));
 
-% Insert magnitude and phase into columns of table
+% Insert magnitude and phase into columns of table (no rounding)
 
 array_for_table(1:window_size, 8) = mag(1:window_size);
 
