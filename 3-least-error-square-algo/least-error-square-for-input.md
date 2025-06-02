@@ -27,6 +27,22 @@ datapoints = true;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% Initializing Variables with Parameters FOR FILTER
+
+%#ok<*UNRCH>
+
+fs = fs_input; % Sampling frequency
+
+f0 = f0_input; % Filter Frequency
+
+T = 1 / fs; % Sampling period
+
+omega = 2 * pi * f0; % Discrete angular frequency (radians/sample)
+
+f_range = linspace(0, fs, 1000); % Frequency range to plot full range. This is only relevant later on when assigning z = exp(j omega T)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Input data points
 
 x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
@@ -91,21 +107,6 @@ ylabel('Sample Value');
 
 grid on;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Initializing Variables with Parameters
-
-%#ok<*UNRCH>
-
-fs = 720; % Sampling frequency
-
-f0 = 60; % Filter Frequency
-
-T = 1 / fs; % Sampling period
-
-omega = 2 * pi * f0; % Discrete angular frequency (radians/sample)
-
-f_range = linspace(0, fs, 1000); % Frequency range to plot full range. This is only relevant later on when assigning z = exp(j omega T)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
