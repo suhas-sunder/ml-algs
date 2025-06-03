@@ -1,24 +1,24 @@
 {
   "main": {
-    "id": "04bbfb83e1308c6d",
+    "id": "2cc2c8238f01914d",
     "type": "split",
     "children": [
       {
-        "id": "5bcc080530a9f953",
+        "id": "b3c15e24c668359c",
         "type": "tabs",
         "children": [
           {
-            "id": "26d2eb69758efc12",
+            "id": "b34f6fb401ef7766",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3-least-error-square-algo/test.md",
+                "file": "3-least-error-square-algo/least-error-square-for-input.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "test"
+              "title": "least-error-square-for-input"
             }
           }
         ]
@@ -27,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "e2f769da1503662c",
+    "id": "2c07c3ccc058bde1",
     "type": "split",
     "children": [
       {
-        "id": "b722a4686bd4c028",
+        "id": "419f2d1bebe56119",
         "type": "tabs",
         "children": [
           {
-            "id": "41bdb79f4402733e",
+            "id": "9208a8a19dc802e0",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +48,7 @@
             }
           },
           {
-            "id": "44f5260fbfa3ac7d",
+            "id": "c6cf887a018057a6",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +65,7 @@
             }
           },
           {
-            "id": "c42bbf9dc7ab2f0c",
+            "id": "9d8619aebd05724a",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -81,20 +81,19 @@
     "width": 300
   },
   "right": {
-    "id": "e46679ef2439950f",
+    "id": "719b48caf450222f",
     "type": "split",
     "children": [
       {
-        "id": "433a002764a41506",
+        "id": "33e7732b136eb9b3",
         "type": "tabs",
         "children": [
           {
-            "id": "7293d1cdcaad939e",
+            "id": "cb26f02022e1a0c0",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,11 +103,11 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for cosine-algo-apply-to-input"
+              "title": "Backlinks"
             }
           },
           {
-            "id": "6a27f91fa2006222",
+            "id": "a4e44a05ec7bafc5",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
@@ -121,7 +120,7 @@
             }
           },
           {
-            "id": "89a813bee19893ae",
+            "id": "39a4b0d7fc4bf87b",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -136,18 +135,17 @@
             }
           },
           {
-            "id": "01b788db2b478ff9",
+            "id": "32aecaf0d3318257",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Welcome.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Welcome"
+              "title": "Outline"
             }
           }
         ]
@@ -167,53 +165,49 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "26d2eb69758efc12",
+  "active": "b34f6fb401ef7766",
   "lastOpenFiles": [
-    "3-least-error-square-algo/least-error-square-for-input.md",
     "3-least-error-square-algo/test.md",
-    "3-least-error-square-algo/least-error-square-filter.md",
-    "Formulas To Remember.md",
+    "3-least-error-square-algo/least-error-square-for-input.md",
     "4-frequency-estimation/least-error-square-freq-est/getting closer...md",
-    "assignments/2-assignment-2/Half Cycle DFT with Input.md",
-    "assignments/2-assignment-2/Half Cycle DFT Filter.md",
-    "4-frequency-estimation/zero-crossing-freq-est/zero-crossing-freq-est.md",
     "4-frequency-estimation/least-error-square-freq-est/progress!.md",
-    "4-frequency-estimation/least-error-square-freq-est/attempt-1.md",
+    "3-least-error-square-algo/least-error-square-filter.md",
     "4-frequency-estimation/least-error-square-freq-est/attempt-1.4-failed.md",
     "4-frequency-estimation/least-error-square-freq-est/attempt-1-got-original-freq-est-working.md",
-    "4-frequency-estimation/images/renameImages.js",
+    "4-frequency-estimation/least-error-square-freq-est/attempt-1.md",
+    "assignments/2-assignment-2/Half Cycle DFT Filter.md",
+    "assignments/2-assignment-2/Half Cycle DFT with Input.md",
+    "assignments/1-assignment-1/Question 2 filter.md",
+    "2-correlation-algo/extra/stem-plot-to-get-data-points.md",
+    "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input-with-table.md",
+    "4-frequency-estimation/zero-crossing-freq-est/zero-crossing-freq-est.md",
     "4-frequency-estimation/images/20250601003141.png",
     "4-frequency-estimation/images/20250601003121.png",
     "4-frequency-estimation/images/20250601003055.png",
     "4-frequency-estimation/images/20250601003037.png",
-    "4-frequency-estimation/zero-crossing-freq-est",
-    "4-frequency-estimation/least-error-square-freq-est",
+    "4-frequency-estimation/images/renameImages.js",
+    "4-frequency-estimation/images/Pasted image 20250601003037.png",
     "4-frequency-estimation/images",
+    "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input-with-table.md",
+    "4-frequency-estimation/images/Pasted image 20250601003141.png",
+    "4-frequency-estimation/images/Pasted image 20250601003121.png",
+    "4-frequency-estimation/images/Pasted image 20250601003055.png",
+    "old-outdated-trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
+    "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
+    "4-frequency-estimation/iterative-technique-freq-est",
+    "4-frequency-estimation/least-error-square-freq-est",
+    "4-frequency-estimation/zero-crossing-freq-est",
     "4-frequency-estimation",
-    "assignments/2-assignment-2/Question.md",
-    "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input.md",
-    "3-least-error-square-algo/least-error-filter-with-overlap.md",
-    "3-least-error-square-algo/images/renameImages.js",
-    "3-least-error-square-algo/images/20250529225048.png",
-    "3-least-error-square-algo/images/20250529225022.png",
-    "3-least-error-square-algo/images/20250529222735.png",
-    "3-least-error-square-algo/images/20250529224857.png",
-    "3-least-error-square-algo/images/20250529224829.png",
-    "3-least-error-square-algo/images/20250529222756.png",
-    "3-least-error-square-algo/images",
+    "2-correlation-algo/2-half-cycle-dft-algo/0-half-cycle-dft-filter.md",
     "2-correlation-algo/5-cosine-algo/cosine-algo-apply-to-input-with-table.md",
     "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input-with-table.md",
-    "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input-with-table.md",
-    "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input-with-table.md",
+    "2-correlation-algo/5-cosine-algo/0-cosine-algo-filter.md",
     "2-correlation-algo/3-even-and-odd-algo/0-even-and-odd-filter.md",
-    "2-correlation-algo/extra/stem-plot-to-get-data-points.md",
-    "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input.md",
-    "old-outdated-trig-algorithms/1-miki-mikano/4-miki-mikano-app-3rd-harmonic.md",
-    "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
-    "2-correlation-algo/2-half-cycle-dft-algo/0-half-cycle-dft-filter.md",
-    "2-correlation-algo/1-orthogonality-check-mags.md",
-    "3-least-error-square-algo",
-    "2-correlation-algo/extra",
-    "assignments/2-assignment-2"
+    "old-outdated-trig-algorithms/1-miki-mikano/3-miki-mikano-app-2nd-harmonic.md",
+    "2-correlation-algo/extra/even-odd-input-conversion-to-get-data-points.md",
+    "Pasted image 20250531010949.png",
+    "Pasted image 20250531014047.png",
+    "2-correlation-algo/3-orthogonality-check-me.md",
+    "2-correlation-algo/1-orthogonality-check-mags.md"
   ]
 }
