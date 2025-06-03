@@ -32,7 +32,7 @@ datapoints = true;
 
 fs = fs_input; % Sampling frequency
 
-f0 = 60; % Filter Frequency
+f0 = 60; % Filter Frequency that we are esimating. Set this to anywhere between 40 to 70Hz. 60Hz by default for mid point.
 
 T = 1 / fs; % Sampling period
 
@@ -49,6 +49,8 @@ f_range = linspace(0, fs, 1000); % Frequency range to plot full range. This is o
 x = Vm_input * sin(omega_input * t_input ); % Input waveform
 
 datapoints = false;
+
+old_estimated_freq = f0 * ones(1, length(t_input));
 
 estimated_freq = f0 * ones(1, length(t_input));
 
@@ -200,21 +202,27 @@ if dc_filter, samples = samples + 2; end
 
 window = samples; % In case you want custom window size, can change it here manually
 
-nested_matrix_pinv_A = cell(1, length(t_input));
-
 matrix_A = [];
 
 real_values = []; % Real part of filter. H(z) Vp Cos(Theta)
 
 imaginary_values = []; % Imaginary part of filter. H(z) Vp Sin(Theta)
 
-for k = 1:length(t_input)
+function generate_matrix_A = generate_filter_matrix(k, window, T, estimated_freq, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter)
 
-z_power = -1 * (window - 1)/2; % Assumes window will always be an odd number so that the center becomes V0, then even amouns before and after.
+% Initialize output matrix
+
+num_features = 2 * (fundamental_filter + second_harmonic_filter + third_harmonic_filter + fourth_harmonic_filter + fifth_harmonic_filter + sixth_harmonic_filter) + 2 * dc_filter;
+
+generate_matrix_A = zeros(window, num_features);
+
+% Initial power offset (centered around 0)
+
+z_power = -1 * (window - 1) / 2;
 
 for n = 1:window
 
-array_of_equations = []; % Reset at the beginning of each loop
+array_of_equations = []; % Reset for each row
 
 if fundamental_filter
 
@@ -226,41 +234,41 @@ end
 
 if second_harmonic_filter
 
-array_of_equations(end + 1) = sin(2 *2*pi*estimated_freq(k)* T * z_power);
+array_of_equations(end + 1) = sin(2*2*pi*estimated_freq(k)* T * z_power);
 
-array_of_equations(end + 1) = cos(2 *2*pi*estimated_freq(k)* T * z_power);
+array_of_equations(end + 1) = cos(2*2*pi*estimated_freq(k)* T * z_power);
 
 end
 
 if third_harmonic_filter
 
-array_of_equations(end + 1) = sin(3 *2*pi*estimated_freq(k)* T * z_power);
+array_of_equations(end + 1) = sin(3*2*pi*estimated_freq(k)* T * z_power);
 
-array_of_equations(end + 1) = cos(3 *2*pi*estimated_freq(k)* T * z_power);
+array_of_equations(end + 1) = cos(3*2*pi*estimated_freq(k)* T * z_power);
 
 end
 
 if fourth_harmonic_filter
 
-array_of_equations(end + 1) = sin(4 *2*pi*estimated_freq(k)* T * z_power);
+array_of_equations(end + 1) = sin(4*2*pi*estimated_freq(k)* T * z_power);
 
-array_of_equations(end + 1) = cos(4 *2*pi*estimated_freq(k)* T * z_power);
+array_of_equations(end + 1) = cos(4*2*pi*estimated_freq(k)* T * z_power);
 
 end
 
 if fifth_harmonic_filter
 
-array_of_equations(end + 1) = sin(5 *2*pi*estimated_freq(k)* T * z_power);
+array_of_equations(end + 1) = sin(5*2*pi*estimated_freq(k)* T * z_power);
 
-array_of_equations(end + 1) = cos(5 *2*pi*estimated_freq(k)* T * z_power);
+array_of_equations(end + 1) = cos(5*2*pi*estimated_freq(k)* T * z_power);
 
 end
 
 if sixth_harmonic_filter
 
-array_of_equations(end + 1) = sin(6 *2*pi*estimated_freq(k)* T * z_power);
+array_of_equations(end + 1) = sin(6*2*pi*estimated_freq(k)* T * z_power);
 
-array_of_equations(end + 1) = cos(6 *2*pi*estimated_freq(k)* T * z_power);
+array_of_equations(end + 1) = cos(6*2*pi*estimated_freq(k)* T * z_power);
 
 end
 
@@ -268,27 +276,19 @@ if dc_filter
 
 array_of_equations(end + 1) = 1;
 
-array_of_equations(end + 1) = 1 * z_power;
+array_of_equations(end + 1) = z_power;
 
 end
 
-% Insert nth row into matrix_A at row `n`
-
-matrix_A(n, :) = array_of_equations;
+generate_matrix_A(n, :) = array_of_equations;
 
 z_power = z_power + 1;
 
 end
 
-target_array_location = 1;
-
-% Perform left pseudo inverse on matrix A
-
-A_left_pinv = pinv(matrix_A);
-
-nested_matrix_pinv_A{k} = A_left_pinv;
-
 end
+
+target_array_location = 1;
 
 %-----------------------------------------------------------
 
@@ -314,25 +314,25 @@ x_buffer = zeros(1, window_size); % sliding buffer for x
 
 for n = 1:length(t_input)
 
-target_pinv_A = nested_matrix_pinv_A{n} ./ 100000; % Use curly braces to get the matrix out
+count = 1;
+
+tolerance = 0.1;
+
+x_buffer = [x_buffer(2:end), x(n)]; % This takes all elements of x_buffer except the first one, destructures the array, then we add the result of x(n) at the end
+
+last_filters_phase = zeros(1, 3);
+
+for k = 1:3
+
+matrix_A = generate_filter_matrix(n, window, T, estimated_freq, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter);
+
+target_pinv_A = pinv(matrix_A) ./ 100000;
 
 real_values = target_pinv_A(target_array_location, :);
 
 imaginary_values = target_pinv_A(target_array_location + 1, :);
 
-disp(target_pinv_A)
-
-disp("real")
-
-disp(real_values )
-
-disp("im")
-
-disp(imaginary_values )
-
 % Slide buffer: drop oldest, append new sample
-
-x_buffer = [x_buffer(2:end), x(n)]; % This takes all elements of x_buffer except the first one, destructures the array, then we add the result of x(n) at the end
 
 % Apply weights to current buffer
 
@@ -344,47 +344,33 @@ imaginary_part_Vp_cos_theta = sum(V_imaginary);
 
 real_part_Vp_sin_theta = sum(V_real);
 
-phase_angle_deg(n) = unwrap(atan2(imaginary_part_Vp_cos_theta, real_part_Vp_sin_theta)) * 180 / pi;
+phase_angle_deg(n) = atan2(imaginary_part_Vp_cos_theta, real_part_Vp_sin_theta) * 180 / pi;
 
 mag(n) = sqrt(imaginary_part_Vp_cos_theta^2 + real_part_Vp_sin_theta^2);
 
-if(n == window_size)
+unwrapped_phase = unwrap(deg2rad(phase_angle_deg));
 
-% Insert real and imaginary filter values into columns of table
+delta = rad2deg(unwrapped_phase(n) - last_filters_phase(k));
 
-array_for_table(1:window_size, 2) = round(real_values(1:window_size), 4);
+old_estimated_freq(n) = estimated_freq(n);
 
-array_for_table(1:window_size, 5) = round(imaginary_values(1:window_size), 4);
+new_estimate = abs(delta) / ((2 * 180) / fs);
 
-% Insert calculated values into columns for table after calculation is done.
+disp("new est")
 
-array_for_table(1:window_size, 3) = round(V_real(1:window_size));
+disp(last_filters_phase)
 
-array_for_table(1:window_size, 6) = round(V_imaginary(1:window_size));
+estimated_freq(n) = new_estimate;
 
-array_for_table(1:window_size, 4) = round(cumsum(V_real(1:window_size)));
+last_filters_phase(k) = unwrapped_phase(n);
 
-array_for_table(1:window_size, 7) = round(cumsum(V_imaginary(1:window_size)));
+if(abs(estimated_freq(n) - old_estimated_freq(n)) <= tolerance)
 
-% Insert magnitude and phase into columns of table (no rounding)
-
-array_for_table(1:window_size, 8) = mag(1:window_size);
-
-array_for_table(1:window_size, 9) = phase_angle_deg(1:window_size);
+break;
 
 end
 
 end
-
-for n = 2:length(t_input)
-
-unwrapped_phase = unwrap(deg2rad(phase_angle_deg)); % unwrap in radians
-
-delta_rad = unwrapped_phase(n) - unwrapped_phase(n - 1);
-
-delta_deg = rad2deg(delta_rad);
-
-estimated_freq(n) = delta_deg / ((2 * 180) / fs);
 
 end
 
@@ -420,4 +406,3 @@ ylabel('Magnitude');
 
 grid on;
 ```
-
