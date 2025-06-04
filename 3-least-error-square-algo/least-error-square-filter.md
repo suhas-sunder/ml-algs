@@ -38,9 +38,11 @@ second_harmonic_filter = true;
 
 third_harmonic_filter = true;
 
-fourth_harmonic_filter = true;
+fourth_harmonic_filter = false;
 
 fifth_harmonic_filter = false;
+
+sixth_harmonic_filter = false;
 
 dc_filter = true;
 
@@ -56,13 +58,15 @@ if fourth_harmonic_filter, track_active_filter(end + 1) = 4; end
 
 if fifth_harmonic_filter, track_active_filter(end + 1) = 5; end
 
-if dc_filter, track_active_filter(end + 1) = 6; end
+if sixth_harmonic_filter, track_active_filter(end + 1) = 6; end
+
+if dc_filter, track_active_filter(end + 1) = 7; end
 
 %-----------------------------------------------------------
 
 % Decide which filter to TARGET/APPLY (Only activate one)
 
-filters = {"fundamental", "2ndHarmonic", "3rdHarmonic", "4thHarmonic", "5thHarmonic", "DC"};
+filters = {"fundamental", "2ndHarmonic", "3rdHarmonic", "4thHarmonic", "5thHarmonic", "6thHarmonic", "DC"};
 
 filter_choice = 1; % FUNDAMENAL
 
@@ -74,7 +78,9 @@ filter_choice = 1; % FUNDAMENAL
 
 % filter_choice = 5; % 5th Harmonic
 
-% filter_choice = 6; % DC
+% filter_choice = 6; % 6th Harmonic
+
+% filter_choice = 7; % DC
 
 if ~ismember(filter_choice, track_active_filter)
 
@@ -103,6 +109,8 @@ if third_harmonic_filter, samples = samples + 2; end
 if fourth_harmonic_filter, samples = samples + 2; end
 
 if fifth_harmonic_filter, samples = samples + 2; end
+
+if sixth_harmonic_filter, samples = samples + 2; end
 
 if dc_filter, samples = samples + 2; end
 
@@ -160,6 +168,14 @@ array_of_equations(end + 1) = cos(5 * omega * T * z_power);
 
 end
 
+if sixth_harmonic_filter
+
+array_of_equations(end + 1) = sin(6 * omega * T * z_power);
+
+array_of_equations(end + 1) = cos(6 * omega * T * z_power);
+
+end
+
 if dc_filter
 
 array_of_equations(end + 1) = 1;
@@ -192,7 +208,7 @@ if strcmp(target_filter, current_filter)
 
 switch current_filter
 
-case {"fundamental", "2ndHarmonic", "3rdHarmonic", "4thHarmonic", "5thHarmonic", "DC"}
+case {"fundamental", "2ndHarmonic", "3rdHarmonic", "4thHarmonic", "5thHarmonic", "6thHarmonic", "DC"}
 
 real_values = A_left_pinv(target_array_location, :);
 
