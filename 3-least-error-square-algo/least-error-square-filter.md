@@ -1,4 +1,5 @@
 
+
 ```
 clc;
 
@@ -38,7 +39,7 @@ second_harmonic_filter = true;
 
 third_harmonic_filter = true;
 
-fourth_harmonic_filter = false;
+fourth_harmonic_filter = true;
 
 fifth_harmonic_filter = false;
 
@@ -310,7 +311,7 @@ title('Magnitude Response of H(z) Real');
 
 grid on;
 
-xticks(0:60:fs);
+xticks(0:f0:fs);
 
 xlim([0 fs]);
 
@@ -326,7 +327,7 @@ title('Phase Response of H(z) Real');
 
 grid on;
 
-xticks(0:60:fs);
+xticks(0:f0:fs);
 
 xlim([0 fs]);
 
@@ -364,7 +365,7 @@ title('Magnitude Response of H(z) Imaginary');
 
 grid on;
 
-xticks(0:60:fs);
+xticks(0:f0:fs);
 
 xlim([0 fs]);
 
@@ -380,7 +381,7 @@ title('Phase Response of H(z) Imaginary');
 
 grid on;
 
-xticks(0:60:fs);
+xticks(0:f0:fs);
 
 xlim([0 fs]);
 
@@ -408,7 +409,7 @@ legend('Real Part', 'Imaginary Part');
 
 grid on;
 
-xticks(0:60:fs);
+xticks(0:f0:fs);
 
 xlim([0 fs]);
 ```
