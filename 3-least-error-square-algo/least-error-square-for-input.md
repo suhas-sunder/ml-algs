@@ -125,9 +125,9 @@ third_harmonic_filter = true;
 
 fourth_harmonic_filter = true;
 
-fifth_harmonic_filter = true;
+fifth_harmonic_filter = false;
 
-sixth_harmonic_filter = true;
+sixth_harmonic_filter = false;
 
 dc_filter = true;
 
