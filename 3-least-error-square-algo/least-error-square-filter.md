@@ -189,8 +189,6 @@ end
 
 matrix_A(n, :) = array_of_equations;
 
-matrix_A(abs(matrix_A) < 1e-12) = 0; % Threshold can be adjusted
-
 z_power = z_power + 1;
 
 end
@@ -200,8 +198,6 @@ target_array_location = 1;
 % Perform left pseudo inverse on matrix A
 
 A_left_pinv = pinv(matrix_A);
-
-A_left_pinv(abs(A_left_pinv) < 1e-12) = 0; % Threshold can be adjusted
 
 % Extract specific TARGET real and imaginary filters from matrix A
 

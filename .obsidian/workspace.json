@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3-least-error-square-algo/les3.md",
+                "file": "3-least-error-square-algo/least-error-square-filter.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "les3"
+              "title": "least-error-square-filter"
             }
           }
         ]
@@ -167,8 +167,8 @@
   },
   "active": "b34f6fb401ef7766",
   "lastOpenFiles": [
-    "3-least-error-square-algo/least-error-square-filter.md",
     "3-least-error-square-algo/les3.md",
+    "3-least-error-square-algo/least-error-square-filter.md",
     "3-least-error-square-algo/images/les-3.md",
     "3-least-error-square-algo/least-error-square-for-input.md",
     "4-frequency-estimation/least-error-square-freq-est/progress!.md",
