@@ -35,11 +35,11 @@ track_active_filter = []; % For error handeling for user selection of filter
 
 fundamental_filter = true;
 
-second_harmonic_filter = true;
+second_harmonic_filter = false;
 
 third_harmonic_filter = true;
 
-fourth_harmonic_filter = true;
+fourth_harmonic_filter = false;
 
 fifth_harmonic_filter = false;
 
@@ -93,7 +93,7 @@ target_filter = filters{filter_choice};
 
 %-----------------------------------------------------------
 
-sample_offset = 1; % Change this to whatever you need. Prof said it should be minimum 1.
+sample_offset = 3; % Change this to whatever you need. Prof said it should be minimum 1.
 
 % Initialize sample count
 
@@ -189,6 +189,8 @@ end
 
 matrix_A(n, :) = array_of_equations;
 
+matrix_A(abs(matrix_A) < 1e-12) = 0; % Threshold can be adjusted
+
 z_power = z_power + 1;
 
 end
@@ -198,6 +200,8 @@ target_array_location = 1;
 % Perform left pseudo inverse on matrix A
 
 A_left_pinv = pinv(matrix_A);
+
+A_left_pinv(abs(A_left_pinv) < 1e-12) = 0; % Threshold can be adjusted
 
 % Extract specific TARGET real and imaginary filters from matrix A
 
@@ -229,7 +233,13 @@ end
 
 end
 
-fprintf("Full matrix A after left pseudo inverse:");
+fprintf("Full matrix A BEFORE left pseudo inverse:");
+
+fprintf("\n");
+
+disp(matrix_A);
+
+fprintf("Full matrix A AFTER left pseudo inverse:");
 
 fprintf("\n");
 
