@@ -36,9 +36,9 @@ datapoints = true;
 
 fs = fs_input; % Sampling frequency
 
-f0_high_range_value = 60;
+f0_high_range_value = 75;
 
-f0_low_range_value = 40;
+f0_low_range_value = 34;
 
 f0 = f0_high_range_value; % Filter Frequency that we are esimating. Set this to anywhere between 40 to 70Hz. 60Hz by default for mid point.
 
@@ -52,7 +52,7 @@ f_range = linspace(0, fs, 1000); % Frequency range to plot full range. This is o
 
 % Input data points
 
-% x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
+% x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699,714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699, 714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
 
 x = Vm_input * sin(omega_input * t_input + pi/18) + Vm_input * sin(2*omega_input * t_input) + Vm_input * sin(3*omega_input * t_input) + Vm_input * sin(4*omega_input * t_input) + Vm_input * sin(5*omega_input * t_input) + Vm_input * sin(6*omega_input * t_input); % Input waveform
 
@@ -61,6 +61,34 @@ datapoints = false;
 t_input = 0:T_input:((length(x)-1) * T_input/scaling_factor);
 
 estimated_freq = f0 * ones(1, length(t_input));
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plots the ORIGINAL Signal and SAMPLES, BEFORE FILTERING
+
+% Top subplot: Original continuous signal
+
+figure;
+
+plot(t_input, x(1: length(t_input)), 'b', 'LineWidth', 1);
+
+title('Original Continuous Signal');
+
+xlabel('Time (s)');
+
+if(datapoints)
+
+xlim([t_input(1), t_input(end)]);
+
+xticks(0:T_input:t_input(end))
+
+xtickformat('%.4f'); % shows more precise decimals
+
+end
+
+ylabel('Amplitude');
+
+grid on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -248,35 +276,23 @@ target_array_location = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-window_size = samples; % Window size is same as sample size
+function [estimated_freq, phase_angle_deg, mag] = run_freq_estimation(estimated_freq, x, t_input, f0, fs, window, samples, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter, target_array_location)
 
-V_real = zeros(1, window_size);
-
-V_imaginary = zeros(1, window_size);
-
-% Allocate arrays to store angles and magnitude values
+window_size = samples;
 
 phase_angle_deg = zeros(1, length(t_input));
 
 mag = zeros(1, length(t_input));
 
-% Apply the 3-sample phasor magnitude and angle estimator
-
-% This is where we actually take 3 SAMPLES and APPLY THE FILTER
-
-x_buffer = zeros(1, window_size); % sliding buffer for x
+x_buffer = zeros(1, window_size);
 
 for n = 2:length(t_input)
 
-count = 1;
-
 tolerance = 0.02;
 
-x_buffer = [x_buffer(2:end), x(n)]; % This takes all elements of x_buffer except the first one, destructures the array, then we add the result of x(n) at the end
+x_buffer = [x_buffer(2:end), x(n)];
 
-last_filters_phase = zeros(1, 3);
-
-new_test_freq = f0 * ones(1, 4 );
+new_test_freq = f0 * ones(1, 4);
 
 for k = 1:3
 
@@ -287,10 +303,6 @@ target_pinv_A = pinv(matrix_A);
 real_values = target_pinv_A(target_array_location, :);
 
 imaginary_values = target_pinv_A(target_array_location + 1, :);
-
-% Slide buffer: drop oldest, append new sample
-
-% Apply weights to current buffer
 
 V_real = real_values .* x_buffer;
 
@@ -310,9 +322,9 @@ delta = rad2deg(unwrapped_phase(n) - unwrapped_phase(n-1));
 
 new_estimate = abs(delta) / ((2 * 180) / fs);
 
-if(new_estimate > 40 && new_estimate < 70)
+if new_estimate > 40 && new_estimate < 70
 
-if(abs(new_estimate - f0) <= tolerance )
+if abs(new_estimate - f0) <= tolerance
 
 estimated_freq(n) = new_estimate;
 
@@ -321,8 +333,6 @@ break;
 end
 
 f0 = new_estimate;
-
-disp(new_estimate)
 
 new_test_freq(k + 1) = new_estimate;
 
@@ -336,21 +346,181 @@ end
 
 end
 
+end
+
+tolerance = 0.02;
+
+min_match_ratio = 0.6;
+
+for f0 = f0_high_range_value:-1:f0_low_range_value
+
+% Run tracking for current f0
+
+[temp_estimate, phase_angle_deg, mag] = run_freq_estimation( estimated_freq, x, t_input, f0, fs, window, samples, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter, target_array_location);
+
+% Round to 2 decimals and find dominant frequency
+
+dominant_freq = mode(round(temp_estimate, 2));
+
+% Count how many are within ±tolerance of dominant_freq
+
+match_count = sum(abs(temp_estimate - dominant_freq) <= tolerance);
+
+match_ratio = match_count / length(temp_estimate);
+
+if match_ratio >= min_match_ratio
+
+fprintf("✓ Match found: f0 = %.2f Hz (%.2f%% match to dominant freq %.2f)\n", f0, match_ratio * 100, dominant_freq);
+
+estimated_freq = temp_estimate; % ✅ final estimate set only if condition met
+
+break;
+
+else
+
+fprintf("× f0 = %.2f Hz rejected (%.2f%% match to dominant freq %.2f Hz)\n", f0, match_ratio * 100, dominant_freq);
+
+% Do not assign estimated_freq
+
+end
+
+end
+
+% Optional fallback if no match found
+
+if isempty(estimated_freq)
+
+fprintf("No frequency in range %d–%d Hz met the match condition.\n", f0_low_range_value, f0_high_range_value);
+
+estimated_freq = f0_low_range_value * ones(1, length(t_input)); % fallback
+
+end
+
+% Optional final f0 result
+
+final_estimated_f0 = mode(round(estimated_freq, 2));
+
+disp("Final estimated f0 Hz:");
+
+disp(final_estimated_f0);
+
+% After main loop completes
+
+avg_freq = round(mean(estimated_freq), 2); % Rounded to 2 decimals to match logic
+
+replacement_f0 = f0_high_range_value;
+
+for i = 1:length(estimated_freq)
+
+if replacement_f0 < avg_freq
+
+break; % Stop modifying once we reach or drop below avg
+
+else
+
+estimated_freq(i) = replacement_f0;
+
+replacement_f0 = replacement_f0 - (T_input * fs_input/1.5);
+
+end
+
+end
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Plot: Input and Phase Angle AFTER FILTER IS APPLIED TO SIGNAL
 
 figure;
 
-subplot(2,1,1);
-
 plot(t_input, estimated_freq, 'b', 'LineWidth', 1);
 
-title('Phasor Magnitude');
+title('Frequency Estimatin: Iterative Method');
 
 xlabel('Time (s)');
 
-xlim([t_input(window_size * 2), t_input(end)]);
+xlim([0, t_input(end)]);
+
+ylabel('Frequency (Hz)');
+
+grid on;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function estimated_freq_original = estimate_freq_original( avg_freq, x, t_input, fs, window_size, target_array_location, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter)
+
+estimated_freq_original = avg_freq * ones(1, length(t_input));
+
+% Allocate arrays to store angles and magnitude values
+
+phase_angle_deg = zeros(1, length(t_input));
+
+% Apply the 3-sample phasor magnitude and angle estimator
+
+x_buffer = zeros(1, window_size); % sliding buffer for x
+
+for n = 1:length(t_input)
+
+matrix_A = generate_filter_matrix(n, window_size, T, avg_freq, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter); % Use curly braces to get the matrix out
+
+target_pinv_A = pinv(matrix_A);
+
+real_values = target_pinv_A(target_array_location, :);
+
+imaginary_values = target_pinv_A(target_array_location + 1, :);
+
+% Slide buffer: drop oldest, append new sample
+
+x_buffer = [x_buffer(2:end), x(n)];
+
+% Apply weights to current buffer
+
+V_real = real_values .* x_buffer;
+
+V_imaginary = imaginary_values .* x_buffer;
+
+imaginary_part_Vp_cos_theta = sum(V_imaginary);
+
+real_part_Vp_sin_theta = sum(V_real);
+
+phase_angle_deg(n) = unwrap(atan2(imaginary_part_Vp_cos_theta, real_part_Vp_sin_theta)) * 180 / pi;
+
+end
+
+% Estimate frequency
+
+for n = 2:length(t_input)
+
+unwrapped_phase = unwrap(deg2rad(phase_angle_deg)); % unwrap in radians
+
+delta_rad = unwrapped_phase(n) - unwrapped_phase(n - 1);
+
+delta_deg = rad2deg(delta_rad);
+
+estimated_freq_original(n) = delta_deg / ((2 * 180) / fs);
+
+end
+
+% Optional: fill first element if needed (otherwise will be 0)
+
+estimated_freq_original(1) = estimated_freq_original(2);
+
+end
+
+estimated_freq_original = estimate_freq_original(avg_freq, x, t_input, fs, window, target_array_location, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plot: Input and Phase Angle AFTER FILTER IS APPLIED TO SIGNAL
+
+figure;
+
+plot(t_input, estimated_freq_original, 'b', 'LineWidth', 1);
+
+title('Original Frequency Estimate: Before Iteration');
+
+xlabel('Time (s)');
+
+xlim([0, t_input(end)]);
 
 if(datapoints)
 
@@ -362,9 +532,65 @@ xtickformat('%.4f'); % shows more precise decimals
 
 end
 
-ylim([min(estimated_freq(window_size * 2:end)) - 2, max(estimated_freq(window_size * 2:end)) + 2])
+ylim([min(estimated_freq_original(window * 2:end)) - 2, max(estimated_freq_original(window * 2:end)) + 2])
+
+ylabel('Frequency (Hz)');
+
+grid on;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Plot: Input and Phase Angle AFTER FILTER IS APPLIED TO SIGNAL
+
+figure;
+
+subplot(2,1,1);
+
+plot(t_input, mag, 'b', 'LineWidth', 1);
+
+title('Phasor Magnitude');
+
+xlabel('Time (s)');
+
+if(datapoints)
+
+xlim([t_input(1), t_input(end)]);
+
+xticks(0:T_input:t_input(end))
+
+xtickformat('%.4f'); % shows more precise decimals
+
+end
 
 ylabel('Magnitude');
+
+ylim([0, mode(round(mag, 2)) + mode(round(mag, 2)) * 0.5]);
+
+grid on;
+
+subplot(2,1,2);
+
+plot(t_input, phase_angle_deg, 'r', 'LineWidth', 1);
+
+title('Phasor Phase Angle');
+
+xlabel('Time (s)');
+
+if(datapoints)
+
+xlim([t_input(1), t_input(end)]);
+
+xticks(0:T_input:t_input(end))
+
+xtickformat('%.4f'); % shows more precise decimals
+
+end
+
+ylabel('Angle (degrees)');
+
+ylim([-180 180]);
+
+yticks(-180:60:180); % Set Y-axis ticks at 50-degree intervals
 
 grid on;
 ```

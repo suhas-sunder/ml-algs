@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "4-frequency-estimation/iterative-freq-est/do-not-use-this-iterative-working-but-needs-manual-testing.md",
+                "file": "4-frequency-estimation/iterative-freq-est/iterative-freq-est-algo-working-final.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "do-not-use-this-iterative-working-but-needs-manual-testing"
+              "title": "iterative-freq-est-algo-working-final"
             }
           }
         ]
@@ -167,18 +167,19 @@
   },
   "active": "b34f6fb401ef7766",
   "lastOpenFiles": [
-    "4-frequency-estimation/iterative-freq-est/iterative-freq-est-algo-working.md",
-    "4-frequency-estimation/zero-crossing-freq-est/zero-crossing-freq-est.md",
-    "4-frequency-estimation/iterative-freq-est",
-    "4-frequency-estimation/iterative-freq-est/do-not-use-this-iterative-working-but-needs-manual-testing.md",
     "3-least-error-square-algo/least-error-square-for-input.md",
+    "4-frequency-estimation/iterative-freq-est/iterative-freq-est-algo-working-final.md",
+    "4-frequency-estimation/iterative-freq-est/do-not-use-this-iterative-working-but-needs-manual-testing.md",
+    "3-least-error-square-algo/least-error-square-filter.md",
+    "4-frequency-estimation/zero-crossing-freq-est/zero-crossing-freq-est.md",
+    "z-experiments-to-figure-out-freq-est/iterative-technique-freq-est/iterative-freq-est-algo-working.md",
+    "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/progress!.md",
+    "4-frequency-estimation/iterative-freq-est",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/false hope.md",
     "4-frequency-estimation",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/0 false victory!.md",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/1-false victory 2.md",
-    "3-least-error-square-algo/least-error-square-filter.md",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/closer.md",
-    "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/progress!.md",
     "3-least-error-square-algo/les3.md",
     "3-least-error-square-algo/images/les-3.md",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/getting closer...md",

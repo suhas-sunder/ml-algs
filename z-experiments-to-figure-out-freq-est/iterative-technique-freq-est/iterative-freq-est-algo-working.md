@@ -10,13 +10,15 @@ close all;
 
 %% Initializing Variables with Parameters For INPUT SIGNAL
 
-fs_input = 1930; % Sampling frequency (Hz)
+fs_input = 720; % Sampling frequency (Hz)
+
+fs_input = fs_input * 2;
 
 T_input = 1 / fs_input; % Sampling period (s)
 
 f0_input = 55; % Signal frequency (Hz)
 
-t_input = 0:T_input:((fs_input/f0_input)/2)/f0_input; % Time vector (0.1 seconds)
+t_input = 0:T_input:(((fs_input/2)/f0_input)/2)/f0_input; % Time vector (0.1 seconds)
 
 Vm_input = 10; % Amplitude
 
@@ -30,7 +32,7 @@ datapoints = true;
 
 %#ok<*UNRCH>
 
-fs = fs_input; % Sampling frequency
+fs = fs_input * 2; % Sampling frequency
 
 f0_high_range_value = 75;
 
@@ -244,15 +246,7 @@ target_array_location = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function [estimated_freq, phase_angle_deg, mag] = run_freq_estimation( ...
-
-estimated_freq, x, t_input, f0, fs, window, samples, T, ...
-
-fundamental_filter, second_harmonic_filter, third_harmonic_filter, ...
-
-fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, ...
-
-dc_filter, target_array_location)
+function [estimated_freq, phase_angle_deg, mag] = run_freq_estimation(estimated_freq, x, t_input, f0, fs, window, samples, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter, target_array_location)
 
 window_size = samples;
 
@@ -274,13 +268,7 @@ new_test_freq = f0 * ones(1, 4);
 
 for k = 1:3
 
-matrix_A = generate_filter_matrix(n, window, T, new_test_freq(k), ...
-
-fundamental_filter, second_harmonic_filter, third_harmonic_filter, ...
-
-fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, ...
-
-dc_filter);
+matrix_A = generate_filter_matrix(n, window, T, new_test_freq(k), fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter);
 
 target_pinv_A = pinv(matrix_A);
 
@@ -340,15 +328,7 @@ for f0 = f0_high_range_value:-1:f0_low_range_value
 
 % Run tracking for current f0
 
-[temp_estimate, phase_angle_deg, mag] = run_freq_estimation( ...
-
-estimated_freq, x, t_input, f0, fs, window, samples, T, ...
-
-fundamental_filter, second_harmonic_filter, third_harmonic_filter, ...
-
-fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, ...
-
-dc_filter, target_array_location);
+[temp_estimate, phase_angle_deg, mag] = run_freq_estimation( estimated_freq, x, t_input, f0, fs, window, samples, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter, target_array_location);
 
 % Round to 2 decimals and find dominant frequency
 
@@ -362,9 +342,7 @@ match_ratio = match_count / length(temp_estimate);
 
 if match_ratio >= min_match_ratio
 
-fprintf("✓ Match found: f0 = %.2f Hz (%.2f%% match to dominant freq %.2f)\n", ...
-
-f0, match_ratio * 100, dominant_freq);
+fprintf("✓ Match found: f0 = %.2f Hz (%.2f%% match to dominant freq %.2f)\n", f0, match_ratio * 100, dominant_freq);
 
 estimated_freq = temp_estimate; % ✅ final estimate set only if condition met
 
@@ -372,9 +350,7 @@ break;
 
 else
 
-fprintf("× f0 = %.2f rejected (%.2f%% match to dominant freq %.2f)\n", ...
-
-f0, match_ratio * 100, dominant_freq);
+fprintf("× f0 = %.2f rejected (%.2f%% match to dominant freq %.2f)\n", f0, match_ratio * 100, dominant_freq);
 
 % Do not assign estimated_freq
 
@@ -386,9 +362,7 @@ end
 
 if isempty(estimated_freq)
 
-fprintf("No frequency in range %d–%d Hz met the match condition.\n", ...
-
-f0_low_range_value, f0_high_range_value);
+fprintf("No frequency in range %d–%d Hz met the match condition.\n", f0_low_range_value, f0_high_range_value);
 
 estimated_freq = f0_low_range_value * ones(1, length(t_input)); % fallback
 
