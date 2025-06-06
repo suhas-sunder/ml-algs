@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "4-frequency-estimation/working-but-needs-manual-testing.md",
+                "file": "4-frequency-estimation/iterative-freq-est/do-not-use-this-iterative-working-but-needs-manual-testing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "working-but-needs-manual-testing"
+              "title": "do-not-use-this-iterative-working-but-needs-manual-testing"
             }
           }
         ]
@@ -167,12 +167,15 @@
   },
   "active": "b34f6fb401ef7766",
   "lastOpenFiles": [
+    "4-frequency-estimation/iterative-freq-est/iterative-freq-est-algo-working.md",
+    "4-frequency-estimation/zero-crossing-freq-est/zero-crossing-freq-est.md",
+    "4-frequency-estimation/iterative-freq-est",
+    "4-frequency-estimation/iterative-freq-est/do-not-use-this-iterative-working-but-needs-manual-testing.md",
+    "3-least-error-square-algo/least-error-square-for-input.md",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/false hope.md",
-    "4-frequency-estimation/working-but-needs-manual-testing.md",
     "4-frequency-estimation",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/0 false victory!.md",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/1-false victory 2.md",
-    "3-least-error-square-algo/least-error-square-for-input.md",
     "3-least-error-square-algo/least-error-square-filter.md",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/closer.md",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/progress!.md",
@@ -189,7 +192,6 @@
     "assignments/1-assignment-1/Question 2 filter.md",
     "2-correlation-algo/extra/stem-plot-to-get-data-points.md",
     "2-correlation-algo/1-discrete-fourier-algo/discrete-fourier-apply-to-input-with-table.md",
-    "z-experiments-to-figure-out-freq-est/zero-crossing-freq-est/zero-crossing-freq-est.md",
     "z-experiments-to-figure-out-freq-est/images/20250601003141.png",
     "z-experiments-to-figure-out-freq-est/images/20250601003121.png",
     "z-experiments-to-figure-out-freq-est/images/20250601003055.png",
@@ -202,12 +204,10 @@
     "4-frequency-estimation/images/Pasted image 20250601003121.png",
     "4-frequency-estimation/images/Pasted image 20250601003055.png",
     "old-outdated-trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
-    "2-correlation-algo/1-discrete-fourier-algo/0-discrete-fourier-filter.md",
     "z-experiments-to-figure-out-freq-est/iterative-technique-freq-est",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est",
-    "z-experiments-to-figure-out-freq-est/zero-crossing-freq-est",
+    "4-frequency-estimation/zero-crossing-freq-est",
     "z-experiments-to-figure-out-freq-est",
-    "2-correlation-algo/2-half-cycle-dft-algo/0-half-cycle-dft-filter.md",
     "Pasted image 20250531010949.png",
     "Pasted image 20250531014047.png"
   ]
