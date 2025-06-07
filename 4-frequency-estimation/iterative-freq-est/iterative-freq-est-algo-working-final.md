@@ -12,7 +12,7 @@ close all;
 
 fs_input = 720; % Sampling frequency (Hz)
 
-scaling_factor = 4;
+scaling_factor = 1;
 
 fs_input = fs_input * scaling_factor;
 
@@ -48,15 +48,17 @@ omega = 2 * pi * f0; % Discrete angular frequency (radians/sample)
 
 f_range = linspace(0, fs, 1000); % Frequency range to plot full range. This is only relevant later on when assigning z = exp(j omega T)
 
+datapoints = true;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Input data points
 
-% x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699,714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699, 714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
+x = [1.7365, 25.0881, 18.0572, -0.1519, -0.9998, 4.7599, -1.7365, -7.7676, -0.7367, 0.1519, -16.3207, -22.0805, 1.7365, 25.0881, 18.0572, -0.1519, -0.9998, 4.7599, -1.7365, -7.7676];
 
-x = Vm_input * sin(omega_input * t_input + pi/18) + Vm_input * sin(2*omega_input * t_input) + Vm_input * sin(3*omega_input * t_input) + Vm_input * sin(4*omega_input * t_input) + Vm_input * sin(5*omega_input * t_input) + Vm_input * sin(6*omega_input * t_input); % Input waveform
+% x = Vm_input * sin(omega_input * t_input + pi/18) + Vm_input * sin(2*omega_input * t_input) + Vm_input * sin(3*omega_input * t_input);
 
-datapoints = false;
+% datapoints = false;
 
 t_input = 0:T_input:((length(x)-1) * T_input/scaling_factor);
 
@@ -75,16 +77,6 @@ plot(t_input, x(1: length(t_input)), 'b', 'LineWidth', 1);
 title('Original Continuous Signal');
 
 xlabel('Time (s)');
-
-if(datapoints)
-
-xlim([t_input(1), t_input(end)]);
-
-xticks(0:T_input:t_input(end))
-
-xtickformat('%.4f'); % shows more precise decimals
-
-end
 
 ylabel('Amplitude');
 
@@ -106,11 +98,11 @@ second_harmonic_filter = true;
 
 third_harmonic_filter = true;
 
-fourth_harmonic_filter = true;
+fourth_harmonic_filter = false;
 
-fifth_harmonic_filter = true;
+fifth_harmonic_filter = false;
 
-sixth_harmonic_filter = true;
+sixth_harmonic_filter = false;
 
 dc_filter = false;
 
@@ -160,7 +152,7 @@ target_filter = filters{filter_choice};
 
 %-----------------------------------------------------------
 
-sample_offset = 1; % Change this to whatever you need. Prof said it should be minimum 1.
+sample_offset = 0; % Change this to whatever you need. Prof said it should be minimum 1.
 
 % Initialize sample count
 
@@ -408,24 +400,6 @@ disp(final_estimated_f0);
 
 avg_freq = round(mean(estimated_freq), 2); % Rounded to 2 decimals to match logic
 
-replacement_f0 = f0_high_range_value;
-
-for i = 1:length(estimated_freq)
-
-if replacement_f0 < avg_freq
-
-break; % Stop modifying once we reach or drop below avg
-
-else
-
-estimated_freq(i) = replacement_f0;
-
-replacement_f0 = replacement_f0 - (T_input * fs_input/1.5);
-
-end
-
-end
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Plot: Input and Phase Angle AFTER FILTER IS APPLIED TO SIGNAL
@@ -530,9 +504,11 @@ xticks(0:T_input:t_input(end))
 
 xtickformat('%.4f'); % shows more precise decimals
 
-end
+else
 
 ylim([min(estimated_freq_original(window * 2:end)) - 2, max(estimated_freq_original(window * 2:end)) + 2])
+
+end
 
 ylabel('Frequency (Hz)');
 
@@ -560,11 +536,13 @@ xticks(0:T_input:t_input(end))
 
 xtickformat('%.4f'); % shows more precise decimals
 
+else
+
+ylim([0, mode(round(mag, 2)) + mode(round(mag, 2)) * 0.5]);
+
 end
 
 ylabel('Magnitude');
-
-ylim([0, mode(round(mag, 2)) + mode(round(mag, 2)) * 0.5]);
 
 grid on;
 
