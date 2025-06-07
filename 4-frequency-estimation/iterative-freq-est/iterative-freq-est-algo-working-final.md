@@ -182,7 +182,11 @@ real_values = []; % Real part of filter. H(z) Vp Cos(Theta)
 
 imaginary_values = []; % Imaginary part of filter. H(z) Vp Sin(Theta)
 
-function generate_matrix_A = generate_filter_matrix(k, window, T, f0, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Matrix generator
+
+function generate_matrix_A = generate_filter_matrix(window, T, f0, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter)
 
 % Initialize output matrix
 
@@ -264,9 +268,9 @@ end
 
 target_array_location = 1;
 
-%-----------------------------------------------------------
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Iterative freq estimation
 
 function [estimated_freq, phase_angle_deg, mag] = run_freq_estimation(estimated_freq, x, t_input, f0, fs, window, samples, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter, target_array_location)
 
@@ -288,7 +292,7 @@ new_test_freq = f0 * ones(1, 4);
 
 for k = 1:3
 
-matrix_A = generate_filter_matrix(n, window, T, new_test_freq(k), fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter);
+matrix_A = generate_filter_matrix(window, T, new_test_freq(k), fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter);
 
 target_pinv_A = pinv(matrix_A);
 
@@ -339,6 +343,10 @@ end
 end
 
 end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Recursive loop for iteration
 
 tolerance = 0.02;
 
@@ -420,6 +428,8 @@ grid on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Original freq estimation
+
 function estimated_freq_original = estimate_freq_original( avg_freq, x, t_input, fs, window_size, target_array_location, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter)
 
 estimated_freq_original = avg_freq * ones(1, length(t_input));
@@ -434,7 +444,7 @@ x_buffer = zeros(1, window_size); % sliding buffer for x
 
 for n = 1:length(t_input)
 
-matrix_A = generate_filter_matrix(n, window_size, T, avg_freq, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter); % Use curly braces to get the matrix out
+matrix_A = generate_filter_matrix(window_size, T, avg_freq, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter); % Use curly braces to get the matrix out
 
 target_pinv_A = pinv(matrix_A);
 
@@ -481,6 +491,60 @@ estimated_freq_original(1) = estimated_freq_original(2);
 end
 
 estimated_freq_original = estimate_freq_original(avg_freq, x, t_input, fs, window, target_array_location, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Rate of change calculation
+
+% Step 1: Build matrix_B
+
+phase_angle_rad = deg2rad(phase_angle_deg); % Convert before regression
+
+N = length(phase_angle_rad);
+
+matrix_B = zeros(N, 3); % Preallocate matrix
+
+for n = 1:N
+
+matrix_B(n, :) = [1, (n - 2) * T_input, ((n - 2)^2) * (T_input^2)];
+
+end
+
+% Step 2: Compute left pseudo-inverse of matrix_B
+
+B_left_pinv = pinv(matrix_B); % Left pseudo-inverse
+
+% Step 3: Multiply with phase_angle_deg column vector
+
+phase_angle_vector = phase_angle_rad(:); % ensure it's a column vector
+
+% Step 4: Get final coefficient vector (solution to least squares)
+
+coeff_vector = B_left_pinv * phase_angle_vector;
+
+a1 = coeff_vector(2);
+
+a2 = coeff_vector(3);
+
+% Compute Δf(t)
+
+delta_f_array = (1 / (2 * pi)) * (a1 + 2 * a2 * t_input);
+
+% Final frequency at each time step
+
+delta_f = estimated_freq + delta_f_array;
+
+disp("Values of F for every phase angle:")
+
+disp(delta_f)
+
+disp('Computed Delta F Frequency:');
+
+disp(mode(delta_f, 2));
+
+rocof = (1 / (2 * pi)) * 2 * a2;
+
+fprintf('Rate of Change of Frequency (RoCoF): %.6f Hz/s\n', rocof);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
