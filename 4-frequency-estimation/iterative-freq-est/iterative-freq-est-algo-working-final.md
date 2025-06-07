@@ -506,7 +506,7 @@ matrix_B = zeros(N, 3); % Preallocate matrix
 
 for n = 1:N
 
-matrix_B(n, :) = [1, (n - 2) * T_input, ((n - 2)^2) * (T_input^2)];
+matrix_B(n, :) = [1, (n - 1) * T_input, ((n - 2)^2) * (T_input^2)];
 
 end
 
@@ -534,13 +534,13 @@ delta_f_array = (1 / (2 * pi)) * (a1 + 2 * a2 * t_input);
 
 delta_f = estimated_freq + delta_f_array;
 
-disp("Values of F for every phase angle:")
+disp("Delta F Change in F:")
 
-disp(delta_f)
+disp(mean(delta_f_array));
 
-disp('Computed Delta F Frequency:');
+disp('Computed Frequency F in Hz:');
 
-disp(mode(delta_f, 2));
+disp(mean(delta_f));
 
 rocof = (1 / (2 * pi)) * 2 * a2;
 
