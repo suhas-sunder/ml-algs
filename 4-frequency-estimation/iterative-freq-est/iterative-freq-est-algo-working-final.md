@@ -18,7 +18,7 @@ fs_input = fs_input * scaling_factor;
 
 T_input = 1 / fs_input; % Sampling period (s)
 
-f0_input = 60; % Signal frequency (Hz)
+f0_input = 47; % Signal frequency (Hz)
 
 t_input = 0:T_input:(((fs_input)/f0_input)/2)/f0_input; % Time vector (0.1 seconds)
 
@@ -54,9 +54,9 @@ datapoints = true;
 
 % Input data points
 
-x = [1.7365, 25.0881, 18.0572, -0.1519, -0.9998, 4.7599, -1.7365, -7.7676, -0.7367, 0.1519, -16.3207, -22.0805, 1.7365, 25.0881, 18.0572, -0.1519, -0.9998, 4.7599, -1.7365, -7.7676];
+x = [1.7365, 12.8329, 18.3623, 16.1561, 8.3112, -0.2580, -4.9334, -4.1919, -0.3338, 2.2839, 0.3338, -6.0893, -13.3392, -16.4643, -12.4132];
 
-% x = Vm_input * sin(omega_input * t_input + pi/18) + Vm_input * sin(2*omega_input * t_input) + Vm_input * sin(3*omega_input * t_input);
+% x = Vm_input * sin(omega_input * t_input + pi/18) + Vm_input * sin(2*omega_input * t_input);
 
 % datapoints = false;
 
@@ -96,7 +96,7 @@ fundamental_filter = true;
 
 second_harmonic_filter = true;
 
-third_harmonic_filter = true;
+third_harmonic_filter = false;
 
 fourth_harmonic_filter = false;
 
@@ -152,7 +152,7 @@ target_filter = filters{filter_choice};
 
 %-----------------------------------------------------------
 
-sample_offset = 0; % Change this to whatever you need. Prof said it should be minimum 1.
+sample_offset = 1; % Change this to whatever you need. Prof said it should be minimum 1.
 
 % Initialize sample count
 
