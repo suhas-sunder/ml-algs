@@ -406,7 +406,7 @@ disp(final_estimated_f0);
 
 % After main loop completes
 
-avg_freq = round(mean(estimated_freq), 2); % Rounded to 2 decimals to match logic
+our_current_guess = 60; % OUR CURRENT GUESS. WE START OUR GUESS THIS FREQ FOR THE WHOLE FILTERED SIGNAL. CHANGE THIS LATER. IS HARD CODED.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -430,9 +430,9 @@ grid on;
 
 % Original freq estimation
 
-function estimated_freq_original = estimate_freq_original( avg_freq, x, t_input, fs, window_size, target_array_location, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter)
+function estimated_freq_original = estimate_freq_original( our_current_guess, x, t_input, fs, window_size, target_array_location, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter)
 
-estimated_freq_original = avg_freq * ones(1, length(t_input));
+estimated_freq_original = our_current_guess * ones(1, length(t_input));
 
 % Allocate arrays to store angles and magnitude values
 
@@ -444,7 +444,7 @@ x_buffer = zeros(1, window_size); % sliding buffer for x
 
 for n = 1:length(t_input)
 
-matrix_A = generate_filter_matrix(window_size, T, avg_freq, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter); % Use curly braces to get the matrix out
+matrix_A = generate_filter_matrix(window_size, T, our_current_guess, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter); % Use curly braces to get the matrix out
 
 target_pinv_A = pinv(matrix_A);
 
@@ -490,7 +490,7 @@ estimated_freq_original(1) = estimated_freq_original(2);
 
 end
 
-estimated_freq_original = estimate_freq_original(avg_freq, x, t_input, fs, window, target_array_location, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter);
+estimated_freq_original = estimate_freq_original(our_current_guess, x, t_input, fs, window, target_array_location, T, fundamental_filter, second_harmonic_filter, third_harmonic_filter, fourth_harmonic_filter, fifth_harmonic_filter, sixth_harmonic_filter, dc_filter);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
