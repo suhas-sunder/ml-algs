@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2-correlation-algo/3-even-and-odd-algo/0-even-and-odd-filter.md",
+                "file": "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input-with-table.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0-even-and-odd-filter"
+              "title": "even-and-odd-apply-to-input-with-table"
             }
           }
         ]
@@ -167,6 +167,8 @@
   },
   "active": "b34f6fb401ef7766",
   "lastOpenFiles": [
+    "2-correlation-algo/3-even-and-odd-algo/0-even-and-odd-filter.md",
+    "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input-with-table.md",
     "3-least-error-square-algo/least-error-square-filter.md",
     "3-least-error-square-algo/least-error-square-for-input.md",
     "4-frequency-estimation/iterative-freq-est/iterative-freq-est-algo-working-final.md",
@@ -200,11 +202,9 @@
     "z-experiments-to-figure-out-freq-est/images/renameImages.js",
     "4-frequency-estimation/images/Pasted image 20250601003037.png",
     "z-experiments-to-figure-out-freq-est/images",
-    "2-correlation-algo/2-half-cycle-dft-algo/half-cycle-dft-apply-to-input-with-table.md",
     "4-frequency-estimation/images/Pasted image 20250601003141.png",
     "4-frequency-estimation/images/Pasted image 20250601003121.png",
     "4-frequency-estimation/images/Pasted image 20250601003055.png",
-    "old-outdated-trig-algorithms/1-miki-mikano/2-miki-mikano-app-DC-Decay.md",
     "z-experiments-to-figure-out-freq-est/iterative-technique-freq-est",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est",
     "4-frequency-estimation/zero-crossing-freq-est",

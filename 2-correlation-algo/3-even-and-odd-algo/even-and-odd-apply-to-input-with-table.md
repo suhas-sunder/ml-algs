@@ -10,11 +10,11 @@ close all;
 
 %% Initializing Variables with Parameters For INPUT SIGNAL
 
-fs_input = 720; % Sampling frequency (Hz)
+fs_input = 1440; % Sampling frequency (Hz)
 
 T_input = 1 / fs_input; % Sampling period (s)
 
-f0_input = 60; % Signal frequency (Hz)
+f0_input = 120; % Signal frequency (Hz)
 
 samples = fs_input/f0_input;
 
@@ -34,7 +34,7 @@ array_for_table_columns = length(col_names);
 
 array_for_table_rows = samples;
 
-array_for_table = zeros(array_for_table_rows, array_for_table_columns);
+array_for_table = zeros(array_for_table_rows, array_for_table_columns, 'double');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -42,7 +42,7 @@ array_for_table = zeros(array_for_table_rows, array_for_table_columns);
 
 x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
 
-x = Vm_input * sin(omega_input * t_input + pi/18 ); % Input waveform
+x = Vm_input * sin(240 * pi * t_input + pi/6) + Vm_input * sin(240 * pi * t_input); % Input waveform
 
 datapoints = false;
 
@@ -172,7 +172,7 @@ imaginary_values = [imaginary_values(1:window_size)]; % Scale to window size
 
 % Calculate factor A
 
-sine_wave_samples = sin(2*pi*(1:window_size)/window_size); % [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
+sine_wave_samples = sin(2*pi*(0:window_size-1)/window_size); % [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
 
 V_real = zeros(1, window_size);
 
@@ -185,6 +185,10 @@ X_For_Factor_A = sum(sine_wave_samples .* real_values);
 Y_For_Factor_A = sum(sine_wave_samples .* imaginary_values);
 
 factor_A = sqrt(X_For_Factor_A^2 + Y_For_Factor_A^2);
+
+track_real = zeros(1, window_size);
+
+track_imag = zeros(1, window_size);
 
 for n = 1:length(t_input)
 
@@ -204,6 +208,10 @@ imaginary_part_Vp_cos_theta = sum(V_imaginary)/factor_A;
 
 real_part_Vp_sin_theta = sum(V_real)/factor_A;
 
+track_real(n) = real_part_Vp_sin_theta;
+
+track_imag(n) = imaginary_part_Vp_cos_theta;
+
 phase_angle_deg(n) = atan2(imaginary_part_Vp_cos_theta, real_part_Vp_sin_theta) * 180 / pi;
 
 mag(n) = sqrt(imaginary_part_Vp_cos_theta^2 + real_part_Vp_sin_theta^2);
@@ -222,9 +230,9 @@ array_for_table(1:window_size, 3) = round(V_real(1:window_size));
 
 array_for_table(1:window_size, 6) = round(V_imaginary(1:window_size));
 
-array_for_table(1:window_size, 4) = round(cumsum(V_real(1:window_size)));
+array_for_table(1:window_size, 4) = round(track_real(1:window_size), 4);
 
-array_for_table(1:window_size, 7) = round(cumsum(V_imaginary(1:window_size)));
+array_for_table(1:window_size, 7) = round(track_imag(1:window_size), 4);
 
 % Insert magnitude and phase into columns of table (no rounding)
 
@@ -406,7 +414,7 @@ formattedData = strings(numRows, numCols);
 
 for col = 1:numCols
 
-if col == 8 || col == 9
+if col == 9
 
 % No decimals for columns 8 and 9
 
@@ -416,7 +424,7 @@ else
 
 % Full precision for all other columns
 
-formattedData(:, col) = compose('%.15g', numericData(:, col));
+formattedData(:, col) = compose('%.4g', numericData(:, col));
 
 end
 

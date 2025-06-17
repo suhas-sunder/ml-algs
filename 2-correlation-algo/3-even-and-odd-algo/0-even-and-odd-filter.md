@@ -10,11 +10,11 @@ close all;
 
 %% Initializing Variables with Parameters
 
-fs = 720; % Sampling frequency
+fs = 1440; % Sampling frequency
 
 T = 1 / fs; % Sampling period
 
-f0 = 60;
+f0 = 120;
 
 samples = fs/f0;
 
@@ -113,6 +113,10 @@ end
 % Calculate factor A
 
 sine_wave_samples = sin(2*pi*(0:N-1)/N); % [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
+
+disp("Sine Wave Samples");
+
+disp(sine_wave_samples);
 
 V_real = zeros(1, N);
 
