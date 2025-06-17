@@ -38,7 +38,7 @@ fs = fs_input; % Sampling frequency
 
 f0_high_range_value = 75;
 
-f0_low_range_value = 34;
+f0_low_range_value = 25;
 
 f0 = f0_high_range_value; % Filter Frequency that we are esimating. Set this to anywhere between 40 to 70Hz. 60Hz by default for mid point.
 
@@ -142,15 +142,15 @@ fundamental_filter = true;
 
 second_harmonic_filter = true;
 
-third_harmonic_filter = false;
+third_harmonic_filter = true;
 
-fourth_harmonic_filter = false;
+fourth_harmonic_filter = true;
 
 fifth_harmonic_filter = false;
 
 sixth_harmonic_filter = false;
 
-dc_filter = false;
+dc_filter = true;
 
 % Add to tracker only if true
 
@@ -364,7 +364,7 @@ delta = rad2deg(unwrapped_phase(n) - unwrapped_phase(n-1));
 
 new_estimate = abs(delta) / ((2 * 180) / fs);
 
-if new_estimate > 40 && new_estimate < 70
+if new_estimate > 30 && new_estimate < 70
 
 if abs(new_estimate - f0) <= tolerance
 
