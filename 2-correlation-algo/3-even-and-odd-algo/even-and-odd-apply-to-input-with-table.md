@@ -190,6 +190,10 @@ track_real = zeros(1, window_size);
 
 track_imag = zeros(1, window_size);
 
+real_values = fliplr(real_values);
+
+imaginary_values = fliplr(imaginary_values);
+
 for n = 1:length(t_input)
 
 % Slide buffer: drop oldest, append new sample
@@ -199,6 +203,12 @@ x_buffer = [x_buffer(2:end), x(n)]; % This takes all elements of x_buffer except
 % Apply weights to current buffer
 
 V_real = real_values .* x_buffer;
+
+disp(real_values)
+
+disp(x_buffer)
+
+disp(V_real)
 
 V_imaginary = imaginary_values .* x_buffer;
 
