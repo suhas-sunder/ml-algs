@@ -10,7 +10,7 @@ close all;
 
 %% Initializing Variables with Parameters For INPUT SIGNAL
 
-fs_input = 1440; % Sampling frequency (Hz)
+fs_input = 2880; % Sampling frequency (Hz)
 
 T_input = 1 / fs_input; % Sampling period (s)
 
@@ -204,12 +204,6 @@ x_buffer = [x_buffer(2:end), x(n)]; % This takes all elements of x_buffer except
 
 V_real = real_values .* x_buffer;
 
-disp(real_values)
-
-disp(x_buffer)
-
-disp(V_real)
-
 V_imaginary = imaginary_values .* x_buffer;
 
 % Calculate Phasor Estimates
@@ -230,7 +224,7 @@ if(n == window_size)
 
 % Insert real and imaginary filter values into columns of table
 
-array_for_table(1:window_size, 2) = round(real_values(1:window_size), 4);
+array_for_table(1:window_size, 2) = round(-real_values(1:window_size), 4);
 
 array_for_table(1:window_size, 5) = round(imaginary_values(1:window_size), 4);
 
