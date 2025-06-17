@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "4-frequency-estimation/iterative-freq-est/iterative-freq-est-algo-working-final.md",
+                "file": "2-correlation-algo/3-even-and-odd-algo/0-even-and-odd-filter.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "iterative-freq-est-algo-working-final"
+              "title": "0-even-and-odd-filter"
             }
           }
         ]
@@ -167,12 +167,12 @@
   },
   "active": "b34f6fb401ef7766",
   "lastOpenFiles": [
-    "4-frequency-estimation/zero-crossing-freq-est/zero-crossing-freq-est.md",
+    "3-least-error-square-algo/least-error-square-filter.md",
+    "3-least-error-square-algo/least-error-square-for-input.md",
     "4-frequency-estimation/iterative-freq-est/iterative-freq-est-algo-working-final.md",
+    "4-frequency-estimation/zero-crossing-freq-est/zero-crossing-freq-est.md",
     "z-experiments-to-figure-out-freq-est/iterative-technique-freq-est/do-not-use-this-iterative-working-but-needs-manual-testing.md",
     "z-experiments-to-figure-out-freq-est/iterative-technique-freq-est/iterative-freq-est-algo-working.md",
-    "3-least-error-square-algo/least-error-square-for-input.md",
-    "3-least-error-square-algo/least-error-square-filter.md",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/progress!.md",
     "4-frequency-estimation/iterative-freq-est",
     "z-experiments-to-figure-out-freq-est/least-error-square-freq-est/false hope.md",

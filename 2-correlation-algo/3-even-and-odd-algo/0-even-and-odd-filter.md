@@ -10,11 +10,11 @@ close all;
 
 %% Initializing Variables with Parameters
 
-fs = 720; % Sampling frequency
+fs = 1440; % Sampling frequency
 
 T = 1 / fs; % Sampling period
 
-f0 = 60;
+f0 = 120;
 
 samples = fs/f0;
 
@@ -46,6 +46,12 @@ real_values = x_even + x_odd;
 
 real_values = real_values(2:samples + 1);
 
+real_values_temp = real_values;
+
+disp("real values");
+
+disp(real_values);
+
 real_values = flip(real_values);
 
 % Length of real and imaginary should be the same, so let's pick real for
@@ -74,7 +80,11 @@ imaginary_values = x_even + x_odd;
 
 imaginary_values = imaginary_values(2:samples + 1);
 
-disp(imaginary_values)
+imaginary_values_temp = imaginary_values;
+
+disp("imag values");
+
+disp(imaginary_values_temp);
 
 imaginary_values = flip(imaginary_values);
 
@@ -102,11 +112,19 @@ end
 
 % Calculate factor A
 
-sine_wave_samples = sin(2*pi*(1:N)/N); % [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
+sine_wave_samples = sin(2*pi*(0:N-1)/N); % [0, 0.5, 0.866, 1.0, 0.866, 0.5, 0, -0.5, -0.866, -1.0, -0.866, -0.5];
 
 V_real = zeros(1, N);
 
 V_imaginary = zeros(1, N);
+
+disp("factor A for X:")
+
+disp(sine_wave_samples .* real_values_temp)
+
+disp("factor A for Y:")
+
+disp(sine_wave_samples .* imaginary_values_temp)
 
 x_buffer = zeros(1, N); % sliding buffer for x
 
