@@ -10,7 +10,7 @@ close all;
 
 %% Initializing Variables with Parameters For INPUT SIGNAL
 
-fs_input = 720; % Sampling frequency (Hz)
+fs_input = 1200; % Sampling frequency (Hz)
 
 scaling_factor = 1;
 
@@ -18,7 +18,7 @@ fs_input = fs_input * scaling_factor;
 
 T_input = 1 / fs_input; % Sampling period (s)
 
-f0_input = 47; % Signal frequency (Hz)
+f0_input = 60; % Signal frequency (Hz)
 
 t_input = 0:T_input:(((fs_input)/f0_input)/2)/f0_input; % Time vector (0.1 seconds)
 
@@ -54,11 +54,57 @@ datapoints = true;
 
 % Input data points
 
-x = [1.7365, 12.8329, 18.3623, 16.1561, 8.3112, -0.2580, -4.9334, -4.1919, -0.3338, 2.2839, 0.3338, -6.0893, -13.3392, -16.4643, -12.4132];
+% x = [1.7365, 12.8329, 18.3623, 16.1561, 8.3112, -0.2580, -4.9334, -4.1919, -0.3338, 2.2839, 0.3338, -6.0893, -13.3392, -16.4643, -12.4132];
 
-% x = Vm_input * sin(omega_input * t_input + pi/18) + Vm_input * sin(2*omega_input * t_input);
+x = Vm_input * sin(omega_input * t_input + pi/18) + Vm_input * sin(2*omega_input * t_input);
 
-% datapoints = false;
+T0 = t_input(end) * 0.1; % start swing at 20% of total duration
+
+Tr = t_input(end) * 0.5; % ramp duration scaled to half total duration
+
+omega_s = 2 * pi * 5; % 5 Hz swing frequency
+
+% Raised cosine window
+
+w = zeros(size(t_input));
+
+for i = 1:length(t_input)
+
+if t_input(i) < T0
+
+w(i) = 0;
+
+elseif t_input(i) < T0 + Tr
+
+w(i) = 0.5 * (1 - cos(pi * (t_input(i) - T0) / Tr));
+
+else
+
+w(i) = 1;
+
+end
+
+end
+
+% Instantaneous frequency swinging ±4 Hz around 60 Hz
+
+x = 60 + 4 * sin(omega_s * t_input) .* w;
+
+% Plot instantaneous frequency
+
+figure;
+
+plot(t_input, x, 'LineWidth', 1.5);
+
+xlabel('Time (s)');
+
+ylabel('Instantaneous Frequency (Hz)');
+
+title('Instantaneous Frequency Swinging Around 60 Hz (Short Window)');
+
+grid on;
+
+datapoints = false;
 
 t_input = 0:T_input:((length(x)-1) * T_input/scaling_factor);
 

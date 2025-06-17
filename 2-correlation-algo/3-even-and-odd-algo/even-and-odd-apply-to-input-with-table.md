@@ -10,7 +10,7 @@ close all;
 
 %% Initializing Variables with Parameters For INPUT SIGNAL
 
-fs_input = 2880; % Sampling frequency (Hz)
+fs_input = 1440; % Sampling frequency (Hz)
 
 T_input = 1 / fs_input; % Sampling period (s)
 
@@ -40,9 +40,9 @@ array_for_table = zeros(array_for_table_rows, array_for_table_columns, 'double')
 
 % Works with both data points and formula
 
-x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
+% x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
 
-x = Vm_input * sin(240 * pi * t_input + pi/6) + Vm_input * sin(240 * pi * t_input); % Input waveform
+x = 1 * sin(240 * pi * t_input + pi/6) + 2 * sin(240 * pi * t_input); % Input waveform
 
 datapoints = false;
 
@@ -230,9 +230,9 @@ array_for_table(1:window_size, 5) = round(imaginary_values(1:window_size), 4);
 
 % Insert calculated values into columns for table after calculation is done.
 
-array_for_table(1:window_size, 3) = round(V_real(1:window_size));
+array_for_table(1:window_size, 3) = round(-V_real(1:window_size), 4);
 
-array_for_table(1:window_size, 6) = round(V_imaginary(1:window_size));
+array_for_table(1:window_size, 6) = round(V_imaginary(1:window_size), 4);
 
 array_for_table(1:window_size, 4) = round(track_real(1:window_size), 4);
 

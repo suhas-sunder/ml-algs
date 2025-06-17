@@ -34,7 +34,7 @@ datapoints = true;
 
 x = [714, 2218, 2314, 1233, -99, -1195, -1699, -1029, 714, 2219, 2314, 1233, -99, -1195, -1699];
 
-x = Vm_input * sin(omega_input * t_input + pi/18 ); % Input waveform
+x = Vm_input * sin(omega_input * t_input); % Input waveform
 
 datapoints = false;
 
