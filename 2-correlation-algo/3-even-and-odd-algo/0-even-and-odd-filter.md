@@ -10,11 +10,11 @@ close all;
 
 %% Initializing Variables with Parameters
 
-fs = 1440; % Sampling frequency
+fs = 720; % Sampling frequency
 
 T = 1 / fs; % Sampling period
 
-f0 = 120;
+f0 = 60;
 
 samples = fs/f0;
 
@@ -118,6 +118,8 @@ V_real = zeros(1, N);
 
 V_imaginary = zeros(1, N);
 
+disp(" ")
+
 disp("factor A for X:")
 
 disp(sine_wave_samples .* real_values_temp)
@@ -130,9 +132,25 @@ x_buffer = zeros(1, N); % sliding buffer for x
 
 X_For_Factor_A = sum(sine_wave_samples .* real_values);
 
+X_For_Factor_A_temp = sum(sine_wave_samples .* real_values_temp);
+
+disp("Factor A value for X:")
+
+disp(X_For_Factor_A_temp)
+
 Y_For_Factor_A = sum(sine_wave_samples .* imaginary_values);
 
+Y_For_Factor_A_temp = sum(sine_wave_samples .* imaginary_values);
+
+disp("Factor A value for Y:")
+
+disp(Y_For_Factor_A_temp)
+
 factor_A = sqrt(X_For_Factor_A^2 + Y_For_Factor_A^2);
+
+disp("Factor A:")
+
+disp(factor_A)
 
 % Divide real and imaginary values by 1/2 N because the mangnitude is too high.
 
