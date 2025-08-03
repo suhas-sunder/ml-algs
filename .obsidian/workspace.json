@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "4-frequency-estimation/iterative-freq-est/x-fucntion.md",
+                "file": "4-frequency-estimation/zero-crossing-freq-est/zero-crossing-freq-est.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "x-fucntion"
+              "title": "zero-crossing-freq-est"
             }
           }
         ]
@@ -167,9 +167,9 @@
   },
   "active": "b34f6fb401ef7766",
   "lastOpenFiles": [
+    "4-frequency-estimation/iterative-freq-est/x-fucntion.md",
     "2-correlation-algo/3-even-and-odd-algo/even-and-odd-apply-to-input-with-table.md",
     "2-correlation-algo/extra/stem-plot-to-get-data-points.md",
-    "4-frequency-estimation/iterative-freq-est/x-fucntion.md",
     "4-frequency-estimation/zero-crossing-freq-est/zero-crossing-freq-est.md",
     "4-frequency-estimation/iterative-freq-est/iterative-freq-est-algo-working-final.md",
     "3-least-error-square-algo/least-error-square-for-input.md",
